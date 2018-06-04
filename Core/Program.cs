@@ -1,4 +1,5 @@
 
+using BlackJack.BusinessLogic.GameLogic;
 using BlackJack.BusinessLogic.Services;
 using DataAccess;
 using DataAccess.Models;
@@ -24,12 +25,14 @@ namespace Core
             //    new Player()
             //    {
             //        Id = Guid.NewGuid(),
-            //        Name = "another user"
+            //        Name = "another user",
+            //        IsBot = false
             //    },
             //    new Player()
             //    {
             //        Id = Guid.NewGuid(),
-            //        Name = "user"
+            //        Name = "someBot",
+            //        IsBot = true
             //    }
             //};
 
@@ -46,41 +49,60 @@ namespace Core
             //Console.WriteLine("Query result: " + query.Count());
             //foreach (var player in query)
             //{
-            //    Console.WriteLine(player.Name);
+            //    Console.WriteLine(player.Name + " isBot: " + player.IsBot);
             //}
             //Console.WriteLine("Done!");
 
             /**/
 
-            Console.WriteLine("Begin!");
+            //Console.WriteLine("Begin!");
 
-            var testService = new PlayerService();
+            //var testService = new PlayerService();
 
-            var players = new Player[]
+            //var players = new Player[]
+            //{
+            //    new Player() 
+            //    {
+            //        Id = Guid.NewGuid(),
+            //        Name = "SomeUser"
+            //    }
+            //};
+            //foreach (var player in players)
+            //{
+            //    testService.CreatePlayer(player);
+            //}
+
+            //Console.WriteLine("Saved!");
+
+
+            //var result = testService.All();
+
+            //Console.WriteLine("Query result: " + result.Count());
+            //foreach (var player in result)
+            //{
+            //    Console.WriteLine(player.Name);
+            //}
+            //Console.WriteLine("Done!");
+            //Console.ReadKey();
+
+            /**/
+
+            var gameLogic = new GameLogic();
+            Console.WriteLine("Enter your name");
+            var name = Console.ReadLine();
+            Console.WriteLine("Enter number of players(from 2 up to 5)");
+
+            var tmpString = Console.ReadLine();
+            int numberOfPlayers = 2;
+            if (Int32.TryParse(tmpString, out numberOfPlayers))
             {
-                new Player() 
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "SomeUser"
-                }
-            };
-            foreach (var player in players)
+                gameLogic.StartNewGame(name, numberOfPlayers);
+            }
+            else
             {
-                testService.CreatePlayer(player);
+                Console.WriteLine("Does not compute!");
             }
 
-            Console.WriteLine("Saved!");
-
-
-            var result = testService.All();
-
-            Console.WriteLine("Query result: " + result.Count());
-            foreach (var player in result)
-            {
-                Console.WriteLine(player.Name);
-            }
-            Console.WriteLine("Done!");
-            Console.ReadKey();
         }
 
 

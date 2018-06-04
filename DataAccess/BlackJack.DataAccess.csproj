@@ -36,13 +36,14 @@
     <Reference Include="Dapper.Contrib">
       <HintPath>..\packages\Dapper.Contrib.1.50.5\lib\net451\Dapper.Contrib.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework">
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
     </Reference>
-    <Reference Include="EntityFramework.SqlServer">
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Configuration.Install" />
     <Reference Include="System.Core" />
@@ -57,6 +58,15 @@
     <Compile Include="BaseRepository.cs" />
     <Compile Include="BlackJackContext.cs" />
     <Compile Include="ConnectionFactory.cs" />
+    <Compile Include="Migrations\201805310835375_InitialCreate.cs" />
+    <Compile Include="Migrations\201805310835375_InitialCreate.Designer.cs">
+      <DependentUpon>201805310835375_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806040720527_init.cs" />
+    <Compile Include="Migrations\201806040720527_init.Designer.cs">
+      <DependentUpon>201806040720527_init.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\Player.cs" />
@@ -71,8 +81,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\201805310835375_InitialCreate.resx">
+      <DependentUpon>201805310835375_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806040720527_init.resx">
+      <DependentUpon>201806040720527_init.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
