@@ -4,15 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccess.Models
+namespace BlackJack.ViewModels.PlayerServiceViewModels
 {
-    public class Player : BaseModel
+    public class PlayerServiceCreatePlayerViewModel
     {
         public string Name { get; set; }
-
         public bool IsBot { get; set; }
-
-        //public virtual ICollection<Round_Player> Round_Player { get; set; }
-
     }
 }

@@ -61,19 +61,12 @@ namespace Core
 
             //var players = new Player[]
             //{
-            //    new Player() 
+            //    new Player()
             //    {
             //        Id = Guid.NewGuid(),
             //        Name = "SomeUser"
             //    }
             //};
-            //foreach (var player in players)
-            //{
-            //    testService.CreatePlayer(player);
-            //}
-
-            //Console.WriteLine("Saved!");
-
 
             //var result = testService.All();
 
@@ -83,25 +76,24 @@ namespace Core
             //    Console.WriteLine(player.Name);
             //}
             //Console.WriteLine("Done!");
-            //Console.ReadKey();
 
             /**/
 
-            var gameLogic = new GameLogic();
-            Console.WriteLine("Enter your name");
-            var name = Console.ReadLine();
-            Console.WriteLine("Enter number of players(from 2 up to 5)");
+            //var gameLogic = new GameLogic();
+            //Console.WriteLine("Enter your name");
+            //var name = Console.ReadLine();
+            //Console.WriteLine("Enter number of players(from 2 up to 5)");
 
-            var tmpString = Console.ReadLine();
-            int numberOfPlayers = 2;
-            if (Int32.TryParse(tmpString, out numberOfPlayers))
-            {
-                gameLogic.StartNewGame(name, numberOfPlayers);
-            }
-            else
-            {
-                Console.WriteLine("Does not compute!");
-            }
+            //var tmpString = Console.ReadLine();
+            //int numberOfPlayers = 2;
+            //if (Int32.TryParse(tmpString, out numberOfPlayers))
+            //{
+            //    gameLogic.StartNewGame(name, numberOfPlayers);
+            //}
+            //else
+            //{
+            //    Console.WriteLine("Does not compute!");
+            //}
 
         }
 

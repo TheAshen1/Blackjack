@@ -58,6 +58,7 @@
     <Compile Include="BaseRepository.cs" />
     <Compile Include="BlackJackContext.cs" />
     <Compile Include="ConnectionFactory.cs" />
+    <Compile Include="DataMappings\DataMapper.cs" />
     <Compile Include="Migrations\201805310835375_InitialCreate.cs" />
     <Compile Include="Migrations\201805310835375_InitialCreate.Designer.cs">
       <DependentUpon>201805310835375_InitialCreate.cs</DependentUpon>
@@ -95,6 +96,12 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BlackJack.ViewModels\BlackJack.ViewModels.csproj">
+      <Project>{1e967dac-9f8c-4dde-a3a8-77cd366fe87b}</Project>
+      <Name>BlackJack.ViewModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,4 +1,6 @@
-﻿using DataAccess;
+﻿using BlackJack.ViewModels.PlayerServiceViewModels;
+using DataAccess;
+using DataAccess.DataMappings;
 using DataAccess.Models;
 using System;
 using System.Collections.Generic;
@@ -17,30 +19,37 @@ namespace BlackJack.BusinessLogic.Services
             _playerRepository = new BaseRepository<Player>("Players", new ConnectionFactory());
         }
 
-        public async void CreatePlayer(Player player)
+        public async Task<int> CreatePlayer(PlayerServiceCreatePlayerViewModel player)
         {
-            await _playerRepository.Add(player);
+           var result  =  await _playerRepository.Add( DataMapper.Map(player));
+            return result;
         }
 
-        public IEnumerable<Player> All()
+        public async Task<IEnumerable<PlayerServiceViewModel>> All()
         {
-            var result =  _playerRepository.All();
-            return result.Result;
+            var players = await _playerRepository.All();
+            return DataMapper.Map(players);
         }
 
-        public async void RetrievePlayerById(Guid id)
+        public PlayerServiceViewModel RetrievePlayerById(string id)
         {
-            await _playerRepository.FindByID(id);
+            var guid = Guid.Empty;
+            if (Guid.TryParse(id, out guid))
+            {
+                var player = _playerRepository.FindByID(guid);
+                return DataMapper.Map(player.Result);
+            }
+            else throw new ArgumentNullException();
         }
 
-        public async void UpdatePlayer(Player player)
+        public async void UpdatePlayer(PlayerServiceViewModel player)
         {
-            await _playerRepository.Update(player);
+            await _playerRepository.Update(DataMapper.Map(player)); 
         }
 
-        public async void DeletePlayer(Player player)
+        public async void DeletePlayer(PlayerServiceViewModel player)
         {
-            await _playerRepository.Remove(player);
+            await _playerRepository.Remove(DataMapper.Map(player));
         }
 
 

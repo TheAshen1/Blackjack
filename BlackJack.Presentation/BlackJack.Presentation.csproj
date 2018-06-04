@@ -184,6 +184,9 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PlayerRoundsController.cs" />
+    <Compile Include="Controllers\PlayersController.cs" />
+    <Compile Include="Controllers\PlayerValuesController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -243,6 +246,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Players\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -276,6 +280,16 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\BlackJack.BusinessLogic\BlackJack.BusinessLogic.csproj">
+      <Project>{a4dfc778-7f07-440d-a375-a1bc00d573b1}</Project>
+      <Name>BlackJack.BusinessLogic</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\BlackJack.ViewModels\BlackJack.ViewModels.csproj">
+      <Project>{1e967dac-9f8c-4dde-a3a8-77cd366fe87b}</Project>
+      <Name>BlackJack.ViewModels</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

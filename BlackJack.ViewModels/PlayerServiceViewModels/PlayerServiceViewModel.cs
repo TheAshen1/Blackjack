@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 
 namespace BlackJack.ViewModels.PlayerServiceViewModels
 {
-    class PlayerServiceViewModel
+    public class PlayerServiceViewModel
     {
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         public string Name { get; set; }
 
-        //public virtual ICollection<Round_Player> Round_Player { get; set; }
+        public bool IsBot { get; set; }
+
     }
 }

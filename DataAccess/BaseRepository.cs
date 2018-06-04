@@ -26,10 +26,11 @@ namespace DataAccess
            return await _connection.GetAllAsync<T>();
         }
 
-        public virtual async Task Add(T item)
+        public virtual async Task<int> Add(T item)
         {
             item.Id = Guid.NewGuid();
-            await _connection.InsertAsync(item);
+           var result =  await _connection.InsertAsync(item);
+            return result;
         }
 
         public virtual async Task Update(List<T> items)
