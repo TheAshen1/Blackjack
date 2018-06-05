@@ -1,4 +1,6 @@
-﻿using DataAccess;
+﻿using BlackJack.ViewModels.RoundServiceViewModels;
+using DataAccess;
+using DataAccess.DataMappings;
 using DataAccess.Models;
 using System;
 using System.Collections.Generic;
@@ -8,38 +10,48 @@ using System.Threading.Tasks;
 
 namespace BlackJack.BusinessLogic.Services
 {
-    class RoundService
+    public class RoundService
     {
         private readonly BaseRepository<Round> _roundRepository;
-        public RoundService()
+
+        public RoundService(BaseRepository<Round> roundRepository)
         {
-            _roundRepository = new BaseRepository<Round>("Rounds", new ConnectionFactory());
+            _roundRepository = roundRepository;
         }
 
-        public async void CreateRound(Round round)
+        public async Task<int> CreateRound(RoundServiceCreateRoundViewModel viewModel)
         {
-            await _roundRepository.Add(round);
+            var result = await _roundRepository.Add(DataMapper.Map(viewModel));
+            return result;
         }
 
-        public IEnumerable<Round> All()
+        public async Task<IEnumerable<RoundServiceViewModel>> RetrieveAllRounds()
         {
-            var result = _roundRepository.All();
-            return result.Result;
+            var rounds = await _roundRepository.All();
+            return DataMapper.Map(rounds);
         }
 
-        public async void RetrieveroundById(Guid id)
+        public async Task<RoundServiceViewModel> RetrieveRound(string id)
         {
-            await _roundRepository.FindByID(id);
+            var guid = Guid.Empty;
+            if (Guid.TryParse(id, out guid))
+            {
+                var round = await _roundRepository.FindByID(guid);
+                return DataMapper.Map(round);
+            }
+            else throw new ArgumentNullException();// whatever, some exception is needed
         }
 
-        public async void Updateround(Round round)
+        public async Task<bool> UpdateRound(RoundServiceViewModel round)
         {
-            await _roundRepository.Update(round);
+            var result = await _roundRepository.Update(DataMapper.Map(round));
+            return result;
         }
 
-        public async void Deleteround(Round round)
+        public async Task<int> DeleteRound(RoundServiceViewModel round)
         {
-            await _roundRepository.Remove(round);
+            var result = await _roundRepository.Remove(DataMapper.Map(round));
+            return result;
         }
 
 

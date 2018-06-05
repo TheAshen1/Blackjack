@@ -12,7 +12,7 @@ namespace DataAccess.Models
 
         public bool IsBot { get; set; }
 
-        //public virtual ICollection<Round_Player> Round_Player { get; set; }
+        //public virtual ICollection<Round_Player> RoundPlayer { get; set; }
 
     }
 }

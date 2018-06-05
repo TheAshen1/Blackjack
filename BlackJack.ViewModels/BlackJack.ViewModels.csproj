@@ -40,14 +40,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GameServiceViewModels\GameServiceCreateGameViewModel.cs" />
     <Compile Include="GameServiceViewModels\GameServiceViewModel.cs" />
     <Compile Include="PlayerServiceViewModels\PlayerServiceCreatePlayerViewModel.cs" />
     <Compile Include="PlayerServiceViewModels\PlayerServiceViewModel.cs" />
-    <Compile Include="RoundPlayerServiceViewModels\PlayerRoundServiceViewModel.cs" />
+    <Compile Include="RoundPlayerServiceViewModels\RoundPlayerServiceCreateRoundPlayerViewModel.cs" />
+    <Compile Include="RoundPlayerServiceViewModels\RoundPlayerServiceViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoundServiceViewModels\RoundServiceCreateViewModel.cs" />
+    <Compile Include="RoundServiceViewModels\RoundServiceViewModel.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="RoundServiceViewModels\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

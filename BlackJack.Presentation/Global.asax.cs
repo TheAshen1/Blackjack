@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlackJack.Presentation.Config;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -14,6 +15,9 @@ namespace BlackJack.Presentation
         protected void Application_Start()
         {
             AreaRegistration.RegisterAllAreas();
+
+            AutofacWebapiConfig.Initialize(GlobalConfiguration.Configuration);
+
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

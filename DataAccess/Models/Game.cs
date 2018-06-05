@@ -10,10 +10,8 @@ namespace DataAccess.Models
     public class Game : BaseModel
     {
         public DateTime Start { get; set; }
-        public DateTime End { get; set; }
+        public DateTime? End { get; set; }
 
-        public bool IsFinished { get; set; }
-
-        public ICollection<Round> Rounds { get; set; }
+        //public ICollection<Round> Rounds { get; set; }
     }
 }

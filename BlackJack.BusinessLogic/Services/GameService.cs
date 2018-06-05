@@ -1,4 +1,6 @@
-﻿using DataAccess;
+﻿using BlackJack.ViewModels.GameServiceViewModels;
+using DataAccess;
+using DataAccess.DataMappings;
 using DataAccess.Models;
 using System;
 using System.Collections.Generic;
@@ -8,38 +10,49 @@ using System.Threading.Tasks;
 
 namespace BlackJack.BusinessLogic.Services
 {
-    class GameService
+    public class GameService
     {
         private readonly BaseRepository<Game> _gameRepository;
-        public GameService()
+
+        public GameService(BaseRepository<Game> gameRepository)
         {
-            _gameRepository = new BaseRepository<Game>("Games", new ConnectionFactory());
+            _gameRepository = gameRepository;
         }
 
-        public async void CreateGame(Game game)
+        public async Task<int> CreateGame(GameServiceCreateGameViewModel viewModel)
         {
-            await _gameRepository.Add(game);
+            var result = await _gameRepository.Add(DataMapper.Map(viewModel));
+            return result; 
         }
 
-        public IEnumerable<Game> All()
+        public async Task<IEnumerable<GameServiceViewModel>> RetrieveAllGames()
         {
-            var result = _gameRepository.All();
-            return result.Result;
+            var games = await _gameRepository.All();
+            return DataMapper.Map(games);
         }
 
-        public async void RetrieveGameById(Guid id)
+        public async Task<GameServiceViewModel> RetrieveGame(string id)
         {
-            await _gameRepository.FindByID(id);
+
+            var guid = Guid.Empty;
+            if (Guid.TryParse(id, out guid))
+            {
+                var game = await _gameRepository.FindByID(guid);
+                return DataMapper.Map(game);
+            }
+            else throw new ArgumentNullException();// whatever, some exception is needed
         }
 
-        public async void UpdateGame(Game game)
+        public async Task<bool> UpdateGame(GameServiceViewModel game)
         {
-            await _gameRepository.Update(game);
+            var result = await _gameRepository.Update(DataMapper.Map(game));
+            return result;
         }
 
-        public async void DeleteGame(Game game)
+        public async Task<int> DeleteGame(GameServiceViewModel game)
         {
-            await _gameRepository.Remove(game);
+            var result = await _gameRepository.Remove(DataMapper.Map(game));
+            return result;
         }
 
 

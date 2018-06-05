@@ -6,11 +6,8 @@ using System.Threading.Tasks;
 
 namespace BlackJack.ViewModels.GameServiceViewModels
 {
-    public class GameServiceViewModel
+    public class GameServiceCreateGameViewModel
     {
-        public string Id { get; set; }
         public string Start { get; set; }
-        public string End { get; set; }
-
     }
 }

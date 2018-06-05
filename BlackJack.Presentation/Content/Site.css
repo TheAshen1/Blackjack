@@ -18,17 +18,19 @@ textarea {
 
 
 #tableBlock {
+    display: inline-block;
     margin: 20px;
-    width: auto;
 }
 
 #editBlock {
+    display: block;
     margin: 20px;
     display: none;
     float: right;
 }
 
 #createBlock {
+    display: block;
     margin: 20px;
-    float: right;
+    float: right
 }

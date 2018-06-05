@@ -1,4 +1,6 @@
-﻿using DataAccess;
+﻿using BlackJack.ViewModels.RoundPlayerServiceViewModels;
+using DataAccess;
+using DataAccess.DataMappings;
 using DataAccess.Models;
 using System;
 using System.Collections.Generic;
@@ -8,39 +10,48 @@ using System.Threading.Tasks;
 
 namespace BlackJack.BusinessLogic.Services
 {
-    class RoundPlayerService
+    public class RoundPlayerService
     {
         private readonly BaseRepository<Round_Player> _round_PlayerRepository;
 
-        public RoundPlayerService()
+        public RoundPlayerService(BaseRepository<Round_Player> round_PlayerRepository)
         {
-            _round_PlayerRepository = new BaseRepository<Round_Player>("Round_Player", new ConnectionFactory());
+            _round_PlayerRepository = round_PlayerRepository;
         }
 
-        public async void CreateRound_Player(Round_Player Round_Player)
+        public async Task<int> CreateRoundPlayer(RoundPlayerServiceCreateRoundPlayerViewModel viewModel)
         {
-            await _round_PlayerRepository.Add(Round_Player);
+            var result = await _round_PlayerRepository.Add(DataMapper.Map(viewModel));
+            return result;
         }
 
-        public IEnumerable<Round_Player> All()
+        public async Task<IEnumerable<RoundPlayerServiceViewModel>> RetrieveAllRoundPlayers()
         {
-            var result = _round_PlayerRepository.All();
-            return result.Result;
+            var roundPlayers = await _round_PlayerRepository.All();
+            return DataMapper.Map(roundPlayers);
         }
 
-        public async void RetrieveRound_PlayerById(Guid id)
+        public async Task<RoundPlayerServiceViewModel> RetrieveRoundPlayer(string id)
         {
-            await _round_PlayerRepository.FindByID(id);
+            var guid = Guid.Empty;
+            if (Guid.TryParse(id, out guid))
+            {
+                var roundPlayer = await _round_PlayerRepository.FindByID(guid);
+                return DataMapper.Map(roundPlayer);
+            }
+            else throw new ArgumentNullException();// whatever, some exception is needed
         }
 
-        public async void UpdateRound_Player(Round_Player Round_Player)
+        public async Task<bool> UpdateRoundPlayer(RoundPlayerServiceViewModel roundPlayer)
         {
-            await _round_PlayerRepository.Update(Round_Player);
+            var result = await _round_PlayerRepository.Update(DataMapper.Map(roundPlayer));
+            return result;
         }
 
-        public async void DeleteRound_Player(Round_Player Round_Player)
+        public async Task<int> DeleteRoundPlayer(RoundPlayerServiceViewModel roundPlayer)
         {
-            await _round_PlayerRepository.Remove(Round_Player);
+            var result = await _round_PlayerRepository.Remove(DataMapper.Map(roundPlayer));
+            return result;
         }
 
     }

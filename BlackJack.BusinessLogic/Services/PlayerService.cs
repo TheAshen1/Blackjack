@@ -9,47 +9,49 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace BlackJack.BusinessLogic.Services
-{
-   
+{   
     public class PlayerService
     {
         private readonly BaseRepository<Player> _playerRepository;
-        public PlayerService()
+
+        public PlayerService(BaseRepository<Player> playerRepository)
         {
-            _playerRepository = new BaseRepository<Player>("Players", new ConnectionFactory());
+            _playerRepository = playerRepository;
         }
 
         public async Task<int> CreatePlayer(PlayerServiceCreatePlayerViewModel player)
         {
-           var result  =  await _playerRepository.Add( DataMapper.Map(player));
+            var result =  await _playerRepository.Add( DataMapper.Map(player));
             return result;
         }
 
-        public async Task<IEnumerable<PlayerServiceViewModel>> All()
+        public async Task<IEnumerable<PlayerServiceViewModel>> RetrieveAllPlayers()
         {
             var players = await _playerRepository.All();
             return DataMapper.Map(players);
         }
 
-        public PlayerServiceViewModel RetrievePlayerById(string id)
+        public async Task<PlayerServiceViewModel> RetrievePlayer(string id)
         {
             var guid = Guid.Empty;
             if (Guid.TryParse(id, out guid))
             {
-                var player = _playerRepository.FindByID(guid);
-                return DataMapper.Map(player.Result);
+                var player = await _playerRepository.FindByID(guid);
+                return DataMapper.Map(player);
             }
-            else throw new ArgumentNullException();
+            else throw new ArgumentNullException();// whatever, some exception is needed
         }
 
-        public async void UpdatePlayer(PlayerServiceViewModel player)
+        public async Task<bool> UpdatePlayer(PlayerServiceViewModel player)
         {
-            await _playerRepository.Update(DataMapper.Map(player)); 
+            var result =  await _playerRepository.Update(DataMapper.Map(player));
+            return result;
         }
 
-        public async void DeletePlayer(PlayerServiceViewModel player)
+        public async Task<int> DeletePlayer(PlayerServiceViewModel player)
         {
-            await _playerRepository.Remove(DataMapper.Map(player));
+            var result = await _playerRepository.Remove(DataMapper.Map(player));
+            return result;
         }
 
 

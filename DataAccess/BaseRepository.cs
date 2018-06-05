@@ -29,19 +29,19 @@ namespace DataAccess
         public virtual async Task<int> Add(T item)
         {
             item.Id = Guid.NewGuid();
-           var result =  await _connection.InsertAsync(item);
+            var result =  await _connection.InsertAsync(item);
             return result;
         }
 
-        public virtual async Task Update(List<T> items)
+        public virtual async Task<bool> Update(List<T> items)
         {
-            await _connection.UpdateAsync(items);
+            return await _connection.UpdateAsync(items);
         }
 
 
-        public virtual async Task Update(T item)
+        public virtual async Task<bool> Update(T item)
         {
-            await _connection.UpdateAsync(item);
+           return await _connection.UpdateAsync(item);
         }
 
         public async Task DeleteList(List<Guid> idToDelete)
@@ -63,14 +63,14 @@ namespace DataAccess
             await _connection.DeleteAsync(IdsForDelete);
         }
 
-        public virtual async Task Remove(T item)
+        public virtual async Task<int> Remove(T item)
         {
-            await _connection.ExecuteAsync("DELETE FROM " + _tableName + " WHERE Id=@Id", new { item.Id });
+            return  await _connection.ExecuteAsync("DELETE FROM " + _tableName + " WHERE Id=@Id", new { item.Id });
         }
 
-        public virtual async Task RemoveById(Guid id)
+        public virtual async Task<int> RemoveById(Guid id)
         {
-            await _connection.ExecuteAsync("DELETE FROM " + _tableName + " WHERE Id=@Id", new { Id = id });
+            return await _connection.ExecuteAsync("DELETE FROM " + _tableName + " WHERE Id=@Id", new { Id = id });
         }
 
         public virtual async Task<T> FindByID(Guid id)

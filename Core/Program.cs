@@ -16,42 +16,42 @@ namespace Core
     {
         static void Main(string[] args)
         {
-            //Console.WriteLine("Begin!");
+            Console.WriteLine("Begin!");
 
-            //BlackJackContext context = new BlackJackContext();
+            BlackJackContext context = new BlackJackContext();
 
-            //var players = new Player[]
-            //{
-            //    new Player()
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        Name = "another user",
-            //        IsBot = false
-            //    },
-            //    new Player()
-            //    {
-            //        Id = Guid.NewGuid(),
-            //        Name = "someBot",
-            //        IsBot = true
-            //    }
-            //};
+            var games = new Game[]
+            {
+                new Game()
+                {
+                    Id = Guid.NewGuid(),
+                    Start = DateTime.Now,
+                    End = DateTime.Now.AddMinutes(15)
+                },
+                new Game()
+                {
+                    Id = Guid.NewGuid(),
+                    Start = DateTime.Now.AddMinutes(15),
+                   
+                }
+            };
 
-            //context.Players.AddRange(players);
+            //context.Games.AddRange(games);
 
-            //context.SaveChanges();
+            context.SaveChanges();
 
-            //Console.WriteLine("Saved!");
+            Console.WriteLine("Saved!");
 
 
 
-            //var query = from p in context.Players
-            //            select p;
-            //Console.WriteLine("Query result: " + query.Count());
-            //foreach (var player in query)
-            //{
-            //    Console.WriteLine(player.Name + " isBot: " + player.IsBot);
-            //}
-            //Console.WriteLine("Done!");
+            var query = from p in context.Games
+                        select p;
+            Console.WriteLine("Query result: " + query.Count());
+            foreach (var game in query)
+            {
+                Console.WriteLine("Game start time: " + game.Start + " Game finish time: " + game.End);
+            }
+            Console.WriteLine("Done!");
 
             /**/
 

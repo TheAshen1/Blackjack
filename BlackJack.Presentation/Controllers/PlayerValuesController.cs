@@ -14,21 +14,23 @@ namespace BlackJack.Presentation.Controllers
     {
         private readonly PlayerService _service;
 
-        public PlayerValuesController()
+        public PlayerValuesController(PlayerService service)
         {
-            _service = new PlayerService();
+            _service = service;
         }
 
-        public async Task<IEnumerable<PlayerServiceViewModel>> GetPlayers()
+        [HttpGet]
+        public async Task<IEnumerable<PlayerServiceViewModel>> RetrieveAllPlayers()
         {
-            var result = await _service.All();
+            var result = await _service.RetrieveAllPlayers();
             return result;
         }
 
-        public PlayerServiceViewModel GetPlayer(string id)
+        [HttpGet]
+        public async Task<PlayerServiceViewModel> RetrievePlayer(string id)
         {
-            return _service.RetrievePlayerById(id);
-
+            var result = await _service.RetrievePlayer(id);
+            return result;
         }
 
         [HttpPost]
@@ -39,19 +41,22 @@ namespace BlackJack.Presentation.Controllers
         }
 
         [HttpPut]
-        public void EditPlayer(string id, [FromBody]PlayerServiceViewModel viewModel)
+        public async Task<HttpResponseMessage> UpdatePlayer(string id, [FromBody]PlayerServiceViewModel viewModel)
         {
             if(id == viewModel.Id)
             {
-                _service.UpdatePlayer(viewModel);
+                var isUpdated = await _service.UpdatePlayer(viewModel);
+                return Request.CreateResponse(HttpStatusCode.OK);
             }
+            return Request.CreateResponse(HttpStatusCode.NotModified);
         }
 
-        public void DeletePlayer(string id)
+        public async Task<HttpResponseMessage> DeletePlayer(string id)
         {
-            var playerToDelete = _service.RetrievePlayerById(id);
+            var playerToDelete = await _service.RetrievePlayer(id);
 
-            _service.DeletePlayer(playerToDelete);
+            await _service.DeletePlayer(playerToDelete);
+            return Request.CreateResponse(HttpStatusCode.OK);
         }
     }
 }

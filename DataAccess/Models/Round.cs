@@ -10,12 +10,12 @@ namespace DataAccess.Models
     public class Round : BaseModel
     {
         public Guid GameId { get; set; }
-        public Game Game { get; set; }
+        //public Game Game { get; set; }
 
         public Guid? WinnerId { get; set; }
-        public Player Winner { get; set; }
+        //public Player Winner { get; set; }
 
-        public virtual ICollection<Round_Player> Round_Player { get; set; }
+        //public virtual ICollection<Round_Player> RoundPlayer { get; set; }
 
     }
 }

@@ -8,14 +8,14 @@ namespace BlackJack.BusinessLogic.GameLogic
 {
     public class GameLogic
     {
-        public void StartNewGame(string userName, int playerCount = 2)
+        public void StartNewGame(string userName, int playerCount = 0)
         {
             if (playerCount > 5)
             {
                 Console.WriteLine("Player count is limited to 5!");
                 return;
             }
-            if (playerCount < 2)
+            if (playerCount < 0)
             {
                 Console.WriteLine("Minimum amount of players is 2!");
                 return;
@@ -66,7 +66,7 @@ namespace BlackJack.BusinessLogic.GameLogic
                 }
             }
 
-            for (var i = 2; i < playerCount; i++)
+            for (var i = 0; i < playerCount; i++)
             {
                 var tmpIndex = RAND.Next(listOfNames.Count);
                 Players.Add(new PlayerLogic()
