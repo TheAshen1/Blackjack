@@ -19,7 +19,7 @@ namespace BlackJack.BusinessLogic.Services
             _playerRepository = playerRepository;
         }
 
-        public async Task<int> CreatePlayer(PlayerServiceCreatePlayerViewModel player)
+        public async Task<string> CreatePlayer(PlayerServiceCreatePlayerViewModel player)
         {
             var result =  await _playerRepository.Add( DataMapper.Map(player));
             return result;

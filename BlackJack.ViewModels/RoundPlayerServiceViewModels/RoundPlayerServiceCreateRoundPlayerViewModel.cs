@@ -12,6 +12,6 @@ namespace BlackJack.ViewModels.RoundPlayerServiceViewModels
 
         public string PlayerId { get; set; }
 
-        public List<String> PlayerCards { get; set; }
+        public string Cards { get; set; }
     }
 }

@@ -69,7 +69,7 @@ function DeleteRound(id) {
 
 function EditRound() {
     var id = $('#editId').val()
-    // получаем новые значения для редактируемого объекта
+
     var round = {
         Id: $('#editId').val(),
         GameId: $('#editGameId').val(),
@@ -138,7 +138,7 @@ function GetRound(id) {
         }
     });
 }
-
+///////////
 function GetAllGames() {
 
     $("#createBlock").css('display', 'block');

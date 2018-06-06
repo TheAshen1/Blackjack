@@ -23,14 +23,15 @@ namespace DataAccess
         }
         public virtual async Task<IEnumerable<T>> All()
         {
-           return await _connection.GetAllAsync<T>();
+           var result = await _connection.GetAllAsync<T>();
+            return result;
         }
 
-        public virtual async Task<int> Add(T item)
+        public virtual async Task<string> Add(T item)
         {
             item.Id = Guid.NewGuid();
             var result =  await _connection.InsertAsync(item);
-            return result;
+            return item.Id.ToString();
         }
 
         public virtual async Task<bool> Update(List<T> items)

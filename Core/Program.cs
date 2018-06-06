@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.Entity;
 
 namespace Core
 {
@@ -20,23 +21,28 @@ namespace Core
 
             BlackJackContext context = new BlackJackContext();
 
-            var games = new Game[]
+            context.Rounds.Load();
+            var queryRounds = from round in context.Rounds.Local
+                              select round;
+            var someRound = queryRounds.First();
+
+            context.Players.Load();
+            var queryPlayers = from player in context.Players.Local
+                               select player;
+            var somePlayer = queryPlayers.First();
+
+
+            var roundPlayers = new RoundPlayer[]
             {
-                new Game()
-                {
-                    Id = Guid.NewGuid(),
-                    Start = DateTime.Now,
-                    End = DateTime.Now.AddMinutes(15)
-                },
-                new Game()
-                {
-                    Id = Guid.NewGuid(),
-                    Start = DateTime.Now.AddMinutes(15),
-                   
-                }
+               new RoundPlayer()
+               {
+                   Id = Guid.NewGuid(),
+                   RoundId = someRound.Id,
+                   PlayerId = somePlayer.Id
+               }
             };
 
-            //context.Games.AddRange(games);
+            context.RoundPlayer.AddRange(roundPlayers);
 
             context.SaveChanges();
 
@@ -44,12 +50,13 @@ namespace Core
 
 
 
-            var query = from p in context.Games
-                        select p;
+            var query = from roundPlayer in context.RoundPlayer
+                        select roundPlayer;
+
             Console.WriteLine("Query result: " + query.Count());
-            foreach (var game in query)
+            foreach (var roundPlayer in query)
             {
-                Console.WriteLine("Game start time: " + game.Start + " Game finish time: " + game.End);
+                Console.WriteLine("Id: " + roundPlayer.Id + " RoundId: " + roundPlayer.RoundId + " PlayerId: " + roundPlayer.PlayerId);
             }
             Console.WriteLine("Done!");
 

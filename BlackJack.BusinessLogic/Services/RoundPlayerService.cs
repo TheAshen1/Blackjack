@@ -12,14 +12,14 @@ namespace BlackJack.BusinessLogic.Services
 {
     public class RoundPlayerService
     {
-        private readonly BaseRepository<Round_Player> _round_PlayerRepository;
+        private readonly BaseRepository<RoundPlayer> _round_PlayerRepository;
 
-        public RoundPlayerService(BaseRepository<Round_Player> round_PlayerRepository)
+        public RoundPlayerService(BaseRepository<RoundPlayer> round_PlayerRepository)
         {
             _round_PlayerRepository = round_PlayerRepository;
         }
 
-        public async Task<int> CreateRoundPlayer(RoundPlayerServiceCreateRoundPlayerViewModel viewModel)
+        public async Task<string> CreateRoundPlayer(RoundPlayerServiceCreateRoundPlayerViewModel viewModel)
         {
             var result = await _round_PlayerRepository.Add(DataMapper.Map(viewModel));
             return result;

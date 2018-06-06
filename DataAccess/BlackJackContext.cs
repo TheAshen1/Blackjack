@@ -17,7 +17,7 @@ namespace DataAccess
         public virtual DbSet<Game> Games { get; set; }
         public virtual DbSet<Round> Rounds { get; set; }
         public virtual DbSet<Player> Players { get; set; }
-        public virtual DbSet<Round_Player> Round_Player { get; set; }
+        public virtual DbSet<RoundPlayer> RoundPlayer { get; set; }
     }
 
 }

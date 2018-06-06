@@ -233,30 +233,31 @@ namespace DataAccess.DataMappings
         #endregion
 
         #region roundPlayerEntity
-        public static RoundPlayerServiceViewModel Map(Round_Player entity)
+        public static RoundPlayerServiceViewModel Map(RoundPlayer entity)
         {
-            return new RoundPlayerServiceViewModel()
+            var viewModel =  new RoundPlayerServiceViewModel()
             {
                 Id = entity.Id.ToString(),
                 RoundId = entity.RoundId.ToString(),
                 PlayerId = entity.PlayerId.ToString(),
-                PlayerCards = entity.Cards.Split(',')
+                Cards = entity.Cards
             };
+            return viewModel;
         }
 
-        public static Round_Player Map(RoundPlayerServiceViewModel viewModel)
+        public static RoundPlayer Map(RoundPlayerServiceViewModel viewModel)
         {
             var id = Guid.Empty;
             var roundId = Guid.Empty;
             var playerId = Guid.Empty;
             if (Guid.TryParse(viewModel.Id, out id) && Guid.TryParse(viewModel.RoundId, out roundId) && Guid.TryParse(viewModel.PlayerId, out playerId))
             {
-                var entity = new Round_Player()
+                var entity = new RoundPlayer()
                 {
                     Id = id,
                     RoundId = roundId,
                     PlayerId = playerId,
-                    Cards = string.Join(",",viewModel.PlayerCards)
+                    Cards = viewModel.Cards
                 };
 
                 return entity;
@@ -265,19 +266,19 @@ namespace DataAccess.DataMappings
 
         }
 
-        public static Round_Player Map(RoundPlayerServiceCreateRoundPlayerViewModel viewModel)
+        public static RoundPlayer Map(RoundPlayerServiceCreateRoundPlayerViewModel viewModel)
         {
             var roundId = Guid.Empty;
             var playerId = Guid.Empty;
 
             if (Guid.TryParse(viewModel.RoundId, out roundId) && Guid.TryParse(viewModel.PlayerId, out playerId))
             {
-                var entity = new Round_Player()
+                var entity = new RoundPlayer()
                 {
                     Id = Guid.Empty,
                     RoundId = roundId,
                     PlayerId = playerId,
-                    Cards = string.Join(",", viewModel.PlayerCards)
+                    Cards = viewModel.Cards
                 };
 
                 return entity;
@@ -286,7 +287,7 @@ namespace DataAccess.DataMappings
         }
 
 
-        public static IEnumerable<RoundPlayerServiceViewModel> Map(IEnumerable<Round_Player> entities)
+        public static IEnumerable<RoundPlayerServiceViewModel> Map(IEnumerable<RoundPlayer> entities)
         {
             var list = new List<RoundPlayerServiceViewModel>();
             foreach (var entity in entities)
@@ -296,9 +297,9 @@ namespace DataAccess.DataMappings
             return list;
         }
 
-        public static IEnumerable<Round_Player> Map(IEnumerable<RoundPlayerServiceViewModel> viewModels)
+        public static IEnumerable<RoundPlayer> Map(IEnumerable<RoundPlayerServiceViewModel> viewModels)
         {
-            var list = new List<Round_Player>();
+            var list = new List<RoundPlayer>();
             foreach (var viewModel in viewModels)
             {
                 list.Add(Map(viewModel));

@@ -19,7 +19,7 @@ namespace BlackJack.BusinessLogic.Services
             _roundRepository = roundRepository;
         }
 
-        public async Task<int> CreateRound(RoundServiceCreateRoundViewModel viewModel)
+        public async Task<string> CreateRound(RoundServiceCreateRoundViewModel viewModel)
         {
             var result = await _roundRepository.Add(DataMapper.Map(viewModel));
             return result;

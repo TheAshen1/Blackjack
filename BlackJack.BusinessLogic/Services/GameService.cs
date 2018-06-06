@@ -19,7 +19,7 @@ namespace BlackJack.BusinessLogic.Services
             _gameRepository = gameRepository;
         }
 
-        public async Task<int> CreateGame(GameServiceCreateGameViewModel viewModel)
+        public async Task<string> CreateGame(GameServiceCreateGameViewModel viewModel)
         {
             var result = await _gameRepository.Add(DataMapper.Map(viewModel));
             return result; 

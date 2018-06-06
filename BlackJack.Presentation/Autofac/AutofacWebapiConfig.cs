@@ -43,8 +43,8 @@ namespace BlackJack.Presentation.Config
                     .WithParameter("connectionFactory", new ConnectionFactory())
                     .InstancePerRequest();
 
-            builder.RegisterType<BaseRepository<Round_Player>>()
-                    .WithParameter("tableName", "Round_Player")
+            builder.RegisterType<BaseRepository<RoundPlayer>>()
+                    .WithParameter("tableName", "RoundPlayers")
                     .WithParameter("connectionFactory", new ConnectionFactory())
                     .InstancePerRequest();
 
