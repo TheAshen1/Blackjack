@@ -10,8 +10,10 @@
     <p><b>Edit Player</b></p>
     <table>
         <tr><td><input type="hidden" id="editId" /></td><td></td></tr>
+        <tr><td><label>GameId: </label></td><td><select id="editGameId" required></select></td></tr>
         <tr><td><label>Name: </label></td><td><input type="text" id="editName" /></td></tr>
         <tr><td><label>IsBot: </label></td><td><input type="text" id="editIsBot" /></td></tr>
+        
     </table>
     <button id="editPlayer">Save</button>
 </div>
@@ -19,6 +21,7 @@
 <div id="createBlock">
     <p><b>Create Player</b></p>
     <table>
+        <tr><td><label>GameId: </label></td><td><select id="createGameId" required></select></td></tr>
         <tr><td><label>Name: </label></td><td><input type="text" id="createName" /></td></tr>
         <tr><td><label>IsBot: </label></td><td><input type="text" id="createIsBot" /></td></tr>
     </table>
@@ -27,6 +30,6 @@
 
 @section scripts
 {
-    <script src="~/Scripts/Players.js" type="text/javascript" ></script>
+    <script src="~/Scripts/myScripts/Players.js" type="text/javascript" ></script>
 }
 

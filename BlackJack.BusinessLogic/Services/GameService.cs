@@ -1,7 +1,7 @@
 ﻿using BlackJack.ViewModels.GameServiceViewModels;
 using DataAccess;
 using DataAccess.DataMappings;
-using DataAccess.Models;
+using DataAccess.DapperModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

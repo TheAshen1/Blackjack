@@ -5,7 +5,8 @@ using System.Web.Http;
 using System.Reflection;
 using BlackJack.BusinessLogic.Services;
 using DataAccess;
-using DataAccess.Models;
+using DataAccess.DapperModels;
+using BlackJack.BusinessLogic.GameLogic;
 
 namespace BlackJack.Presentation.Config
 {

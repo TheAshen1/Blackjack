@@ -2,7 +2,7 @@
 using BlackJack.ViewModels.PlayerServiceViewModels;
 using BlackJack.ViewModels.GameServiceViewModels;
 using BlackJack.ViewModels.RoundPlayerServiceViewModels;
-using DataAccess.Models;
+using DataAccess.DapperModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,6 +21,7 @@ namespace DataAccess.DataMappings
             return new PlayerServiceViewModel()
             {
                 Id = entity.Id.ToString(),
+                GameId = entity.GameId.ToString(),
                 Name = entity.Name,
                 IsBot = entity.IsBot             
             };
@@ -28,8 +29,7 @@ namespace DataAccess.DataMappings
 
         public static Player Map(PlayerServiceViewModel viewModel)
         {
-            var id = Guid.Empty;
-            if (Guid.TryParse(viewModel.Id, out id))
+            if (Guid.TryParse(viewModel.Id, out Guid id))
             {
                 var entity = new Player()
                 {
@@ -46,14 +46,18 @@ namespace DataAccess.DataMappings
 
         public static Player Map(PlayerServiceCreatePlayerViewModel viewModel)
         {
-            var entity = new Player()
+            if (Guid.TryParse(viewModel.GameId, out Guid gameId))
             {
-                Id = Guid.Empty,
-                Name = viewModel.Name,
-                IsBot = viewModel.IsBot
-            };
+                var entity = new Player()
+                {
+                    Id = Guid.Empty,
+                    GameId = gameId,
+                    Name = viewModel.Name,
+                    IsBot = viewModel.IsBot
+                };
 
-            return entity;
+                return entity;
+            } throw new ArgumentException();
         }
 
         public static IEnumerable<PlayerServiceViewModel> Map( IEnumerable<Player> entities)
@@ -90,11 +94,7 @@ namespace DataAccess.DataMappings
 
         public static Game Map(GameServiceViewModel viewModel)
         {
-            var id = Guid.Empty;
-            var startTime = DateTime.Now;
-            DateTime endTime;
-
-            if (Guid.TryParse(viewModel.Id, out id) && DateTime.TryParse(viewModel.Start, out startTime))
+            if (Guid.TryParse(viewModel.Id, out Guid id) && DateTime.TryParse(viewModel.Start, out DateTime startTime))
             {
                 
                 var entity = new Game()
@@ -103,7 +103,7 @@ namespace DataAccess.DataMappings
                     Start = startTime,
                     
                 };
-                if (DateTime.TryParse(viewModel.End, out endTime))
+                if (DateTime.TryParse(viewModel.End, out DateTime endTime))
                     entity.End = endTime;
 
                 return entity;
@@ -161,27 +161,18 @@ namespace DataAccess.DataMappings
             {
                 Id = entity.Id.ToString(),
                 GameId = entity.GameId.ToString(),
-                WinnerId = entity.WinnerId.ToString()
             };
         }
 
         public static Round Map(RoundServiceViewModel viewModel)
         {
-            var id = Guid.Empty;
-            var gameId = Guid.Empty;
-            var winnerId = Guid.Empty;
-            if (Guid.TryParse(viewModel.Id, out id) && Guid.TryParse(viewModel.GameId, out gameId))
+            if (Guid.TryParse(viewModel.Id, out Guid id) && Guid.TryParse(viewModel.GameId, out Guid gameId))
             {
                 var entity = new Round()
                 {
                     Id = id,
                     GameId = gameId,
                 };
-                if(Guid.TryParse(viewModel.WinnerId, out winnerId))
-                {
-                    entity.WinnerId = winnerId;
-                }
-
                 return entity;
             }
             else throw new ArgumentException();
@@ -190,9 +181,7 @@ namespace DataAccess.DataMappings
 
         public static Round Map(RoundServiceCreateRoundViewModel viewModel)
         {
-            var gameId = Guid.Empty;
-            var winnerId = Guid.Empty;
-            if (Guid.TryParse(viewModel.GameId, out gameId))
+            if (Guid.TryParse(viewModel.GameId, out Guid gameId))
             {
                 var entity = new Round()
                 {
@@ -200,10 +189,6 @@ namespace DataAccess.DataMappings
                     GameId = gameId,
                 };
 
-                if(Guid.TryParse(viewModel.WinnderId,out winnerId))
-                {
-                    entity.WinnerId = winnerId;
-                }
 
                 return entity;
             }
@@ -247,10 +232,7 @@ namespace DataAccess.DataMappings
 
         public static RoundPlayer Map(RoundPlayerServiceViewModel viewModel)
         {
-            var id = Guid.Empty;
-            var roundId = Guid.Empty;
-            var playerId = Guid.Empty;
-            if (Guid.TryParse(viewModel.Id, out id) && Guid.TryParse(viewModel.RoundId, out roundId) && Guid.TryParse(viewModel.PlayerId, out playerId))
+            if (Guid.TryParse(viewModel.Id, out Guid id) && Guid.TryParse(viewModel.RoundId, out Guid roundId) && Guid.TryParse(viewModel.PlayerId, out Guid playerId))
             {
                 var entity = new RoundPlayer()
                 {
@@ -268,10 +250,7 @@ namespace DataAccess.DataMappings
 
         public static RoundPlayer Map(RoundPlayerServiceCreateRoundPlayerViewModel viewModel)
         {
-            var roundId = Guid.Empty;
-            var playerId = Guid.Empty;
-
-            if (Guid.TryParse(viewModel.RoundId, out roundId) && Guid.TryParse(viewModel.PlayerId, out playerId))
+            if (Guid.TryParse(viewModel.RoundId, out Guid roundId) && Guid.TryParse(viewModel.PlayerId, out Guid playerId))
             {
                 var entity = new RoundPlayer()
                 {

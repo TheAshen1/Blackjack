@@ -58,24 +58,12 @@
     <Compile Include="BaseRepository.cs" />
     <Compile Include="BlackJackContext.cs" />
     <Compile Include="ConnectionFactory.cs" />
+    <Compile Include="DapperModels\BaseModel.cs" />
+    <Compile Include="DapperModels\Game.cs" />
+    <Compile Include="DapperModels\Player.cs" />
+    <Compile Include="DapperModels\Round.cs" />
+    <Compile Include="DapperModels\RoundPlayer.cs" />
     <Compile Include="DataMappings\DataMapper.cs" />
-    <Compile Include="Migrations\201805310835375_InitialCreate.cs" />
-    <Compile Include="Migrations\201805310835375_InitialCreate.Designer.cs">
-      <DependentUpon>201805310835375_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806040720527_init.cs" />
-    <Compile Include="Migrations\201806040720527_init.Designer.cs">
-      <DependentUpon>201806040720527_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806050803422_fixGameModel.cs" />
-    <Compile Include="Migrations\201806050803422_fixGameModel.Designer.cs">
-      <DependentUpon>201806050803422_fixGameModel.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201806061159567_fixRoundPlayer.cs" />
-    <Compile Include="Migrations\201806061159567_fixRoundPlayer.Designer.cs">
-      <DependentUpon>201806061159567_fixRoundPlayer.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\Player.cs" />
@@ -93,18 +81,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201805310835375_InitialCreate.resx">
-      <DependentUpon>201805310835375_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806040720527_init.resx">
-      <DependentUpon>201806040720527_init.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806050803422_fixGameModel.resx">
-      <DependentUpon>201806050803422_fixGameModel.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806061159567_fixRoundPlayer.resx">
-      <DependentUpon>201806061159567_fixRoundPlayer.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

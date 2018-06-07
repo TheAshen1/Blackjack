@@ -1,4 +1,4 @@
-﻿using DataAccess.Models;
+﻿using DataAccess.DapperModels;
 using Dapper;
 using Dapper.Contrib.Extensions;
 using System;

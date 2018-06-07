@@ -9,6 +9,7 @@ namespace BlackJack.ViewModels.PlayerServiceViewModels
     public class PlayerServiceCreatePlayerViewModel
     {
         public string Name { get; set; }
+        public string GameId { get; set; }
         public bool IsBot { get; set; }
     }
 }
