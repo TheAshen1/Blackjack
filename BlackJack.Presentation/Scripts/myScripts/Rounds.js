@@ -1,5 +1,4 @@
-﻿
-$(document).ready(function () {
+﻿$(document).ready(function () {
 
     GetAllRounds();
     GetAllGames();
@@ -66,7 +65,7 @@ function DeleteRound(id) {
 }
 
 function EditRound() {
-    var id = $('#editId').val()
+    var id = $('#editId').val();
 
     var round = {
         Id: $('#editId').val(),
@@ -89,8 +88,8 @@ function EditRound() {
 function WriteResponse(rounds) {
     var strResult = "<table><th>ID</th><th>GameId</th>";
     $.each(rounds, function (index, round) {
-        strResult += "<tr><td>" + round.Id + "</td><td> " + round.GameId +
-            "</td><td><a id=editItem' data-item='" + round.Id + "' onclick='EditItem(this)'>Edit</a></td>" +
+        strResult += "<tr><td>" + round.Id + "</td><td> " + round.GameId + "</td><td> " +
+            "</td><td><a id='editItem' data-item='" + round.Id + "' onclick='EditItem(this)'>Edit</a></td>" +
             "<td><a id='deleteItem' data-item='" + round.Id + "' onclick='DeleteItem(this)'>Delete</a></td></tr>";
     });
     strResult += "</table>";
@@ -110,7 +109,7 @@ function EditItem(el) {
 }
 
 function ShowRound(round) {
-    if (round != null) {
+    if (round !== null) {
         $("#createBlock").css('display', 'none');
         $("#editBlock").css('display', 'block');
         $("#editId").val(round.Id);
@@ -159,30 +158,4 @@ function FillGameSelect(games) {
     });
     $("#editGameId").html(strResult);
     $("#createGameId").html(strResult);
-}
-
-function GetAllPlayers() {
-
-    $("#createBlock").css('display', 'block');
-    $("#editBlock").css('display', 'none');
-    $.ajax({
-        url: '/api/PlayerValues/',
-        type: 'GET',
-        dataType: 'json',
-        success: function (data) {
-            FillPlayerSelect(data);
-        },
-        error: function (x, y, z, ) {
-            alert(x.status + '\n' + x.responseJSON + '\n' + z);
-        }
-    });
-}
-
-function FillPlayerSelect(players) {
-    var strResult = "";
-    $.each(players, function (index, player) {
-        strResult += "<option value='" + player.Id + "'>" + player.Id + "</option>";
-    });
-    $("#editWinnerId").html(strResult);
-    $("#createWinnerId").html(strResult);
 }

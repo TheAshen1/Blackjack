@@ -68,12 +68,12 @@ function DeletePlayer(id) {
 }
 
 function EditPlayer() {
-    var id = $('#editId').val()
+    var id = $('#editId').val();
     // получаем новые значения для редактируемого объекта
     var player = {
         Id: $('#editId').val(),
         Name: $('#editName').val(),
-        IsBot: $('#editIsBot').val(),
+        IsBot: $('#editIsBot').val()
     };
     $.ajax({
         url: '/api/PlayerValues/' + id,
@@ -93,7 +93,7 @@ function WriteResponse(players) {
     var strResult = "<table><th>ID</th><th>Name</th><th>IsBot</th>";
     $.each(players, function (index, player) {
         strResult += "<tr><td>" + player.Id + "</td><td> " + player.Name + "</td><td>" + player.IsBot +
-            "</td><td><a id=editItem' data-item='" + player.Id + "' onclick='EditItem(this)'>Edit</a></td>" +
+            "</td><td><a id='editItem' data-item='" + player.Id + "' onclick='EditItem(this)'>Edit</a></td>" +
             "<td><a id='deleteItem' data-item='" + player.Id + "' onclick='DeleteItem(this)'>Delete</a></td></tr>";
     });
     strResult += "</table>";
@@ -113,7 +113,7 @@ function EditItem(el) {
 }
 
 function ShowPlayer(player) {
-    if (player != null) {
+    if (player !== null) {
         $("#createBlock").css('display', 'none');
         $("#editBlock").css('display', 'block');
         $("#editId").val(player.Id);

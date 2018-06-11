@@ -78,7 +78,7 @@ function DeleteRoundPlayer(id) {
 }
 
 function EditRoundPlayer() {
-    var id = $('#editId').val()
+    var id = $('#editId').val();
 
     var roundPlayer = {
         Id: $('#editId').val(),
@@ -125,7 +125,7 @@ function EditItem(el) {
 }
 
 function ShowRoundPlayer(roundPlayer) {
-    if (roundPlayer != null) {
+    if (roundPlayer !== null) {
         $("#createBlock").css('display', 'none');
         $("#editBlock").css('display', 'block');
         $("#editId").val(roundPlayer.Id);
@@ -205,7 +205,7 @@ function FillPlayerSelect(players) {
     $.each(players, function (index, player) {
         //console.log("player GameId:" + player.GameId);
         //console.log("round GameId:" + selectedRoundGameId);
-        if (player.GameId == selectedRoundGameId)
+        if (player.GameId === selectedRoundGameId)
         strResult += "<option value='" + player.Id + "'>" + player.Name + "</option>";
     });
 

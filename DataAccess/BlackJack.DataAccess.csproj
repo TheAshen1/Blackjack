@@ -64,6 +64,15 @@
     <Compile Include="DapperModels\Round.cs" />
     <Compile Include="DapperModels\RoundPlayer.cs" />
     <Compile Include="DataMappings\DataMapper.cs" />
+    <Compile Include="Migrations\201806071101216_InitialCreate.cs" />
+    <Compile Include="Migrations\201806071101216_InitialCreate.Designer.cs">
+      <DependentUpon>201806071101216_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806110854034_deckField.cs" />
+    <Compile Include="Migrations\201806110854034_deckField.Designer.cs">
+      <DependentUpon>201806110854034_deckField.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Game.cs" />
     <Compile Include="Models\Player.cs" />
@@ -81,6 +90,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Migrations\201806071101216_InitialCreate.resx">
+      <DependentUpon>201806071101216_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806110854034_deckField.resx">
+      <DependentUpon>201806110854034_deckField.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>

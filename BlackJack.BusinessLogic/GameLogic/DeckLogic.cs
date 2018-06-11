@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Script.Serialization;
 
 namespace BlackJack.BusinessLogic.GameLogic
 {
     public class DeckLogic
     {
-        private List<CardLogic> cards = new List<CardLogic>();
+        private List<CardLogic> _cards = new List<CardLogic>();
 
         public DeckLogic()
         {
@@ -16,10 +17,15 @@ namespace BlackJack.BusinessLogic.GameLogic
             {
                 foreach (SuitLogic suit in Enum.GetValues(typeof(SuitLogic)))
                 {
-                    cards.Add(new CardLogic(value, suit));
+                    _cards.Add(new CardLogic(value, suit));
                 }
             }
 
+            Shuffle();
+        }
+        public DeckLogic(List<CardLogic> cards)
+        {
+            _cards = cards; 
             Shuffle();
         }
 
@@ -30,27 +36,33 @@ namespace BlackJack.BusinessLogic.GameLogic
 
 
             var randomIndex = 0;
-            var deckSize = cards.Count;
+            var deckSize = _cards.Count;
 
             for (int i = 0; i < deckSize; i++)
             {
 
-                randomIndex = rand.Next((cards.Count));
-                tmpDeck.Add(cards[randomIndex]);
+                randomIndex = rand.Next((_cards.Count));
+                tmpDeck.Add(_cards[randomIndex]);
 
-                cards.RemoveAt(randomIndex);
+                _cards.RemoveAt(randomIndex);
             }
-           cards = tmpDeck;
+            _cards = tmpDeck;
         }
 
 
         public CardLogic Draw()
         {
             var rand = new Random();
-            var x = rand.Next(cards.Count);
-            var card = cards[x];
-            cards.RemoveAt(x);
+            var x = rand.Next(_cards.Count);
+            var card = _cards[x];
+            _cards.RemoveAt(x);
             return card;
+        }
+
+        public string Stringify()
+        {
+            var json = new JavaScriptSerializer().Serialize(_cards);
+            return json;
         }
     }
 }

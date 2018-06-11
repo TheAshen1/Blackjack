@@ -13,9 +13,7 @@ namespace DataAccess.DapperModels
         public bool IsBot { get; set; }
 
         public Guid GameId { get; set; }
-        //public Game Game { get; set; }
 
-        //public virtual ICollection<RoundPlayer> PlayerRounds { get; set; }
 
     }
 }

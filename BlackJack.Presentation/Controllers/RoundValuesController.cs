@@ -1,4 +1,5 @@
-﻿using BlackJack.BusinessLogic.Services;
+﻿using BlackJack.BusinessLogic.GameLogic;
+using BlackJack.BusinessLogic.Services;
 using BlackJack.ViewModels.RoundServiceViewModels;
 using System;
 using System.Collections.Generic;
@@ -37,6 +38,7 @@ namespace BlackJack.Presentation.Controllers
         [HttpPost]
         public async Task<HttpResponseMessage> CreateRound([FromBody]RoundServiceCreateRoundViewModel viewModel)
         {
+            viewModel.Deck = (new DeckLogic()).Stringify();
             var result = await _service.CreateRound(viewModel);
             return Request.CreateResponse(HttpStatusCode.OK);
         }

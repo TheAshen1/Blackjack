@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace DataAccess
 {
-    public class BaseRepository<T>  where T : BaseModel 
+    public class BaseRepository<T> :IDisposable  where T : BaseModel 
     {
         protected readonly string _tableName;
         protected IDbConnection _connection { get; set; }
@@ -80,5 +80,9 @@ namespace DataAccess
             return result;
         }
 
+        public void Dispose()
+        {
+            _connection.Close();
+        }
     }
 }

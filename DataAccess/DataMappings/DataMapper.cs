@@ -157,11 +157,13 @@ namespace DataAccess.DataMappings
         #region roundEntity
         public static RoundServiceViewModel Map(Round entity)
         {
-            return new RoundServiceViewModel()
+            var viewModel = new RoundServiceViewModel()
             {
                 Id = entity.Id.ToString(),
                 GameId = entity.GameId.ToString(),
+                Deck = entity.Deck
             };
+            return viewModel;
         }
 
         public static Round Map(RoundServiceViewModel viewModel)
@@ -172,6 +174,7 @@ namespace DataAccess.DataMappings
                 {
                     Id = id,
                     GameId = gameId,
+                    Deck = viewModel.Deck
                 };
                 return entity;
             }
@@ -187,6 +190,7 @@ namespace DataAccess.DataMappings
                 {
                     Id = Guid.Empty,
                     GameId = gameId,
+                    Deck = viewModel.Deck
                 };
 
 

@@ -19,12 +19,17 @@
 
 </div>
 
-<div id="gameBody" onunload="Exit()" onbeforeunload="Exit()">
+<div id="gameBody">
     <div id="roundBody" class="jumbotron">
         <h3>game runs here</h3>
     </div>
 </div>
 
+<div id="roundSummary">
+    <div class="message"></div>
+    <div id="startNextRound" class="btn btn-success">Next Round</div>
+    <div id="quitGame" class="btn btn-danger">Quit</div>
+</div>
 
 @section scripts
 {

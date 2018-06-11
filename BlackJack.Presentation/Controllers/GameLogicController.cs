@@ -12,6 +12,7 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Script.Serialization;
 
 namespace BlackJack.Presentation.Controllers
 {
@@ -21,8 +22,6 @@ namespace BlackJack.Presentation.Controllers
         private readonly PlayerService _playerService;
         private readonly RoundService _roundService;
         private readonly RoundPlayerService _roundPlayerService;
-
-        private DeckLogic _deck;
 
         public GameLogicController(GameService gameService, PlayerService playerService, RoundService roundService, RoundPlayerService roundPlayerService)
         {
@@ -35,20 +34,41 @@ namespace BlackJack.Presentation.Controllers
         [HttpGet]
         public async Task<string> GiveCard(string roundPlayerId)
         {
-            if(_deck == null)
-            {
-                _deck = new DeckLogic();
-            }
-            var card = _deck.Draw().ToString();
             var roundPlayer = await _roundPlayerService.RetrieveRoundPlayer(roundPlayerId);
-            roundPlayer.Cards += card;
+            var round = await _roundService.RetrieveRound(roundPlayer.RoundId);
+            var deck = new DeckLogic( new JavaScriptSerializer().Deserialize<List<CardLogic>>(round.Deck));
+
+
+            var card = deck.Draw().ToString();
+            roundPlayer.Cards += card + ", ";
+            round.Deck = deck.Stringify();
+
             await _roundPlayerService.UpdateRoundPlayer(roundPlayer);
-            //var result = new PlayerLogicViewModel
-            //{
-            //    Id = roundPlayer.Id,
-            //};
+            await _roundService.UpdateRound(round);
+
             return card;
         }
+
+        //[HttpGet]
+        //public async Task<string> GiveTwoCards(string roundPlayerId)
+        //{
+        //    var roundPlayer = await _roundPlayerService.RetrieveRoundPlayer(roundPlayerId);
+        //    var round = await _roundService.RetrieveRound(roundPlayer.RoundId);
+        //    var deck = new JavaScriptSerializer().Deserialize<DeckLogic>(round.Deck);
+
+
+        //    var card1 = _deck.Draw().ToString();
+        //    var card2 = _deck.Draw().ToString();
+        //    roundPlayer.Cards += card1;
+        //    roundPlayer.Cards += card2;
+        //    round.Deck = new JavaScriptSerializer().Serialize(deck);
+
+        //    await _roundPlayerService.UpdateRoundPlayer(roundPlayer);
+        //    await _roundService.UpdateRound(round);
+
+            
+        //    return card1 + "," + card2 ;
+        //}
 
         [HttpPost]
         public async Task<bool> EndTheGame([FromBody]EndGameDataViewModel viewModel)
@@ -63,10 +83,9 @@ namespace BlackJack.Presentation.Controllers
         [HttpGet]
         public async Task<GameLogicViewModel> StartNewGameAsync(string playerName, int numberOfBots)
         {
-            _deck = new DeckLogic();
 
             var newGameId = await _gameService.CreateGame(new GameServiceCreateGameViewModel());
-            var newRoundId = await _roundService.CreateRound(new RoundServiceCreateRoundViewModel() { GameId = newGameId});
+            var newRoundId = await _roundService.CreateRound(new RoundServiceCreateRoundViewModel() { GameId = newGameId, Deck = (new DeckLogic()).Stringify() });
 
             var Players = new List<PlayerLogicViewModel> {
                 new PlayerLogicViewModel
