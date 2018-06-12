@@ -1,16 +1,7 @@
 
 using BlackJack.BusinessLogic.GameLogic;
-using BlackJack.BusinessLogic.Services;
 using DataAccess;
-using DataAccess.Models;
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity;
-using Core.models;
 
 namespace Core
 {

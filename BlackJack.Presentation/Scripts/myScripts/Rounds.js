@@ -1,21 +1,21 @@
 ﻿$(document).ready(function () {
 
-    GetAllRounds();
-    GetAllGames();
+    getAllRounds();
+    getAllGames();
 
     $("#editRound").click(function (event) {
         event.preventDefault();
-        EditRound();
+        editRound();
     });
 
     $("#createRound").click(function (event) {
         event.preventDefault();
-        CreateRound();
+        createRound();
     });
 
 });
 
-function GetAllRounds() {
+function getAllRounds() {
 
     $("#createBlock").css('display', 'block');
     $("#editBlock").css('display', 'none');
@@ -24,7 +24,7 @@ function GetAllRounds() {
         type: 'GET',
         dataType: 'json',
         success: function (data) {
-            WriteResponse(data);
+            writeResponse(data);
         },
         error: function (x, y, z, ) {
             alert(x.status + '\n' + x.responseJSON + '\n' + z);
@@ -32,7 +32,7 @@ function GetAllRounds() {
     });
 }
 
-function CreateRound() {
+function createRound() {
     var round = {
         GameId: $('#createGameId').val()
     };
@@ -42,7 +42,7 @@ function CreateRound() {
         data: JSON.stringify(round),
         contentType: "application/json;charset=utf-8",
         success: function () {
-            GetAllRounds();
+            getAllRounds();
         },
         error: function (x, y, z) {
             alert(x + '\n' + y + '\n' + z);
@@ -50,13 +50,13 @@ function CreateRound() {
     });
 }
 
-function DeleteRound(id) {
+function deleteRound(id) {
     $.ajax({
         url: '/api/RoundValues/' + id,
         type: 'DELETE',
         contentType: "application/json;charset=utf-8",
         success: function (data) {
-            GetAllRounds();
+            getAllRounds();
         },
         error: function (x, y, z) {
             alert(x + '\n' + y + '\n' + z);
@@ -64,7 +64,7 @@ function DeleteRound(id) {
     });
 }
 
-function EditRound() {
+function editRound() {
     var id = $('#editId').val();
 
     var round = {
@@ -77,7 +77,7 @@ function EditRound() {
         data: JSON.stringify(round),
         contentType: "application/json;charset=utf-8",
         success: function (data) {
-            GetAllRounds();
+            getAllRounds();
         },
         error: function (x, y, z) {
             alert(x + '\n' + y + '\n' + z);
@@ -85,30 +85,30 @@ function EditRound() {
     });
 }
 
-function WriteResponse(rounds) {
+function writeResponse(rounds) {
     var strResult = "<table><th>ID</th><th>GameId</th>";
     $.each(rounds, function (index, round) {
         strResult += "<tr><td>" + round.Id + "</td><td> " + round.GameId + "</td><td> " +
-            "</td><td><a id='editItem' data-item='" + round.Id + "' onclick='EditItem(this)'>Edit</a></td>" +
-            "<td><a id='deleteItem' data-item='" + round.Id + "' onclick='DeleteItem(this)'>Delete</a></td></tr>";
+            "</td><td><a id='editItem' data-item='" + round.Id + "' onclick='editItem(this)'>Edit</a></td>" +
+            "<td><a id='deleteItem' data-item='" + round.Id + "' onclick='deleteItem(this)'>Delete</a></td></tr>";
     });
     strResult += "</table>";
     $("#tableBlock").html(strResult);
 
 }
 
-function DeleteItem(el) {
+function deleteItem(el) {
 
     var id = $(el).attr('data-item');
-    DeleteRound(id);
+    deleteRound(id);
 }
 
-function EditItem(el) {
+function editItem(el) {
     var id = $(el).attr('data-item');
-    GetRound(id);
+    getRound(id);
 }
 
-function ShowRound(round) {
+function showRound(round) {
     if (round !== null) {
         $("#createBlock").css('display', 'none');
         $("#editBlock").css('display', 'block');
@@ -120,13 +120,17 @@ function ShowRound(round) {
     }
 }
 
-function GetRound(id) {
+function getRound(id) {
     $.ajax({
         url: '/api/RoundValues/' + id,
         type: 'GET',
         dataType: 'json',
         success: function (data) {
-            ShowRound(data);
+            
+            if (data.Id != getEmptyGuid()) {
+                showRound(data);
+                console.log('No entity with such Id was found!');
+            }
         },
         error: function (x, y, z) {
             alert(x + '\n' + y + '\n' + z);
@@ -134,7 +138,7 @@ function GetRound(id) {
     });
 }
 ///////////
-function GetAllGames() {
+function getAllGames() {
 
     $("#createBlock").css('display', 'block');
     $("#editBlock").css('display', 'none');
@@ -143,7 +147,7 @@ function GetAllGames() {
         type: 'GET',
         dataType: 'json',
         success: function (data) {
-            FillGameSelect(data);
+            fillGameSelect(data);
         },
         error: function (x, y, z, ) {
             alert(x.status + '\n' + x.responseJSON + '\n' + z);
@@ -151,7 +155,7 @@ function GetAllGames() {
     });
 }
 
-function FillGameSelect(games) {
+function fillGameSelect(games) {
     var strResult = "";
     $.each(games, function (index, game) {
         strResult += "<option value='" + game.Id + "'>" + game.Id + "</option>";
@@ -159,3 +163,7 @@ function FillGameSelect(games) {
     $("#editGameId").html(strResult);
     $("#createGameId").html(strResult);
 }
+
+function getEmptyGuid() {
+    return "00000000-0000-0000-0000-000000000000";
+} 

@@ -12,32 +12,32 @@ namespace BlackJack.Presentation.Controllers
 {
     public class GameValuesController : ApiController
     {
-        private readonly GameService _service;
+        private readonly GameService _gameService;
 
-        public GameValuesController(GameService service)
+        public GameValuesController(GameService gameService)
         {
-            _service = service;
+            _gameService = gameService;
         }
 
         
         [HttpGet]
         public async Task<IEnumerable<GameServiceViewModel>> RetrieveAllGames()
         {
-            var result = await _service.RetrieveAllGames();
+            var result = await _gameService.RetrieveAllGames();
             return result;
         }
 
         [HttpGet]
         public async Task<GameServiceViewModel> RetrieveGame(string id)
         {
-            var result = await _service.RetrieveGame(id);
+            var result = await _gameService.RetrieveGame(id);
             return result;
         }
 
         [HttpPost]
         public async Task<HttpResponseMessage> CreateGame([FromBody]GameServiceCreateGameViewModel viewModel)
         {
-            var result = await _service.CreateGame(viewModel);
+            var result = await _gameService.CreateGame(viewModel);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
 
@@ -46,7 +46,7 @@ namespace BlackJack.Presentation.Controllers
         {
             if (id == viewModel.Id)
             {
-                var isUpdated = await _service.UpdateGame(viewModel);
+                var isUpdated = await _gameService.UpdateGame(viewModel);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
             return Request.CreateResponse(HttpStatusCode.NotModified);
@@ -55,9 +55,9 @@ namespace BlackJack.Presentation.Controllers
         
         public async Task<HttpResponseMessage> DeleteGame(string id)
         {
-            var gameToDelete = await _service.RetrieveGame(id);
+            var gameToDelete = await _gameService.RetrieveGame(id);
 
-            await _service.DeleteGame(gameToDelete);
+            await _gameService.DeleteGame(gameToDelete);
             return Request.CreateResponse(HttpStatusCode.OK);
         }
     }

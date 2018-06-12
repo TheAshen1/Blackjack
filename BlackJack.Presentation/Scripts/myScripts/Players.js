@@ -1,22 +1,22 @@
 ﻿
 $(document).ready(function () {
 
-    GetAllPlayers();
-    GetAllGames();
+    getAllPlayers();
+    getAllGames();
 
     $("#editPlayer").click(function (event) {
         event.preventDefault();
-        EditPlayer();
+        editPlayer();
     });
 
     $("#createPlayer").click(function (event) {
         event.preventDefault();
-        CreatePlayer();
+        createPlayer();
     });
 
 });
 
-function GetAllPlayers() {
+function getAllPlayers() {
 
     $("#createBlock").css('display', 'block');
     $("#editBlock").css('display', 'none');
@@ -25,7 +25,7 @@ function GetAllPlayers() {
         type: 'GET',
         dataType: 'json',
         success: function (data) {
-            WriteResponse(data);
+            writeResponse(data);
         },
         error: function (x, y, z, ) {
             alert(x.status + '\n' + x.responseJSON + '\n' + z);
@@ -33,7 +33,7 @@ function GetAllPlayers() {
     });
 }
 
-function CreatePlayer() {
+function createPlayer() {
     var player = {
         Name: $('#createName').val(),
         IsBot: $('#createIsBot').val()
@@ -43,9 +43,8 @@ function CreatePlayer() {
         type: 'POST',
         data: JSON.stringify(player),
         contentType: "application/json;charset=utf-8",
-        success: function () {
-            //alert("yay!");
-            GetAllPlayers();
+        success: function (data) {
+            getAllPlayers();
         },
         error: function (x, y, z) {
             alert(x + '\n' + y + '\n' + z);
@@ -53,13 +52,13 @@ function CreatePlayer() {
     });
 }
 
-function DeletePlayer(id) {
+function deletePlayer(id) {
     $.ajax({
         url: '/api/PlayerValues/' + id,
         type: 'DELETE',
         contentType: "application/json;charset=utf-8",
         success: function (data) {
-            GetAllPlayers();
+            getAllPlayers();
         },
         error: function (x, y, z) {
             alert(x + '\n' + y + '\n' + z);
@@ -67,7 +66,7 @@ function DeletePlayer(id) {
     });
 }
 
-function EditPlayer() {
+function editPlayer() {
     var id = $('#editId').val();
     // получаем новые значения для редактируемого объекта
     var player = {
@@ -81,7 +80,7 @@ function EditPlayer() {
         data: JSON.stringify(player),
         contentType: "application/json;charset=utf-8",
         success: function (data) {
-            GetAllPlayers();
+            getAllPlayers();
         },
         error: function (x, y, z) {
             alert(x + '\n' + y + '\n' + z);
@@ -89,30 +88,30 @@ function EditPlayer() {
     });
 }
 
-function WriteResponse(players) {
+function writeResponse(players) {
     var strResult = "<table><th>ID</th><th>Name</th><th>IsBot</th>";
     $.each(players, function (index, player) {
         strResult += "<tr><td>" + player.Id + "</td><td> " + player.Name + "</td><td>" + player.IsBot +
-            "</td><td><a id='editItem' data-item='" + player.Id + "' onclick='EditItem(this)'>Edit</a></td>" +
-            "<td><a id='deleteItem' data-item='" + player.Id + "' onclick='DeleteItem(this)'>Delete</a></td></tr>";
+            "</td><td><a id='editItem' data-item='" + player.Id + "' onclick='editItem(this)'>Edit</a></td>" +
+            "<td><a id='deleteItem' data-item='" + player.Id + "' onclick='deleteItem(this)'>Delete</a></td></tr>";
     });
     strResult += "</table>";
     $("#tableBlock").html(strResult);
 
 }
 
-function DeleteItem(el) {
+function deleteItem(el) {
 
     var id = $(el).attr('data-item');
-    DeletePlayer(id);
+    deletePlayer(id);
 }
 
-function EditItem(el) {
+function editItem(el) {
     var id = $(el).attr('data-item');
-    GetPlayer(id);
+    getPlayer(id);
 }
 
-function ShowPlayer(player) {
+function showPlayer(player) {
     if (player !== null) {
         $("#createBlock").css('display', 'none');
         $("#editBlock").css('display', 'block');
@@ -125,13 +124,18 @@ function ShowPlayer(player) {
     }
 }
 
-function GetPlayer(id) {
+function getPlayer(id) {
     $.ajax({
         url: '/api/PlayerValues/' + id,
         type: 'GET',
         dataType: 'json',
         success: function (data) {
-            ShowPlayer(data);
+
+            if (data.Id != getEmptyGuid()) {
+                showPlayer(data);
+                console.log('No entity with such Id was found!');
+            }
+          
         },
         error: function (x, y, z) {
             alert(x + '\n' + y + '\n' + z);
@@ -140,7 +144,7 @@ function GetPlayer(id) {
 }
 ////////
 
-function GetAllGames() {
+function getAllGames() {
 
     $("#createBlock").css('display', 'block');
     $("#editBlock").css('display', 'none');
@@ -149,7 +153,7 @@ function GetAllGames() {
         type: 'GET',
         dataType: 'json',
         success: function (data) {
-            FillGameSelect(data);
+            fillGameSelect(data);
         },
         error: function (x, y, z, ) {
             alert(x.status + '\n' + x.responseJSON + '\n' + z);
@@ -157,7 +161,7 @@ function GetAllGames() {
     });
 }
 
-function FillGameSelect(games) {
+function fillGameSelect(games) {
     var strResult = "";
     $.each(games, function (index, game) {
         strResult += "<option value='" + game.Id + "'>" + game.Id + "</option>";
@@ -165,3 +169,7 @@ function FillGameSelect(games) {
     $("#editGameId").html(strResult);
     $("#createGameId").html(strResult);
 }
+
+function getEmptyGuid() {
+    return "00000000-0000-0000-0000-000000000000";
+} 

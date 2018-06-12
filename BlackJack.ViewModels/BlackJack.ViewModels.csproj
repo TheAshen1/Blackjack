@@ -40,10 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameLogicViewModels\EndGameDataViewModel.cs" />
     <Compile Include="GameLogicViewModels\GameLogicViewModel.cs" />
     <Compile Include="GameLogicViewModels\PlayerLogicViewModel.cs" />
-    <Compile Include="GameLogicViewModels\StartGameViewModel.cs" />
     <Compile Include="GameServiceViewModels\GameServiceCreateGameViewModel.cs" />
     <Compile Include="GameServiceViewModels\GameServiceViewModel.cs" />
     <Compile Include="PlayerServiceViewModels\PlayerServiceCreatePlayerViewModel.cs" />

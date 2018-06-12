@@ -40,3 +40,50 @@ textarea {
     width: 200px;
     height: 150px;
 }
+
+#roundBody{
+    position: relative;
+    background-image: url('Pictures/cardTableBackground.jpg');
+    height: 700px;
+    width: auto;
+}
+
+
+.player{
+    position: absolute;
+    display: block;
+    border: 2px solid white;
+    color: white;
+    font-size: 20px;
+    margin: 20px;
+}
+.card{
+    display:inline-block;
+
+}
+    .card img {
+        width: 60px;
+        height: 90px;
+    }
+
+
+#roundSummary {
+    position: relative;
+    width: 200px;
+    height: auto;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: auto;
+}
+#startNextRound{
+    float: left;
+}
+
+#quitGame{
+    float:right;
+}
+span.clear {
+    clear: left;
+    display: block;
+}

@@ -12,7 +12,6 @@ namespace BlackJack.ViewModels.GameLogicViewModels
         public string CurrentRoundPlayerId { get; set; }
         public string Name { get; set; }
         public bool IsBot { get; set; }
-        public List<string> Cards { get; set; }
 
     }
 }

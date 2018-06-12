@@ -64,10 +64,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="models\Client.cs" />
-    <Compile Include="models\OptCompanyDbContext.cs" />
-    <Compile Include="models\order.cs" />
-    <Compile Include="models\product.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

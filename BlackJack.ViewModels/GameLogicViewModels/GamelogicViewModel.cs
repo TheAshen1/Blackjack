@@ -10,6 +10,7 @@ namespace BlackJack.ViewModels.GameLogicViewModels
     {
         public string GameId { get; set; }
         public string CurrentRoundId { get; set; }
+        public int NumberOfBots { get; set; }
 
         public List<PlayerLogicViewModel> Players { get; set; }
     }

@@ -23,7 +23,7 @@ namespace BlackJack.BusinessLogic.GameLogic
 
         public override string ToString()
         {
-            return value.ToString("g") + " of " + suit.ToString("g");
+            return $"{value.ToString("g")} of {suit.ToString("g")}";
         }
     }
 }

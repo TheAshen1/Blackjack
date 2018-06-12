@@ -61,6 +61,10 @@ namespace BlackJack.Presentation.Config
             builder.RegisterType<RoundPlayerService>()
                    .InstancePerRequest();
 
+            builder.RegisterType<GameLogicService>()
+                  .InstancePerRequest();
+
+
             //Set the dependency resolver to be Autofac.  
             Container = builder.Build();
 

@@ -40,7 +40,10 @@ namespace DataAccess.DataMappings
 
                 return entity;
             }
-            else throw new ArgumentException();
+
+            return new Player {
+                Id = Guid.Empty
+            };
 
         }
 
@@ -57,7 +60,10 @@ namespace DataAccess.DataMappings
                 };
 
                 return entity;
-            } throw new ArgumentException();
+            }
+            return new Player {
+                Id = Guid.Empty
+            };
         }
 
         public static IEnumerable<PlayerServiceViewModel> Map( IEnumerable<Player> entities)
@@ -96,19 +102,22 @@ namespace DataAccess.DataMappings
         {
             if (Guid.TryParse(viewModel.Id, out Guid id) && DateTime.TryParse(viewModel.Start, out DateTime startTime))
             {
-                
+
                 var entity = new Game()
                 {
                     Id = id,
                     Start = startTime,
-                    
+
                 };
                 if (DateTime.TryParse(viewModel.End, out DateTime endTime))
                     entity.End = endTime;
 
                 return entity;
             }
-            else throw new ArgumentException();
+            else
+            {
+                throw new ArgumentException();
+            }
 
         }
 

@@ -33,14 +33,15 @@ namespace BlackJack.BusinessLogic.Services
 
         public async Task<GameServiceViewModel> RetrieveGame(string id)
         {
-
-            var guid = Guid.Empty;
-            if (Guid.TryParse(id, out guid))
+            if (Guid.TryParse(id, out Guid guid))
             {
                 var game = await _gameRepository.FindByID(guid);
                 return DataMapper.Map(game);
             }
-            else throw new ArgumentNullException();// whatever, some exception is needed
+
+            return DataMapper.Map(new Game{
+                Id = Guid.Empty
+            });
         }
 
         public async Task<bool> UpdateGame(GameServiceViewModel game)

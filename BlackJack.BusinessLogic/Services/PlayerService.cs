@@ -21,8 +21,13 @@ namespace BlackJack.BusinessLogic.Services
 
         public async Task<string> CreatePlayer(PlayerServiceCreatePlayerViewModel player)
         {
-            var result =  await _playerRepository.Add( DataMapper.Map(player));
-            return result;
+            var entity = DataMapper.Map(player);
+            if (entity.Id != Guid.Empty)
+            {
+                var result = await _playerRepository.Add(DataMapper.Map(player));
+                return result;
+            }
+            return "Game does not exist!";
         }
 
         public async Task<IEnumerable<PlayerServiceViewModel>> RetrieveAllPlayers()
@@ -33,28 +38,45 @@ namespace BlackJack.BusinessLogic.Services
 
         public async Task<PlayerServiceViewModel> RetrievePlayer(string id)
         {
-            var guid = Guid.Empty;
-            if (Guid.TryParse(id, out guid))
+            if (Guid.TryParse(id, out Guid guid))
             {
                 var player = await _playerRepository.FindByID(guid);
                 return DataMapper.Map(player);
             }
-            else throw new ArgumentNullException();// whatever, some exception is needed
+
+            return DataMapper.Map(new Player{
+                Id = Guid.Empty
+            });
         }
 
         public async Task<bool> UpdatePlayer(PlayerServiceViewModel player)
         {
-            var result =  await _playerRepository.Update(DataMapper.Map(player));
-            return result;
+            var entity = DataMapper.Map(player);
+            if (entity.Id != Guid.Empty)
+            {
+                var result = await _playerRepository.Update(DataMapper.Map(player));
+                return result;
+            }
+            return false;
         }
 
         public async Task<int> DeletePlayer(PlayerServiceViewModel player)
         {
-            var result = await _playerRepository.Remove(DataMapper.Map(player));
-            return result;
+            var entity = DataMapper.Map(player);
+            if (entity.Id != Guid.Empty)
+            {
+                var result = await _playerRepository.Remove(DataMapper.Map(player));
+                return result;
+            }
+            return 0;
         }
 
 
-
+        public async Task<IEnumerable<PlayerServiceViewModel>> RetrieveGamePlayers(string gameId)
+        {
+            var players = await _playerRepository.All();
+            var result = players.Where(p => p.GameId.ToString() == gameId).ToList();
+            return DataMapper.Map(result);
+        }
     }
 }

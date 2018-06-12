@@ -33,13 +33,15 @@ namespace BlackJack.BusinessLogic.Services
 
         public async Task<RoundPlayerServiceViewModel> RetrieveRoundPlayer(string id)
         {
-            var guid = Guid.Empty;
-            if (Guid.TryParse(id, out guid))
+            if (Guid.TryParse(id, out Guid guid))
             {
                 var roundPlayer = await _round_PlayerRepository.FindByID(guid);
                 return DataMapper.Map(roundPlayer);
             }
-            else throw new ArgumentNullException();// whatever, some exception is needed
+
+            return DataMapper.Map(new RoundPlayer {
+                Id = Guid.Empty
+            });
         }
 
         public async Task<bool> UpdateRoundPlayer(RoundPlayerServiceViewModel roundPlayer)

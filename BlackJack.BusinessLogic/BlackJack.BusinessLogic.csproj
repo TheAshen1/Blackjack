@@ -48,6 +48,7 @@
     <Compile Include="GameLogic\SuitLogic.cs" />
     <Compile Include="GameLogic\ValueLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\GameLogicService.cs" />
     <Compile Include="Services\GameService.cs" />
     <Compile Include="Services\PlayerService.cs" />
     <Compile Include="Services\RoundPlayerService.cs" />
