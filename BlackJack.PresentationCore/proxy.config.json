@@ -1,0 +1,10 @@
+﻿{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=(localdb)\\MSSQLLocalDB;Database=DataAccess.BlackJackContext;Trusted_Connection=True;MultipleActiveResultSets=true"
+  },
+  "/api/*": {
+    "target": "http://localhost:57060/",
+    "secure": false,
+    "logLevel": "debug"
+  }
+}
