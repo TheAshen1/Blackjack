@@ -7,9 +7,11 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace BlackJack.Presentation.Controllers
 {
+    [EnableCors(origins: "http://localhost:59977", headers: "*", methods: "*")]
     public class PlayerValuesController : ApiController
     {
         private readonly PlayerService _playerService;
@@ -34,29 +36,32 @@ namespace BlackJack.Presentation.Controllers
         }
 
         [HttpPost]
-        public async Task<HttpResponseMessage> CreatePlayer([FromBody]PlayerServiceCreatePlayerViewModel viewModel)
+        public async Task<string> CreatePlayer([FromBody]PlayerServiceCreatePlayerViewModel viewModel)
         {
             var result = await _playerService.CreatePlayer(viewModel);
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return result;
         }
 
         [HttpPut]
-        public async Task<HttpResponseMessage> UpdatePlayer(string id, [FromBody]PlayerServiceViewModel viewModel)
+        public async Task<bool> UpdatePlayer(string id, [FromBody]PlayerServiceViewModel viewModel)
         {
             if(id == viewModel.Id)
             {
                 var isUpdated = await _playerService.UpdatePlayer(viewModel);
-                return Request.CreateResponse(HttpStatusCode.OK);
+                return isUpdated;
             }
-            return Request.CreateResponse(HttpStatusCode.NotModified);
+            return false;
         }
 
-        public async Task<HttpResponseMessage> DeletePlayer(string id)
+        public async Task<int> DeletePlayer(string id)
         {
             var playerToDelete = await _playerService.RetrievePlayer(id);
-
-            await _playerService.DeletePlayer(playerToDelete);
-            return Request.CreateResponse(HttpStatusCode.OK);
+            if (playerToDelete.Id != Guid.Empty.ToString())
+            {
+                var result = await _playerService.DeletePlayer(playerToDelete);
+                return result;
+            }
+            return 0;
         }
     }
 }

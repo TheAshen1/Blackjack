@@ -7,53 +7,105 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BlackJack.Utility.Loggers;
 
 namespace BlackJack.BusinessLogic.Services
 {
     public class RoundPlayerService
     {
-        private readonly BaseRepository<RoundPlayer> _round_PlayerRepository;
+        private readonly BaseRepository<RoundPlayer> _roundPlayerRepository;
 
-        public RoundPlayerService(BaseRepository<RoundPlayer> round_PlayerRepository)
+        public RoundPlayerService(BaseRepository<RoundPlayer> roundPlayerRepository)
         {
-            _round_PlayerRepository = round_PlayerRepository;
+            _roundPlayerRepository = roundPlayerRepository;
         }
 
         public async Task<string> CreateRoundPlayer(RoundPlayerServiceCreateRoundPlayerViewModel viewModel)
         {
-            var result = await _round_PlayerRepository.Add(DataMapper.Map(viewModel));
-            return result;
+            try
+            {
+                var entity = DataMapper.Map(viewModel);
+                if (entity.PlayerId != Guid.Empty && entity.RoundId != Guid.Empty)
+                {
+                    var result = await _roundPlayerRepository.Add(DataMapper.Map(viewModel));
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLogToFile(ex.Message, "RoundPlayerService");
+            }
+            return "Round or Player do not exist!";
+
         }
 
         public async Task<IEnumerable<RoundPlayerServiceViewModel>> RetrieveAllRoundPlayers()
         {
-            var roundPlayers = await _round_PlayerRepository.All();
-            return DataMapper.Map(roundPlayers);
+            try
+            {
+                var roundPlayers = await _roundPlayerRepository.All();
+                return DataMapper.Map(roundPlayers);
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLogToFile(ex.Message, "RoundPlayerService");
+            }
+            return null;
         }
 
         public async Task<RoundPlayerServiceViewModel> RetrieveRoundPlayer(string id)
         {
-            if (Guid.TryParse(id, out Guid guid))
+            try
             {
-                var roundPlayer = await _round_PlayerRepository.FindByID(guid);
-                return DataMapper.Map(roundPlayer);
+                if (Guid.TryParse(id, out Guid guid))
+                {
+                    var roundPlayer = await _roundPlayerRepository.FindById(guid);
+                    return DataMapper.Map(roundPlayer);
+                }
             }
-
+            catch (Exception ex)
+            {
+                Logger.WriteLogToFile(ex.Message, "RoundPlayerService");
+            }
             return DataMapper.Map(new RoundPlayer {
                 Id = Guid.Empty
             });
         }
 
-        public async Task<bool> UpdateRoundPlayer(RoundPlayerServiceViewModel roundPlayer)
+        public async Task<bool> UpdateRoundPlayer(RoundPlayerServiceViewModel viewModel)
         {
-            var result = await _round_PlayerRepository.Update(DataMapper.Map(roundPlayer));
-            return result;
+            try
+            {
+                var entity = DataMapper.Map(viewModel);
+                if (entity.Id != Guid.Empty && entity.RoundId != Guid.Empty && entity.PlayerId != Guid.Empty)
+                {
+                    var result = await _roundPlayerRepository.Update(entity);
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLogToFile(ex.Message, "RoundPlayerService");
+            }
+            return false;
         }
 
-        public async Task<int> DeleteRoundPlayer(RoundPlayerServiceViewModel roundPlayer)
+        public async Task<int> DeleteRoundPlayer(RoundPlayerServiceViewModel viewModel)
         {
-            var result = await _round_PlayerRepository.Remove(DataMapper.Map(roundPlayer));
-            return result;
+            try
+            {
+                var entity = DataMapper.Map(viewModel);
+                if (entity.Id != Guid.Empty && entity.RoundId != Guid.Empty && entity.PlayerId != Guid.Empty)
+                {
+                    var result = await _roundPlayerRepository.Remove(entity);
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLogToFile(ex.Message, "RoundPlayerService");
+            }
+            return 0;
         }
 
     }

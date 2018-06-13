@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BlackJack.Utility.Loggers;
 
 namespace BlackJack.BusinessLogic.Services
 {
@@ -21,41 +22,92 @@ namespace BlackJack.BusinessLogic.Services
 
         public async Task<string> CreateRound(RoundServiceCreateRoundViewModel viewModel)
         {
-            var result = await _roundRepository.Add(DataMapper.Map(viewModel));
-            return result;
+            try
+            {
+                var entity = DataMapper.Map(viewModel);
+                if (entity.GameId != Guid.Empty)
+                {
+                    var result = await _roundRepository.Add(entity);
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLogToFile(ex.Message, "RoundService");
+            }
+            return "Game does not exist!";
         }
 
         public async Task<IEnumerable<RoundServiceViewModel>> RetrieveAllRounds()
         {
-            var rounds = await _roundRepository.All();
-            return DataMapper.Map(rounds);
+            try
+            {
+                var rounds = await _roundRepository.All();
+                return DataMapper.Map(rounds);
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLogToFile(ex.Message, "RoundService");
+            }
+            return null;
         }
 
         public async Task<RoundServiceViewModel> RetrieveRound(string id)
         {
-            if (Guid.TryParse(id, out Guid guid))
+            try
             {
-                var round = await _roundRepository.FindByID(guid);
-                return DataMapper.Map(round);
+                if (Guid.TryParse(id, out Guid guid))
+                {
+                    var round = await _roundRepository.FindById(guid);
+                    return DataMapper.Map(round);
+                }
             }
-            
-            return DataMapper.Map(new Round {
-                Id = Guid.Empty
-            });
+            catch (Exception ex)
+            {
+                Logger.WriteLogToFile(ex.Message, "RoundService");
+            }
+            return new RoundServiceViewModel
+            {
+                Id = Guid.Empty.ToString(),
+                GameId = Guid.Empty.ToString()
+            };
         }
 
-        public async Task<bool> UpdateRound(RoundServiceViewModel round)
+        public async Task<bool> UpdateRound(RoundServiceViewModel viewModel)
         {
-            var result = await _roundRepository.Update(DataMapper.Map(round));
-            return result;
+            try
+            {
+                var entity = DataMapper.Map(viewModel);
+                if (entity.Id != Guid.Empty && entity.GameId != Guid.Empty)
+                {
+                    var result = await _roundRepository.Update(entity);
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLogToFile(ex.Message, "RoundService");
+            }
+            return false;
         }
 
-        public async Task<int> DeleteRound(RoundServiceViewModel round)
+        public async Task<int> DeleteRound(RoundServiceViewModel viewModel)
         {
-            var result = await _roundRepository.Remove(DataMapper.Map(round));
-            return result;
+            try
+            {
+                var entity = DataMapper.Map(viewModel);
+                if (entity.Id != Guid.Empty && entity.GameId != Guid.Empty)
+                {
+                    var result = await _roundRepository.Remove(entity);
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLogToFile(ex.Message, "RoundService");
+            }
+            return 0;
         }
-
 
     }
 }

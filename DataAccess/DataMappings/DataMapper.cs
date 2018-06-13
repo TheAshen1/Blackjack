@@ -29,11 +29,12 @@ namespace DataAccess.DataMappings
 
         public static Player Map(PlayerServiceViewModel viewModel)
         {
-            if (Guid.TryParse(viewModel.Id, out Guid id))
+            if (Guid.TryParse(viewModel.Id, out Guid id) && Guid.TryParse(viewModel.GameId, out Guid gameId))
             {
                 var entity = new Player()
                 {
                     Id = id,
+                    GameId = gameId,
                     Name = viewModel.Name,
                     IsBot = viewModel.IsBot
                 };
@@ -42,7 +43,8 @@ namespace DataAccess.DataMappings
             }
 
             return new Player {
-                Id = Guid.Empty
+                Id = Guid.Empty,
+                GameId = Guid.Empty
             };
 
         }
@@ -62,7 +64,8 @@ namespace DataAccess.DataMappings
                 return entity;
             }
             return new Player {
-                Id = Guid.Empty
+                Id = Guid.Empty,
+                GameId = Guid.Empty
             };
         }
 
@@ -114,17 +117,16 @@ namespace DataAccess.DataMappings
 
                 return entity;
             }
-            else
-            {
-                throw new ArgumentException();
-            }
+
+            return new Game {
+                Id = Guid.NewGuid()
+            };
 
         }
 
         public static Game Map(GameServiceCreateGameViewModel viewModel)
         {
-            var startTime = DateTime.Now;
-            if (DateTime.TryParse(viewModel.Start, out startTime))
+            if (DateTime.TryParse(viewModel.Start, out DateTime startTime))
             {
                 var entity = new Game()
                 {
@@ -187,7 +189,10 @@ namespace DataAccess.DataMappings
                 };
                 return entity;
             }
-            else throw new ArgumentException();
+            return new Round {
+                Id = Guid.Empty,
+                GameId = Guid.Empty
+            };
 
         }
 
@@ -205,7 +210,11 @@ namespace DataAccess.DataMappings
 
                 return entity;
             }
-            else throw new ArgumentException();
+            return new Round
+            {
+                Id = Guid.Empty,
+                GameId = Guid.Empty
+            };
         }
 
         public static IEnumerable<RoundServiceViewModel> Map(IEnumerable<Round> entities)
@@ -257,7 +266,12 @@ namespace DataAccess.DataMappings
 
                 return entity;
             }
-            else throw new ArgumentException();
+
+            return new RoundPlayer {
+                Id = Guid.Empty,
+                PlayerId = Guid.Empty,
+                RoundId = Guid.Empty
+            };
 
         }
 
@@ -275,7 +289,13 @@ namespace DataAccess.DataMappings
 
                 return entity;
             }
-            else throw new ArgumentException();
+
+            return new RoundPlayer
+            {
+                Id = Guid.Empty,
+                PlayerId = Guid.Empty,
+                RoundId = Guid.Empty
+            };
         }
 
 

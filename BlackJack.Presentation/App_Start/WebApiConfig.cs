@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace BlackJack.Presentation
 {
@@ -9,9 +10,8 @@ namespace BlackJack.Presentation
     {
         public static void Register(HttpConfiguration config)
         {
-            // Web API configuration and services
+            config.EnableCors();
 
-            // Web API routes
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
@@ -19,6 +19,9 @@ namespace BlackJack.Presentation
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+
+
+            
         }
     }
 }

@@ -74,7 +74,7 @@ namespace DataAccess
             return await _connection.ExecuteAsync("DELETE FROM " + _tableName + " WHERE Id=@Id", new { Id = id });
         }
 
-        public virtual async Task<T> FindByID(Guid id)
+        public virtual async Task<T> FindById(Guid id)
         {
             var result = await _connection.QueryFirstAsync<T>("SELECT TOP(1) * FROM " + _tableName + " WHERE Id=@Id", new { Id = id });
             return result;

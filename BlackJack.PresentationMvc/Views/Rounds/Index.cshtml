@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div id="tableBlock"></div>
+
+<div id="editBlock">
+    <p><b>Edit Round</b></p>
+    <table>
+        <tr><td><input type="hidden" id="editId" /></td><td></td></tr>
+        <tr><td><label>GameId: </label></td><td><select id="editGameId" required></select></td></tr>
+    </table>
+    <button id="editRound">Save</button>
+</div>
+
+<div id="createBlock">
+    <p><b>Create Round</b></p>
+    <table>
+        <tr><td><label>GameId: </label></td><td><select id="createGameId" required></select></td></tr>
+    </table>
+    <button id="createRound">Create</button>
+</div>
+
+@section scripts
+{
+    <script src="~/Scripts/myScripts/Rounds.js" type="text/javascript"></script>
+}
+

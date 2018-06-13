@@ -55,6 +55,10 @@
     <Compile Include="Services\RoundService.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BlackJack.Utility\BlackJack.Utility.csproj">
+      <Project>{18619f18-f171-4422-b7c1-fd66bd421d36}</Project>
+      <Name>BlackJack.Utility</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BlackJack.ViewModels\BlackJack.ViewModels.csproj">
       <Project>{1e967dac-9f8c-4dde-a3a8-77cd366fe87b}</Project>
       <Name>BlackJack.ViewModels</Name>

@@ -7,58 +7,64 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace BlackJack.Presentation.Controllers
 {
+    [EnableCors(origins: "http://localhost:59977", headers: "*", methods: "*")]
     public class RoundPlayerValuesController : ApiController
     {
-        private readonly RoundPlayerService _service;
+        private readonly RoundPlayerService _roundPlayerService;
 
-        public RoundPlayerValuesController(RoundPlayerService service)
+        public RoundPlayerValuesController(RoundPlayerService roundPlayerService)
         {
-            _service = service;
+            _roundPlayerService = roundPlayerService;
         }
 
 
         [HttpGet]
         public async Task<IEnumerable<RoundPlayerServiceViewModel>> RetrieveAllRounds()
         {
-            var result = await _service.RetrieveAllRoundPlayers();
+            var result = await _roundPlayerService.RetrieveAllRoundPlayers();
             return result;
         }
 
         [HttpGet]
         public async Task<RoundPlayerServiceViewModel> RetrieveRound(string id)
         {
-            var result = await _service.RetrieveRoundPlayer(id);
+            var result = await _roundPlayerService.RetrieveRoundPlayer(id);
             return result;
         }
 
         [HttpPost]
-        public async Task<HttpResponseMessage> CreateRound([FromBody]RoundPlayerServiceCreateRoundPlayerViewModel viewModel)
+        public async Task<string> CreateRound([FromBody]RoundPlayerServiceCreateRoundPlayerViewModel viewModel)
         {
-            var result = await _service.CreateRoundPlayer(viewModel);
-            return Request.CreateResponse(HttpStatusCode.OK);
+            var result = await _roundPlayerService.CreateRoundPlayer(viewModel);
+            return result;
         }
 
         [HttpPut]
-        public async Task<HttpResponseMessage> UpdateRound(string id, [FromBody]RoundPlayerServiceViewModel viewModel)
+        public async Task<bool> UpdateRound(string id, [FromBody]RoundPlayerServiceViewModel viewModel)
         {
             if (id == viewModel.Id)
             {
-                var isUpdated = await _service.UpdateRoundPlayer(viewModel);
-                return Request.CreateResponse(HttpStatusCode.OK);
+                var isUpdated = await _roundPlayerService.UpdateRoundPlayer(viewModel);
+                return isUpdated;
             }
-            return Request.CreateResponse(HttpStatusCode.NotModified);
+            return false;
         }
 
 
-        public async Task<HttpResponseMessage> DeleteRound(string id)
+        public async Task<int> DeleteRound(string id)
         {
-            var roundPlayerToDelete = await _service.RetrieveRoundPlayer(id);
 
-            await _service.DeleteRoundPlayer(roundPlayerToDelete);
-            return Request.CreateResponse(HttpStatusCode.OK);
+            var roundPlayerToDelete = await _roundPlayerService.RetrieveRoundPlayer(id);
+            if (roundPlayerToDelete.Id != Guid.Empty.ToString())
+            {
+                var result = await _roundPlayerService.DeleteRoundPlayer(roundPlayerToDelete);
+                return result;
+            }
+            return 0;
         }
 
     }

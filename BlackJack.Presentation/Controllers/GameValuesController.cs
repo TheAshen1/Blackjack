@@ -1,4 +1,5 @@
 ﻿using BlackJack.BusinessLogic.Services;
+using BlackJack.Utility.Loggers;
 using BlackJack.ViewModels.GameServiceViewModels;
 using System;
 using System.Collections.Generic;
@@ -7,9 +8,11 @@ using System.Net;
 using System.Net.Http;
 using System.Threading.Tasks;
 using System.Web.Http;
+using System.Web.Http.Cors;
 
 namespace BlackJack.Presentation.Controllers
 {
+    [EnableCors(origins: "http://localhost:59977", headers: "*", methods: "*")]
     public class GameValuesController : ApiController
     {
         private readonly GameService _gameService;
@@ -23,7 +26,16 @@ namespace BlackJack.Presentation.Controllers
         [HttpGet]
         public async Task<IEnumerable<GameServiceViewModel>> RetrieveAllGames()
         {
-            var result = await _gameService.RetrieveAllGames();
+            IEnumerable<GameServiceViewModel> result = null;
+            try
+            {              
+                result = await _gameService.RetrieveAllGames();               
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLogToFile(ex.Message, "GameValueController");
+            }
+
             return result;
         }
 
@@ -35,30 +47,33 @@ namespace BlackJack.Presentation.Controllers
         }
 
         [HttpPost]
-        public async Task<HttpResponseMessage> CreateGame([FromBody]GameServiceCreateGameViewModel viewModel)
+        public async Task<string> CreateGame([FromBody]GameServiceCreateGameViewModel viewModel)
         {
             var result = await _gameService.CreateGame(viewModel);
-            return Request.CreateResponse(HttpStatusCode.OK);
+            return result;
         }
 
         [HttpPut]
-        public async Task<HttpResponseMessage> UpdateGame(string id, [FromBody]GameServiceViewModel viewModel)
+        public async Task<bool> UpdateGame(string id, [FromBody]GameServiceViewModel viewModel)
         {
             if (id == viewModel.Id)
             {
                 var isUpdated = await _gameService.UpdateGame(viewModel);
-                return Request.CreateResponse(HttpStatusCode.OK);
+                return isUpdated;
             }
-            return Request.CreateResponse(HttpStatusCode.NotModified);
+            return false;
         }
 
         
-        public async Task<HttpResponseMessage> DeleteGame(string id)
+        public async Task<int> DeleteGame(string id)
         {
             var gameToDelete = await _gameService.RetrieveGame(id);
-
-            await _gameService.DeleteGame(gameToDelete);
-            return Request.CreateResponse(HttpStatusCode.OK);
+            if (gameToDelete.Id != Guid.Empty.ToString())
+            {
+                var result = await _gameService.DeleteGame(gameToDelete);
+                return result;
+            }
+            return 0;
         }
     }
 }

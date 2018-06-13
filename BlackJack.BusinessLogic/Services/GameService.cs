@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BlackJack.Utility.Loggers;
 
 namespace BlackJack.BusinessLogic.Services
 {
@@ -21,39 +22,89 @@ namespace BlackJack.BusinessLogic.Services
 
         public async Task<string> CreateGame(GameServiceCreateGameViewModel viewModel)
         {
-            var result = await _gameRepository.Add(DataMapper.Map(viewModel));
-            return result; 
+            try
+            {
+                var result = await _gameRepository.Add(DataMapper.Map(viewModel));
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLogToFile(ex.Message, "GameService");
+                return "error";
+            }
         }
 
         public async Task<IEnumerable<GameServiceViewModel>> RetrieveAllGames()
         {
-            var games = await _gameRepository.All();
-            return DataMapper.Map(games);
+            try
+            {
+                var games = await _gameRepository.All();
+                return DataMapper.Map(games);
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLogToFile(ex.Message, "GameService");
+                return null;
+            }
         }
 
         public async Task<GameServiceViewModel> RetrieveGame(string id)
         {
-            if (Guid.TryParse(id, out Guid guid))
+            try
             {
-                var game = await _gameRepository.FindByID(guid);
-                return DataMapper.Map(game);
+                if (Guid.TryParse(id, out Guid guid))
+                {
+                    var game = await _gameRepository.FindById(guid);
+                    return DataMapper.Map(game);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLogToFile(ex.Message, "GameService");
+                return new GameServiceViewModel
+                {
+                    Id = Guid.Empty.ToString()
+                };
             }
 
-            return DataMapper.Map(new Game{
-                Id = Guid.Empty
-            });
+            return new GameServiceViewModel
+            {
+                Id = Guid.Empty.ToString()
+            };
+
         }
 
-        public async Task<bool> UpdateGame(GameServiceViewModel game)
+        public async Task<bool> UpdateGame(GameServiceViewModel viewModel)
         {
-            var result = await _gameRepository.Update(DataMapper.Map(game));
-            return result;
+            try
+            {
+                var entity = DataMapper.Map(viewModel);
+                if (entity.Id != Guid.Empty)
+                {
+                    var result = await _gameRepository.Update(entity);
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLogToFile(ex.Message, "GameService");
+                return false;
+            }
+            return false;
         }
 
-        public async Task<int> DeleteGame(GameServiceViewModel game)
+        public async Task<int> DeleteGame(GameServiceViewModel viewModel)
         {
-            var result = await _gameRepository.Remove(DataMapper.Map(game));
-            return result;
+            try
+            {
+                var result = await _gameRepository.Remove(DataMapper.Map(viewModel));
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLogToFile(ex.Message, "GameService");
+                return 0;
+            }
         }
 
 

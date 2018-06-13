@@ -1,4 +1,5 @@
 ﻿using BlackJack.BusinessLogic.GameLogic;
+using BlackJack.Utility.Loggers;
 using BlackJack.ViewModels.GameLogicViewModels;
 using BlackJack.ViewModels.GameServiceViewModels;
 using BlackJack.ViewModels.PlayerServiceViewModels;
@@ -31,28 +32,37 @@ namespace BlackJack.BusinessLogic.Services
 
         public async Task<string> GiveCard(string roundPlayerId)
         {
-            var roundPlayer = await _roundPlayerService.RetrieveRoundPlayer(roundPlayerId);
-            var round = await _roundService.RetrieveRound(roundPlayer.RoundId);
-            var deck = new DeckLogic(new JavaScriptSerializer().Deserialize<List<CardLogic>>(round.Deck));
+            try
+            {
+                var roundPlayer = await _roundPlayerService.RetrieveRoundPlayer(roundPlayerId);
+                var round = await _roundService.RetrieveRound(roundPlayer.RoundId);
+                var deck = new DeckLogic(new JavaScriptSerializer().Deserialize<List<CardLogic>>(round.Deck));
 
 
-            var card = deck.Draw().ToString();
-            roundPlayer.Cards += card + ", ";
-            round.Deck = deck.Stringify();
+                var card = deck.Draw().ToString();
+                roundPlayer.Cards += card + ", ";
+                round.Deck = deck.Stringify();
 
-            await _roundPlayerService.UpdateRoundPlayer(roundPlayer);
-            await _roundService.UpdateRound(round);
+                await _roundPlayerService.UpdateRoundPlayer(roundPlayer);
+                await _roundService.UpdateRound(round);
+                return card;
 
-            return card;
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLogToFile(ex.Message, "GameLogicService", "GiveCard");
+                return null;
+            }
         }
 
         public async Task<GameLogicViewModel> StartNewGame(string playerName, int numberOfBots)
         {
+            try
+            {
+                var newGameId = await _gameService.CreateGame(new GameServiceCreateGameViewModel());
+                var newRoundId = await _roundService.CreateRound(new RoundServiceCreateRoundViewModel() { GameId = newGameId, Deck = (new DeckLogic()).Stringify() });
 
-            var newGameId = await _gameService.CreateGame(new GameServiceCreateGameViewModel());
-            var newRoundId = await _roundService.CreateRound(new RoundServiceCreateRoundViewModel() { GameId = newGameId, Deck = (new DeckLogic()).Stringify() });
-
-            var players = new List<PlayerLogicViewModel> {
+                var players = new List<PlayerLogicViewModel> {
                 new PlayerLogicViewModel
                 {
                     Id = await _playerService.CreatePlayer(new PlayerServiceCreatePlayerViewModel() { GameId = newGameId, Name = "Dealer", IsBot=true }),
@@ -68,8 +78,8 @@ namespace BlackJack.BusinessLogic.Services
                 }
             };
 
-            #region create Bots
-            var listOfNames = new List<string>()
+                #region create Bots
+                var listOfNames = new List<string>()
             {
                 "James",
                 "John",
@@ -87,92 +97,117 @@ namespace BlackJack.BusinessLogic.Services
                 "Mark",
                 "Donald",
             };
-            var RAND = new Random();
+                var RAND = new Random();
 
-            foreach (var name in listOfNames)
-            {
-                if (name == playerName)
+                foreach (var name in listOfNames)
                 {
-                    listOfNames.Remove(name);
+                    if (name == playerName)
+                    {
+                        listOfNames.Remove(name);
+                    }
                 }
-            }
 
-            for (var i = 0; i < numberOfBots; i++)
-            {
-                var tmpIndex = RAND.Next(listOfNames.Count);
-                var bot = new PlayerLogicViewModel
+                for (var i = 0; i < numberOfBots; i++)
                 {
-                    Id = await _playerService.CreatePlayer(new PlayerServiceCreatePlayerViewModel() { GameId = newGameId, Name = listOfNames[tmpIndex], IsBot = true }),
-                    Name = listOfNames[tmpIndex],
-                    IsBot = true
-                };
-                listOfNames.RemoveAt(tmpIndex);
+                    var tmpIndex = RAND.Next(listOfNames.Count);
+                    var bot = new PlayerLogicViewModel
+                    {
+                        Id = await _playerService.CreatePlayer(new PlayerServiceCreatePlayerViewModel() { GameId = newGameId, Name = listOfNames[tmpIndex], IsBot = true }),
+                        Name = listOfNames[tmpIndex],
+                        IsBot = true
+                    };
+                    listOfNames.RemoveAt(tmpIndex);
 
-                players.Add(bot);
+                    players.Add(bot);
+                }
+                #endregion
+
+                #region initialize RoundPlayer values
+                for (var i = 0; i < players.Count; i++)
+                {
+                    var player = players.ElementAt(i);
+                    player.CurrentRoundPlayerId =
+                        await _roundPlayerService.CreateRoundPlayer(new RoundPlayerServiceCreateRoundPlayerViewModel { RoundId = newRoundId, PlayerId = player.Id, Cards = "" });
+                }
+                #endregion
+
+                var viewModel = new GameLogicViewModel();
+
+                viewModel.GameId = newGameId;
+                viewModel.CurrentRoundId = newRoundId;
+                viewModel.Players = players;
+
+                return viewModel;
             }
-            #endregion
-
-            #region initialize RoundPlayer values
-            for (var i = 0; i < players.Count; i++)
+            catch (Exception ex)
             {
-                var player = players.ElementAt(i);
-                player.CurrentRoundPlayerId =
-                    await _roundPlayerService.CreateRoundPlayer(new RoundPlayerServiceCreateRoundPlayerViewModel { RoundId = newRoundId, PlayerId = player.Id, Cards = "" });
+                Logger.WriteLogToFile(ex.Message, "GameLogicService", "StartNewGame");
             }
-            #endregion
-
-            var viewModel = new GameLogicViewModel();
-
-            viewModel.GameId = newGameId;
-            viewModel.CurrentRoundId = newRoundId;
-            viewModel.Players = players;
-
-            return viewModel;
+            return new GameLogicViewModel {
+                GameId = Guid.Empty.ToString()
+            };
         }
 
         public async Task<GameLogicViewModel> StartNewGameRound(string currentGameId)
         {
-
-            var newRoundId = await _roundService.CreateRound(new RoundServiceCreateRoundViewModel() { GameId = currentGameId, Deck = (new DeckLogic()).Stringify() });
-
-            var playerModels = await _playerService.RetrieveGamePlayers(currentGameId);
-
-            var Players = new List<PlayerLogicViewModel>();
-
-            foreach (var playerModel in playerModels)
+            try
             {
-                Players.Add(new PlayerLogicViewModel
+                var newRoundId = await _roundService.CreateRound(new RoundServiceCreateRoundViewModel() { GameId = currentGameId, Deck = (new DeckLogic()).Stringify() });
+
+                var playerModels = await _playerService.RetrieveGamePlayers(currentGameId);
+
+                var Players = new List<PlayerLogicViewModel>();
+
+                foreach (var playerModel in playerModels)
                 {
-                    Id = playerModel.Id,
-                    Name = playerModel.Name,
-                    IsBot = playerModel.IsBot
-                });
-            }
+                    Players.Add(new PlayerLogicViewModel
+                    {
+                        Id = playerModel.Id,
+                        Name = playerModel.Name,
+                        IsBot = playerModel.IsBot
+                    });
+                }
 
-            #region initialize RoundPlayer values
-            for (var i = 0; i < Players.Count; i++)
+                #region initialize RoundPlayer values
+                for (var i = 0; i < Players.Count; i++)
+                {
+                    var player = Players.ElementAt(i);
+                    player.CurrentRoundPlayerId =
+                        await _roundPlayerService.CreateRoundPlayer(new RoundPlayerServiceCreateRoundPlayerViewModel { RoundId = newRoundId, PlayerId = player.Id, Cards = "" });
+                }
+                #endregion
+
+                var viewModel = new GameLogicViewModel();
+
+                viewModel.GameId = currentGameId;
+                viewModel.CurrentRoundId = newRoundId;
+                viewModel.Players = Players;
+
+                return viewModel;
+            }
+            catch (Exception ex)
             {
-                var player = Players.ElementAt(i);
-                player.CurrentRoundPlayerId =
-                    await _roundPlayerService.CreateRoundPlayer(new RoundPlayerServiceCreateRoundPlayerViewModel { RoundId = newRoundId, PlayerId = player.Id, Cards = "" });
+                Logger.WriteLogToFile(ex.Message, "GameLogicService", "StartNewGameRound");
             }
-            #endregion
-
-            var viewModel = new GameLogicViewModel();
-
-            viewModel.GameId = currentGameId;
-            viewModel.CurrentRoundId = newRoundId;
-            viewModel.Players = Players;
-            
-            return viewModel;
+            return new GameLogicViewModel {
+                GameId = Guid.Empty.ToString()
+            };
         }
 
         public async Task<bool> FinishTheGame(string GameId)
         {
-            var game = await _gameService.RetrieveGame(GameId);
-            game.End = DateTime.Now.ToString();
-            var result = await _gameService.UpdateGame(game);
-            return result;
+            try
+            {
+                var game = await _gameService.RetrieveGame(GameId);
+                game.End = DateTime.Now.ToString();
+                var result = await _gameService.UpdateGame(game);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLogToFile(ex.Message, "GameLogicService", "FinishTheGame");
+            }
+            return false;
         }
     }
 }
