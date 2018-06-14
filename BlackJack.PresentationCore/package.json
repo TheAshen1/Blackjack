@@ -4,20 +4,19 @@
   "private": true,
   "author": "Lolzor",
   "dependencies": {
-    "@angular/common": "~6.0.0",
-    "@angular/compiler": "~6.0.0",
-    "@angular/core": "~6.0.0",
-    "@angular/forms": "~6.0.0",
-    "@angular/platform-browser": "~6.0.0",
-    "@angular/platform-browser-dynamic": "~6.0.0",
-    "@angular/router": "~6.0.0",
+    "@angular/common": "~6.0.5",
+    "@angular/compiler": "~6.0.5",
+    "@angular/core": "~6.0.5",
+    "@angular/forms": "~6.0.5",
+    "@angular/platform-browser": "~6.0.5",
+    "@angular/platform-browser-dynamic": "~6.0.5",
+    "@angular/router": "~6.0.5",
     "core-js": "^2.5.6",
     "npm": "^6.1.0",
     "rxjs": "^6.1.0",
     "zone.js": "^0.8.26"
   },
   "devDependencies": {
-    "@angular/cli": "^6.0.8",
     "@types/node": "^10.0.5",
     "@types/webpack-env": "^1.13.6",
     "angular2-template-loader": "^0.6.2",
@@ -31,8 +30,5 @@
     "webpack": "^4.8.1",
     "webpack-cli": "^2.1.2",
     "webpack-hot-middleware": "^2.22.1"
-  },
-  "scripts": {
-    "start": "ng serve --proxy-config proxy.config.json"
   }
 }

@@ -6,7 +6,7 @@ using System.Web.Http.Cors;
 
 namespace BlackJack.Presentation.Controllers
 {
-    [EnableCors(origins: "http://localhost:59977", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://localhost:59977, http://localhost:50182", headers: "*", methods: "*")]
     public class GameLogicController : ApiController
     {
         private readonly GameLogicService _gameLogicService;
