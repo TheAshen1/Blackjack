@@ -60,6 +60,7 @@
     "zone.js": "0.8.12"
   },
   "dependencies": {
+    "@angular-devkit/core": "^0.6.8",
     "npm": "^6.1.0"
   }
 }
