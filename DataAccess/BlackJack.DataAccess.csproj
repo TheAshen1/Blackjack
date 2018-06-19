@@ -7,8 +7,8 @@
     <ProjectGuid>{FAB1984A-011B-4967-A9F0-5E0B2A9E0870}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DataAccess</RootNamespace>
-    <AssemblyName>DataAccess</AssemblyName>
+    <RootNamespace>BlackJack.DataAccess</RootNamespace>
+    <AssemblyName>BlackJack.DataAccess</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
