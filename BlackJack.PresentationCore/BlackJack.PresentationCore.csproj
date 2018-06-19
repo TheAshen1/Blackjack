@@ -6,28 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="BlackJack\src\app\components\gamelist.component.ts" />
-    <None Remove="BlackJack\src\app\components\home\gameBody.component.ts" />
-    <None Remove="BlackJack\src\app\components\home\gameStart.component.ts" />
-    <None Remove="BlackJack\src\app\components\home\home.component.ts" />
-    <None Remove="BlackJack\src\app\components\playerList\playerList.component.ts" />
-    <None Remove="BlackJack\src\app\components\roundList\roundList.component.ts" />
-    <None Remove="BlackJack\src\app\components\roundPlayerList\roundPlayerList.component.ts" />
-    <None Remove="BlackJack\src\app\models\game.ts" />
-    <None Remove="BlackJack\src\app\models\gameLogic.ts" />
-    <None Remove="BlackJack\src\app\models\player.ts" />
-    <None Remove="BlackJack\src\app\models\playerLogic.ts" />
-    <None Remove="BlackJack\src\app\models\round.ts" />
-    <None Remove="BlackJack\src\app\models\roundPlayer.ts" />
-    <None Remove="BlackJack\src\app\services\gamedata.service.ts" />
-    <None Remove="BlackJack\src\app\services\gameLogic.service.ts" />
-    <None Remove="BlackJack\src\app\services\logger.service.ts" />
-    <None Remove="BlackJack\src\app\services\playerdata.service.ts" />
-    <None Remove="BlackJack\src\app\services\roundData.service.ts" />
-    <None Remove="BlackJack\src\app\services\roundPlayerData.service.ts" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
   </ItemGroup>
 
@@ -40,25 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="BlackJack\src\app\components\gameList\gameList.component.ts" />
-    <TypeScriptCompile Include="BlackJack\src\app\components\home\gameBody\gameBody.component.ts" />
-    <TypeScriptCompile Include="BlackJack\src\app\components\home\gameStart\gameStart.component.ts" />
-    <TypeScriptCompile Include="BlackJack\src\app\components\home\home.component.ts" />
-    <TypeScriptCompile Include="BlackJack\src\app\components\playerList\playerList.component.ts" />
-    <TypeScriptCompile Include="BlackJack\src\app\components\roundList\roundList.component.ts" />
-    <TypeScriptCompile Include="BlackJack\src\app\components\roundPlayerList\roundPlayerList.component.ts" />
-    <TypeScriptCompile Include="BlackJack\src\app\models\game.ts" />
-    <TypeScriptCompile Include="BlackJack\src\app\models\gameLogic.ts" />
-    <TypeScriptCompile Include="BlackJack\src\app\models\player.ts" />
-    <TypeScriptCompile Include="BlackJack\src\app\models\playerLogic.ts" />
-    <TypeScriptCompile Include="BlackJack\src\app\models\round.ts" />
-    <TypeScriptCompile Include="BlackJack\src\app\models\roundPlayer.ts" />
-    <TypeScriptCompile Include="BlackJack\src\app\services\gameData.service.ts" />
-    <TypeScriptCompile Include="BlackJack\src\app\services\gameLogic.service.ts" />
-    <TypeScriptCompile Include="BlackJack\src\app\services\logger.service.ts" />
-    <TypeScriptCompile Include="BlackJack\src\app\services\playerData.service.ts" />
-    <TypeScriptCompile Include="BlackJack\src\app\services\roundData.service.ts" />
-    <TypeScriptCompile Include="BlackJack\src\app\services\roundPlayerData.service.ts" />
+    <TypeScriptCompile Include="..\..\BlackJack%2528Novikov%2529\BlackJack.PresentationCore\BlackJack\src\app\components\home\player\player.component.ts" />
   </ItemGroup>
 
 </Project>

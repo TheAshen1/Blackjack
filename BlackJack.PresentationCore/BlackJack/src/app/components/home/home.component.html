@@ -1,9 +1,0 @@
-
-<game-body *ngIf="gameIsGoingOn; else start" ></game-body>
-
-<ng-template #start>
-  <game-start (begin)="onBegin($event)"></game-start>
-</ng-template>
-
-
-<p>game status : {{gameIsGoingOn}}</p>

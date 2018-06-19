@@ -53,7 +53,7 @@ namespace BlackJack.BusinessLogic.GameLogic
         public CardLogic Draw()
         {
             var rand = new Random();
-            var x = rand.Next(_cards.Count);
+            var x = rand.Next(_cards.Count-1);
             var card = _cards[x];
             _cards.RemoveAt(x);
             return card;
