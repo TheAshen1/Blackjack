@@ -12,7 +12,7 @@ using System.Web.Http.Cors;
 
 namespace BlackJack.Presentation.Controllers
 {
-    [EnableCors(origins: "http://localhost:59977, http://localhost:50182, http://localhost:4200", headers: "*", methods: "*")]
+    [EnableCors(origins: "http://localhost:59977, http://localhost:50182, http://localhost:4200, https://localhost:44327", headers: "*", methods: "*")]
     public class RoundValuesController : ApiController
     {
         private readonly RoundService _roundService;
