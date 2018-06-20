@@ -1,0 +1,81 @@
+<h1>Players</h1>
+<button 
+        (click)="add()">
+  Add
+</button>
+<table *ngIf="tableMode; else create" class="table table-striped">
+  <thead>
+    <tr>
+      <td>Id</td>
+      <td>GameId</td>
+      <td>Name</td>
+      <td>IsBot</td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of players">
+      <ng-template [ngIf]="player?.Id != p.Id" [ngIfElse]="edit">
+        <td>{{p?.Id}}</td>
+        <td>{{p?.GameId}}</td>
+        <td>{{p?.Name}}</td>
+        <td>{{p?.IsBot}}</td>
+        <td>
+          <p class="k-block">
+            <button
+                    (click)="editPlayer(p)">
+              Edit
+            </button>
+            <button 
+                    (click)="delete(p)">
+              Delete
+            </button>
+          </p>
+        </td>
+      </ng-template>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #edit>
+  <td>
+    <input type="text" [(ngModel)]="player.Id" />
+  </td>
+  <td>
+    <input type="text" [(ngModel)]="player.GameId" />
+  </td>
+  <td>
+    <input type="text" [(ngModel)]="player.Name" />
+  </td>
+  <td>
+    <input type="text" [(ngModel)]="player.IsBot" />
+  </td>
+  <td>
+    <input type="button" value="Сохранить" (click)="save()" class="btn btn-sm btn-success" />
+    <input type="button" value="Отмена" (click)="cancel()" class="btn btn-sm btn-warning" />
+  </td>
+</ng-template>
+
+
+<ng-template #create>
+  <div>
+    <label>Id</label>
+    <input type="text" [(ngModel)]="player.Id" />
+  </div>
+  <div>
+    <label>GameId</label>
+    <input type="text" [(ngModel)]="player.GameId" />
+  </div>
+  <div>
+    <label>Name</label>
+    <input type="text" [(ngModel)]="player.Name" />
+  </div>
+  <div>
+    <label>IsBot</label>
+    <input type="text" [(ngModel)]="player.IsBot" />
+  </div>
+  <div>
+    <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />
+    <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+  </div>
+</ng-template>

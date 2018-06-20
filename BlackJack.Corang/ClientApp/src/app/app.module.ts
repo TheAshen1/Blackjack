@@ -5,11 +5,20 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { NavMenuComponent } from './nav-menu/nav-menu.component';
-import { HomeComponent } from './home/home.component';
-import { CounterComponent } from './counter/counter.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { NavMenuComponent } from './components/navmenu/navmenu.component';
+import { HomeComponent } from './components/home/home.component';
+import { CounterComponent } from './components/counter/counter.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { BlackJack } from './components/blackjack/blackjack.component';
+import { GameStart } from './components/blackjack/gameStart/gameStart.component';
+import { PlayerComponent } from './components/blackjack/player/player.component';
+import { GameList } from './components/gameList/gamelist.component';
+import { PlayerList } from './components/playerList/playerList.component';
+import { RoundList } from './components/roundList/roundList.component';
+import { RoundPlayerList } from './components/roundPlayerList/roundPlayerList.component';
+
+
 
 @NgModule({
   declarations: [
@@ -17,16 +26,30 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
-    FetchDataComponent
+
+    BlackJack,
+    GameStart,
+    PlayerComponent,
+    GameList,
+    PlayerList,
+    RoundList,
+    RoundPlayerList
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
     HttpClientModule,
     FormsModule,
     RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
+      { path: '', redirectTo: 'home', pathMatch: 'full' },
+      { path: 'home', component: HomeComponent },
       { path: 'counter', component: CounterComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
+      { path: 'blackjack', component: BlackJack },
+      { path: 'games', component: GameList },
+      { path: 'players', component: PlayerList },
+      { path: 'rounds', component: RoundList },
+      { path: 'roundPlayers', component: RoundPlayerList },
+
+      { path: '**', redirectTo: 'home' }
     ]),
     BrowserAnimationsModule
   ],

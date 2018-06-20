@@ -1,3 +1,6 @@
+using BlackJack.BusinessLogic.Services;
+using DataAccess;
+using DataAccess.DapperModels;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -19,6 +22,7 @@ namespace BlackJack.Corang
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             // In production, the Angular files will be served from this directory
@@ -26,6 +30,9 @@ namespace BlackJack.Corang
             {
                 configuration.RootPath = "ClientApp/dist";
             });
+            services.AddTransient<BaseRepository<Game>>(); 
+            services.AddTransient<GameLogicService>();
+            services.AddTransient<GameService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
