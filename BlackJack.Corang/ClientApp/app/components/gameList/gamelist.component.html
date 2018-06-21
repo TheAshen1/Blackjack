@@ -1,0 +1,72 @@
+<h1>Games</h1>
+<button class="btn btn-primary"
+        (click)="add()">
+  Add
+</button>
+<table *ngIf="tableMode; else create" class="table table-striped">
+  <thead>
+    <tr>
+      <td>Id</td>
+      <td>Start</td>
+      <td>End</td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let g of games">
+      <ng-template [ngIf]="game?.id != g.id" [ngIfElse]="edit">
+        <td>{{g?.id}}</td>
+        <td>{{g?.start}}</td>
+        <td>{{g?.end}}</td>
+        <td>
+
+            <button class="btn btn-primary"
+                    (click)="editGame(g)">
+              Edit
+            </button>
+            <button  class="btn btn-danger"
+                    (click)="delete(g)">
+              Delete
+            </button>
+
+        </td>
+      </ng-template>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #edit>
+  <td>
+    <input type="text" [(ngModel)]="game.id" />
+  </td>
+  <td>
+    <input type="text" [(ngModel)]="game.start" />
+  </td>
+  <td>
+    <input type="text" [(ngModel)]="game.end" />
+  </td>
+  <td>
+    <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />
+    <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+  </td>
+</ng-template>
+
+
+<ng-template #create>
+  <div class="form-group">
+    <label>Id</label>
+    <input type="text" [(ngModel)]="game.id" />
+  </div>
+  <div class="form-group">
+    <label>Start</label>
+    <input type="text" [(ngModel)]="game.start" />
+  </div>
+  <div class="form-group">
+    <label>End</label>
+    <input type="text" [(ngModel)]="game.end" />
+  </div>
+  <div>
+    <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />
+    <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+  </div>
+</ng-template>

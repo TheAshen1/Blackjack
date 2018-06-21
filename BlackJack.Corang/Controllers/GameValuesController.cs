@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 
-namespace BlackJack.Presentation.Controllers
+namespace BlackJack.Corang.Controllers
 {
     [Route("api/[controller]")]
     public class GameValuesController : ControllerBase
@@ -20,7 +20,7 @@ namespace BlackJack.Presentation.Controllers
         }
 
 
-        [HttpGet(Name = "GetAll")]
+        [HttpGet("[action]")]
         public async Task<IEnumerable<GameServiceViewModel>> RetrieveAllGames()
         {
             IEnumerable<GameServiceViewModel> result = null;
@@ -36,7 +36,7 @@ namespace BlackJack.Presentation.Controllers
             return result;
         }
 
-        [HttpGet("{id}",Name = "Get")]
+        [HttpGet("[action]/{id}")]
         public async Task<GameServiceViewModel> RetrieveGame(string id)
         {
             var result = await _gameService.RetrieveGame(id);
@@ -50,7 +50,7 @@ namespace BlackJack.Presentation.Controllers
             return result;
         }
 
-        [HttpPut("[action]")]
+        [HttpPut("[action]/{id}")]
         public async Task<bool> UpdateGame(string id, [FromBody]GameServiceViewModel viewModel)
         {
             if (id == viewModel.Id)
@@ -61,7 +61,7 @@ namespace BlackJack.Presentation.Controllers
             return false;
         }
 
-        [HttpDelete("[action]")]
+        [HttpDelete("[action]/{id}")]
         public async Task<int> DeleteGame(string id)
         {
             var gameToDelete = await _gameService.RetrieveGame(id);

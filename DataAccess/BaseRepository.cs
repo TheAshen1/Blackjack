@@ -16,10 +16,10 @@ namespace DataAccess
         protected readonly string _tableName;
         protected IDbConnection _connection { get; set; }
 
-        public BaseRepository(string tableName, ConnectionFactory connectionFactory)
+        public BaseRepository(string tableName, IDbConnection connection)
         {
             _tableName = tableName;
-            _connection = connectionFactory.CreateConnection("BlackJackConnectionString");
+            _connection = connection;
         }
         public virtual async Task<IEnumerable<T>> All()
         {

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 
 
-namespace BlackJack.Presentation.Controllers
+namespace BlackJack.Corang.Controllers
 {
     [Route("api/[controller]")]
     public class RoundValuesController : ControllerBase
@@ -20,21 +20,21 @@ namespace BlackJack.Presentation.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet("[action]")]
         public async Task<IEnumerable<RoundServiceViewModel>> RetrieveAllRounds()
         {
             var result = await _roundService.RetrieveAllRounds();
             return result;
         }
 
-        [HttpGet]
+        [HttpGet("[action]/{id}")]
         public async Task<RoundServiceViewModel> RetrieveRound(string id)
         {
             var result = await _roundService.RetrieveRound(id);
             return result;
         }
 
-        [HttpPost]
+        [HttpPost("[action]")]
         public async Task<string> CreateRound([FromBody]RoundServiceCreateRoundViewModel viewModel)
         {
             viewModel.Deck = (new DeckLogic()).Stringify();
@@ -42,7 +42,7 @@ namespace BlackJack.Presentation.Controllers
             return result;
         }
 
-        [HttpPut]
+        [HttpPut("[action]/{id}")]
         public async Task<bool> UpdateRound(string id, [FromBody]RoundServiceViewModel viewModel)
         {
             if (id == viewModel.Id)
@@ -53,7 +53,7 @@ namespace BlackJack.Presentation.Controllers
             return false;
         }
 
-
+        [HttpDelete("[action]/{id}")]
         public async Task<int> DeleteRound(string id)
         {
             var roundToDelete = await _roundService.RetrieveRound(id);

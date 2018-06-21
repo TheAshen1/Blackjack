@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BlackJack.Presentation.Controllers
+namespace BlackJack.Corang.Controllers
 {
     [Route("api/[controller]")]
     public class RoundPlayerValuesController : ControllerBase
@@ -18,29 +18,29 @@ namespace BlackJack.Presentation.Controllers
         }
 
 
-        [HttpGet]
-        public async Task<IEnumerable<RoundPlayerServiceViewModel>> RetrieveAllRounds()
+        [HttpGet("[action]")]
+        public async Task<IEnumerable<RoundPlayerServiceViewModel>> RetrieveAllRoundPlayers()
         {
             var result = await _roundPlayerService.RetrieveAllRoundPlayers();
             return result;
         }
 
-        [HttpGet]
-        public async Task<RoundPlayerServiceViewModel> RetrieveRound(string id)
+        [HttpGet("[action]/{id}")]
+        public async Task<RoundPlayerServiceViewModel> RetrieveRoundPlayer(string id)
         {
             var result = await _roundPlayerService.RetrieveRoundPlayer(id);
             return result;
         }
 
-        [HttpPost]
-        public async Task<string> CreateRound([FromBody]RoundPlayerServiceCreateRoundPlayerViewModel viewModel)
+        [HttpPost("[action]")]
+        public async Task<string> CreateRoundPlayer([FromBody]RoundPlayerServiceCreateRoundPlayerViewModel viewModel)
         {
             var result = await _roundPlayerService.CreateRoundPlayer(viewModel);
             return result;
         }
 
-        [HttpPut]
-        public async Task<bool> UpdateRound(string id, [FromBody]RoundPlayerServiceViewModel viewModel)
+        [HttpPut("[action]/{id}")]
+        public async Task<bool> UpdateRoundPlayer(string id, [FromBody]RoundPlayerServiceViewModel viewModel)
         {
             if (id == viewModel.Id)
             {
@@ -50,8 +50,8 @@ namespace BlackJack.Presentation.Controllers
             return false;
         }
 
-
-        public async Task<int> DeleteRound(string id)
+        [HttpDelete("[action]/{id}")]
+        public async Task<int> DeleteRoundPlayer(string id)
         {
 
             var roundPlayerToDelete = await _roundPlayerService.RetrieveRoundPlayer(id);

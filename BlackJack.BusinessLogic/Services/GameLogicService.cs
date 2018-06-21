@@ -5,12 +5,12 @@ using BlackJack.ViewModels.GameServiceViewModels;
 using BlackJack.ViewModels.PlayerServiceViewModels;
 using BlackJack.ViewModels.RoundPlayerServiceViewModels;
 using BlackJack.ViewModels.RoundServiceViewModels;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
 
 namespace BlackJack.BusinessLogic.Services
 {
@@ -36,7 +36,7 @@ namespace BlackJack.BusinessLogic.Services
             {
                 var roundPlayer = await _roundPlayerService.RetrieveRoundPlayer(roundPlayerId);
                 var round = await _roundService.RetrieveRound(roundPlayer.RoundId);
-                var deck = new DeckLogic(new JavaScriptSerializer().Deserialize<List<CardLogic>>(round.Deck));
+                var deck = new DeckLogic(JsonConvert.DeserializeObject<List<CardLogic>>(round.Deck));
 
 
                 var card = deck.Draw().ToString();

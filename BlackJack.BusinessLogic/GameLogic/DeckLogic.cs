@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Web.Script.Serialization;
 
 namespace BlackJack.BusinessLogic.GameLogic
 {
@@ -61,7 +61,7 @@ namespace BlackJack.BusinessLogic.GameLogic
 
         public string Stringify()
         {
-            var json = new JavaScriptSerializer().Serialize(_cards);
+            var json = JsonConvert.SerializeObject(_cards);
             return json;
         }
     }

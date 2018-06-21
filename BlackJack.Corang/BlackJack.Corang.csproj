@@ -1,59 +1,352 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
     <TypeScriptCompileBlocked>true</TypeScriptCompileBlocked>
     <TypeScriptToolsVersion>Latest</TypeScriptToolsVersion>
     <IsPackable>false</IsPackable>
-    <SpaRoot>ClientApp\</SpaRoot>
-    <DefaultItemExcludes>$(DefaultItemExcludes);$(SpaRoot)node_modules\**</DefaultItemExcludes>
-
-    <!-- Set this to true if you enable server-side prerendering -->
-    <BuildServerSideRenderer>false</BuildServerSideRenderer>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.1" />
+    <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.5.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.1.0-preview1-final" />
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
   </ItemGroup>
 
   <ItemGroup>
-    <!-- Don't publish the SPA source files, but do show them in the project files list -->
-    <Content Remove="$(SpaRoot)**" />
-    <None Include="$(SpaRoot)**" Exclude="$(SpaRoot)node_modules\**" />
+    <!-- Files not to publish (note that the 'dist' subfolders are re-added below) -->
+    <Content Remove="ClientApp\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="ClientApp\app\components\blackjack\card\card.component.ts" />
+    <None Remove="ClientApp\assets\images\10C.png" />
+    <None Remove="ClientApp\assets\images\10D.png" />
+    <None Remove="ClientApp\assets\images\10H.png" />
+    <None Remove="ClientApp\assets\images\10S.png" />
+    <None Remove="ClientApp\assets\images\2C.png" />
+    <None Remove="ClientApp\assets\images\2D.png" />
+    <None Remove="ClientApp\assets\images\2H.png" />
+    <None Remove="ClientApp\assets\images\2S.png" />
+    <None Remove="ClientApp\assets\images\3C.png" />
+    <None Remove="ClientApp\assets\images\3D.png" />
+    <None Remove="ClientApp\assets\images\3H.png" />
+    <None Remove="ClientApp\assets\images\3S.png" />
+    <None Remove="ClientApp\assets\images\4C.png" />
+    <None Remove="ClientApp\assets\images\4D.png" />
+    <None Remove="ClientApp\assets\images\4H.png" />
+    <None Remove="ClientApp\assets\images\4S.png" />
+    <None Remove="ClientApp\assets\images\5C.png" />
+    <None Remove="ClientApp\assets\images\5D.png" />
+    <None Remove="ClientApp\assets\images\5H.png" />
+    <None Remove="ClientApp\assets\images\5S.png" />
+    <None Remove="ClientApp\assets\images\6C.png" />
+    <None Remove="ClientApp\assets\images\6D.png" />
+    <None Remove="ClientApp\assets\images\6H.png" />
+    <None Remove="ClientApp\assets\images\6S.png" />
+    <None Remove="ClientApp\assets\images\7C.png" />
+    <None Remove="ClientApp\assets\images\7D.png" />
+    <None Remove="ClientApp\assets\images\7H.png" />
+    <None Remove="ClientApp\assets\images\7S.png" />
+    <None Remove="ClientApp\assets\images\8C.png" />
+    <None Remove="ClientApp\assets\images\8D.png" />
+    <None Remove="ClientApp\assets\images\8H.png" />
+    <None Remove="ClientApp\assets\images\8S.png" />
+    <None Remove="ClientApp\assets\images\9C.png" />
+    <None Remove="ClientApp\assets\images\9D.png" />
+    <None Remove="ClientApp\assets\images\9H.png" />
+    <None Remove="ClientApp\assets\images\9S.png" />
+    <None Remove="ClientApp\assets\images\AC.png" />
+    <None Remove="ClientApp\assets\images\aces.png" />
+    <None Remove="ClientApp\assets\images\AD.png" />
+    <None Remove="ClientApp\assets\images\AH.png" />
+    <None Remove="ClientApp\assets\images\AS.png" />
+    <None Remove="ClientApp\assets\images\back_cards-07.png" />
+    <None Remove="ClientApp\assets\images\blue_back.png" />
+    <None Remove="ClientApp\assets\images\cardTableBackground.jpg" />
+    <None Remove="ClientApp\assets\images\gray_back.png" />
+    <None Remove="ClientApp\assets\images\green_back.png" />
+    <None Remove="ClientApp\assets\images\honors_spade-14.png" />
+    <None Remove="ClientApp\assets\images\honor_clubs.png" />
+    <None Remove="ClientApp\assets\images\honor_diamond.png" />
+    <None Remove="ClientApp\assets\images\honor_heart-14.png" />
+    <None Remove="ClientApp\assets\images\JC.png" />
+    <None Remove="ClientApp\assets\images\JD.png" />
+    <None Remove="ClientApp\assets\images\JH.png" />
+    <None Remove="ClientApp\assets\images\JS.png" />
+    <None Remove="ClientApp\assets\images\KC.png" />
+    <None Remove="ClientApp\assets\images\KD.png" />
+    <None Remove="ClientApp\assets\images\KH.png" />
+    <None Remove="ClientApp\assets\images\KS.png" />
+    <None Remove="ClientApp\assets\images\purple_back.png" />
+    <None Remove="ClientApp\assets\images\QC.png" />
+    <None Remove="ClientApp\assets\images\QD.png" />
+    <None Remove="ClientApp\assets\images\QH.png" />
+    <None Remove="ClientApp\assets\images\QS.png" />
+    <None Remove="ClientApp\assets\images\red_back.png" />
+    <None Remove="ClientApp\assets\images\yellow_back.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="ClientApp\assets\images\10C.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\10D.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\10H.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\10S.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\2C.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\2D.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\2H.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\2S.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\3C.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\3D.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\3H.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\3S.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\4C.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\4D.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\4H.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\4S.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\5C.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\5D.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\5H.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\5S.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\6C.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\6D.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\6H.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\6S.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\7C.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\7D.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\7H.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\7S.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\8C.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\8D.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\8H.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\8S.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\9C.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\9D.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\9H.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\9S.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\AC.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\aces.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\AD.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\AH.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\AS.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\back_cards-07.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\blue_back.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\cardTableBackground.jpg">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\gray_back.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\green_back.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\honors_spade-14.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\honor_clubs.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\honor_diamond.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\honor_heart-14.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\JC.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\JD.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\JH.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\JS.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\KC.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\KD.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\KH.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\KS.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\purple_back.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\QC.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\QD.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\QH.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\QS.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\red_back.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="ClientApp\assets\images\yellow_back.png">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BlackJack.BusinessLogic\BlackJack.BusinessLogic.csproj" />
     <ProjectReference Include="..\BlackJack.Utility\BlackJack.Utility.csproj" />
     <ProjectReference Include="..\BlackJack.ViewModels\BlackJack.ViewModels.csproj" />
-    <ProjectReference Include="..\DataAccess\BlackJack.DataAccess.csproj" />
   </ItemGroup>
 
-  <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
+  <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\Core\bin\Debug\EntityFramework.dll</HintPath>
+    </Reference>
+    
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ClientApp\dist\" />
+    <Folder Include="wwwroot\assets\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\..\BlackJack%2528Novikov%2529\BlackJack.Corang\ClientApp\app\components\playerList\playerList.component.css" />
+    <None Include="..\..\BlackJack%2528Novikov%2529\BlackJack.Corang\ClientApp\app\components\playerList\playerList.component.html" />
+    <None Include="..\..\BlackJack%2528Novikov%2529\BlackJack.Corang\ClientApp\app\components\playerList\playerList.component.ts" />
+    <None Include="..\..\BlackJack%2528Novikov%2529\BlackJack.Corang\ClientApp\app\components\roundList\roundList.component.css" />
+    <None Include="..\..\BlackJack%2528Novikov%2529\BlackJack.Corang\ClientApp\app\components\roundList\roundList.component.html" />
+    <None Include="..\..\BlackJack%2528Novikov%2529\BlackJack.Corang\ClientApp\app\components\roundList\roundList.component.ts" />
+    <None Include="..\..\BlackJack%2528Novikov%2529\BlackJack.Corang\ClientApp\app\components\roundPlayerList\roundPlayerList.component.css" />
+    <None Include="..\..\BlackJack%2528Novikov%2529\BlackJack.Corang\ClientApp\app\components\roundPlayerList\roundPlayerList.component.html" />
+    <None Include="..\..\BlackJack%2528Novikov%2529\BlackJack.Corang\ClientApp\app\components\roundPlayerList\roundPlayerList.component.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="ClientApp\app\components\blackjack\card\card.component.ts" />
+  </ItemGroup>
+
+  <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">
       <Output TaskParameter="ExitCode" PropertyName="ErrorCode" />
     </Exec>
     <Error Condition="'$(ErrorCode)' != '0'" Text="Node.js is required to build and run this project. To continue, please install Node.js from https://nodejs.org/, and then restart your command prompt or IDE." />
-    <Message Importance="high" Text="Restoring dependencies using 'npm'. This may take several minutes..." />
-    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
+
+    <!-- In development, the dist files won't exist on the first run or when cloning to
+         a different machine, so rebuild them if not already present. -->
+    <Message Importance="high" Text="Performing first-run Webpack build..." />
+    <Exec Command="node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js" />
+    <Exec Command="node node_modules/webpack/bin/webpack.js" />
   </Target>
 
   <Target Name="PublishRunWebpack" AfterTargets="ComputeFilesToPublish">
     <!-- As part of publishing, ensure the JS resources are freshly built in production mode -->
-    <Exec WorkingDirectory="$(SpaRoot)" Command="npm install" />
-    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build -- --prod" />
-    <Exec WorkingDirectory="$(SpaRoot)" Command="npm run build:ssr -- --prod" Condition=" '$(BuildServerSideRenderer)' == 'true' " />
+    <Exec Command="npm install" />
+    <Exec Command="node node_modules/webpack/bin/webpack.js --config webpack.config.vendor.js --env.prod" />
+    <Exec Command="node node_modules/webpack/bin/webpack.js --env.prod" />
 
     <!-- Include the newly-built files in the publish output -->
     <ItemGroup>
-      <DistFiles Include="$(SpaRoot)dist\**; $(SpaRoot)dist-server\**" />
-      <DistFiles Include="$(SpaRoot)node_modules\**" Condition="'$(BuildServerSideRenderer)' == 'true'" />
+      <DistFiles Include="wwwroot\dist\**; ClientApp\dist\**" />
       <ResolvedFileToPublish Include="@(DistFiles->'%(FullPath)')" Exclude="@(ResolvedFileToPublish)">
         <RelativePath>%(DistFiles.Identity)</RelativePath>
         <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>

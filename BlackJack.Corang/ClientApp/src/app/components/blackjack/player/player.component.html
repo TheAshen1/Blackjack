@@ -1,9 +1,0 @@
-<div class="player" [style.background-color]="_score < 21 ? 'white' : (_score == 21 ? 'green' : 'red')">
-  <div class="playerName">{{_player.Name}}</div>
-  <div class='cardList'>
-    <div *ngFor="let c of cards" class="card">
-      <img [src]="c.uri" />
-    </div>
-  </div>
-</div>
-<p>{{_score}}</p>

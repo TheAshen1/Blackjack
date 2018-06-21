@@ -1,0 +1,73 @@
+<h1>Rounds</h1>
+<button class="btn btn-primary"
+        (click)="add()">
+  Add
+</button>
+<table *ngIf="tableMode; else create" class="table table-striped">
+  <thead>
+    <tr>
+      <td>Id</td>
+      <td>GameId</td>
+      <td>Deck</td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let r of rounds">
+      <ng-template [ngIf]="round?.id != r.id" [ngIfElse]="edit">
+        <td>{{r?.id}}</td>
+        <td>{{r?.gameId}}</td>
+        <td>{{r?.deck}}</td>
+        <td>
+            <button class="btn btn-primary"
+                    (click)="editRound(r)">
+              Edit
+            </button>
+            <button  class="btn btn-danger"
+                    (click)="delete(r)">
+              Delete
+            </button>
+
+        </td>
+      </ng-template>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #edit>
+  <td>
+    <input type="text" [(ngModel)]="round.id" />
+  </td>                           
+  <td>                            
+    <input type="text" [(ngModel)]="round.gameId" />
+  </td>                            
+  <td>                              
+    <input type="text" [(ngModel)]="round.deck" />
+  </td>
+
+  <td>
+    <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />
+    <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+  </td>
+</ng-template>
+
+
+<ng-template #create>
+  <div>
+    <label>Id</label>
+    <input type="text" [(ngModel)]="round.id" />
+  </div>
+  <div>
+    <label>GameId</label>
+    <input type="text" [(ngModel)]="round.gameId" />
+  </div>
+  <div>
+    <label>Deck</label>
+    <input type="text" [(ngModel)]="round.deck" />
+  </div>
+
+  <div>
+    <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />
+    <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+  </div>
+</ng-template>

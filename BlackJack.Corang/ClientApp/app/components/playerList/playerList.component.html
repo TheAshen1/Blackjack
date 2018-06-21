@@ -1,0 +1,81 @@
+<h1>Players</h1>
+<button class="btn btn-primary"
+        (click)="add()">
+  Add
+</button>
+<table *ngIf="tableMode; else create" class="table table-striped">
+  <thead>
+    <tr>
+      <td>Id</td>
+      <td>GameId</td>
+      <td>Name</td>
+      <td>IsBot</td>
+      <td></td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let p of players">
+      <ng-template [ngIf]="player?.id != p.id" [ngIfElse]="edit">
+        <td>{{p?.id}}</td>
+        <td>{{p?.gameId}}</td>
+        <td>{{p?.name}}</td>
+        <td>{{p?.isBot}}</td>
+        <td>
+
+            <button class="btn btn-primary"
+                    (click)="editPlayer(p)">
+              Edit
+            </button>
+            <button class="btn btn-danger"
+                    (click)="delete(p)">
+              Delete
+            </button>
+
+        </td>
+      </ng-template>
+    </tr>
+  </tbody>
+</table>
+
+<ng-template #edit>
+  <td>
+    <input type="text" [(ngModel)]="player.id" />
+  </td>
+  <td>
+    <input type="text" [(ngModel)]="player.gameId" />
+  </td>
+  <td>
+    <input type="text" [(ngModel)]="player.name" />
+  </td>
+  <td>
+    <input type="text" [(ngModel)]="player.isBot" />
+  </td>
+  <td>
+    <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />
+    <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+  </td>
+</ng-template>
+
+
+<ng-template #create>
+  <div>
+    <label>Id</label>
+    <input type="text" [(ngModel)]="player.id" />
+  </div>
+  <div>
+    <label>GameId</label>
+    <input type="text" [(ngModel)]="player.gameId" />
+  </div>
+  <div>
+    <label>Name</label>
+    <input type="text" [(ngModel)]="player.name" />
+  </div>
+  <div>
+    <label>IsBot</label>
+    <input type="text" [(ngModel)]="player.isBot" />
+  </div>
+  <div>
+    <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />
+    <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+  </div>
+</ng-template>

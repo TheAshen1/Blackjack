@@ -5,7 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BlackJack.Presentation.Controllers
+namespace BlackJack.Corang.Controllers
 {
     [Route("api/[controller]")]
     public class PlayerValuesController : ControllerBase
@@ -17,28 +17,28 @@ namespace BlackJack.Presentation.Controllers
             _playerService = playerService;
         }
 
-        [HttpGet]
+        [HttpGet("[action]")]
         public async Task<IEnumerable<PlayerServiceViewModel>> RetrieveAllPlayers()
         {
             var result = await _playerService.RetrieveAllPlayers();
             return result;
         }
 
-        [HttpGet]
+        [HttpGet("[action]/{id}")]
         public async Task<PlayerServiceViewModel> RetrievePlayer(string id)
         {
             var result = await _playerService.RetrievePlayer(id);
             return result;
         }
 
-        [HttpPost]
+        [HttpPost("[action]")]
         public async Task<string> CreatePlayer([FromBody]PlayerServiceCreatePlayerViewModel viewModel)
         {
             var result = await _playerService.CreatePlayer(viewModel);
             return result;
         }
 
-        [HttpPut]
+        [HttpPut("[action]/{id}")]
         public async Task<bool> UpdatePlayer(string id, [FromBody]PlayerServiceViewModel viewModel)
         {
             if(id == viewModel.Id)
@@ -48,7 +48,7 @@ namespace BlackJack.Presentation.Controllers
             }
             return false;
         }
-
+        [HttpDelete("[action]/{id}")]
         public async Task<int> DeletePlayer(string id)
         {
             var playerToDelete = await _playerService.RetrievePlayer(id);
