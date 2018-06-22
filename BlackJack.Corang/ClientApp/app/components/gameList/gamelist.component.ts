@@ -10,7 +10,7 @@ import { Game } from '../../models/game';
 })
 export class GameList implements OnInit {
 
-    game: Game = new Game();
+    game: Game | undefined;
     games: Game[] = [];
     tableMode: boolean = true;
 
@@ -26,6 +26,11 @@ export class GameList implements OnInit {
     }
 
     save() {
+        if (this.game == undefined) {
+            console.log('game is undefined');
+            return;
+        }
+
         if (this.game.id == null) {
             this.gameDataService.createGame(this.game)
                 .subscribe((data) => this.loadGames());
@@ -39,7 +44,7 @@ export class GameList implements OnInit {
         this.game = g;
     }
     cancel() {
-        this.game = new Game();
+        this.game = undefined;
         this.tableMode = true;
     }
     delete(g: Game) {

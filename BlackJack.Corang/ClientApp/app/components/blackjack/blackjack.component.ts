@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit, AfterViewChecked } from '@angular/core';
 import { GameLogicService } from '../../services/gameLogic.service';
 import { CardLogic } from '../../models/cardLogic';
 import { GameLogic } from '../../models/gameLogic';
@@ -12,143 +12,102 @@ import * as $ from 'jquery';
     styleUrls: ['./blackjack.component.css'],
     providers: [GameLogicService]
 })
-export class BlackJack implements AfterViewInit {
+export class BlackJack {
 
     constructor(private gameLogicService: GameLogicService) { }
 
-    gameData: GameLogic = new GameLogic();
+    gameData: GameLogic | undefined;
 
     gameIsGoingOn: boolean = false;
     roundFinished: boolean = true;
     message: string = "";
+    positions: Array<[number, number]> = [];
 
-    @ViewChild("roundBody")
-    private roundBody: ElementRef | undefined;
-
-
-    ngAfterViewInit(): void {
-        if (this.gameIsGoingOn)
-            this.positionPlayer();
-    }
 
     onBegin(data: GameLogic) {
         this.gameData = data;
-        if (this.gameData.players == null)
+        if (this.gameData.players == undefined)
             this.gameData.players = [];
         this.gameData.players.forEach(function (player) { player.cards = []; });
         this.gameIsGoingOn = true;
 
-        setTimeout(this.startTheGame(), 50000);
+        this.startTheGame();
 
     }
 
 
     startTheGame() {
-
-     
-
+        if (this.gameData == undefined) {
+            console.log('gameData is undefined');
+            return;
+        }
+        if (this.gameData.players == undefined) {
+            console.log('players are undefined');
+            return;
+        }
+        this.calculatePositions()
         this.roundFinished = false;
         this.message = "";
-        if (this.gameData.players == null) {
-            console.log('players is null');
-            return;
-        }
+
 
         var timeOut = 0;
-        this.gameData.players.forEach((player) => {
-            setTimeout(this.drawTwoCards(player), timeOut);
-            timeOut += 10000;
+        this.gameData.players.forEach((player, index) => {
+            player.x = this.positions[index][0];
+            player.y = this.positions[index][1];
+            this.drawTwoCards(player);
+            timeOut += 1000;
         });
+
     }
 
-    positionPlayer(): any {
-        console.log('positioning players');
-        if (this.gameData.players == null) {
-            console.log('no players found');
-            return;
-        }
-        if (this.roundBody == undefined) {
-            console.log('roundBody is undefined');
-            return;
-        }
-
-        var radius = 250;
-        var width = this.roundBody.nativeElement.clientWidth;
-        var height = this.roundBody.nativeElement.clientHeight;
-        var angle = 0;
-        var step = 2 * Math.PI / this.gameData.players.length;
-
+    calculatePositions(): any {
+        var maxNumberOfPlayers = 7;
         var minPlayerHeight = 100;
         var maxPlayerWidth = 60;
+        var containerWidth = 800;
+        var containerHeight = 600;
+        var radius = 250;
+        var angle = 0;
+        var step = 2 * Math.PI / maxNumberOfPlayers;
+        
+        for (var i = 0; i < maxNumberOfPlayers; i++) {
 
-        this.gameData.players.forEach(function (player, index) {
-            player.x = Math.round(width / 2 + radius * Math.cos(angle) - maxPlayerWidth / 2);
-            player.y = Math.round(height / 2 + radius * Math.sin(angle) - minPlayerHeight / 2);
+            var temp: [number, number] = [
+                Math.round(containerWidth / 2 + radius * Math.cos(angle) - maxPlayerWidth / 2) ,
+                Math.round(containerHeight / 2 + radius * Math.sin(angle) - minPlayerHeight / 2)
+            ];
+
+            this.positions.push(temp);
+
             angle += step;
-        });
-
-
-        //var radius = 250;
-        //var fields = $('.player'),
-        //    container = $('#roundBody'),
-        //    width = container.width(),
-        //    height = container.height(),
-        //    angle = 0,
-        //    step = 2 * Math.PI / fields.length;
-
-        //if (fields == null) {
-        //    console.log('cannot get players');
-        //    return;
-        //}
-        //fields.each(function () {
-
-        //    if (width == undefined || height == undefined) {
-        //        console.log('height or width is undefined');
-        //        return;
-        //    }
-        //    var player = $(this);
-
-        //    if (player == undefined) {
-        //        console.log('player is undefined');
-        //        return;
-        //    }
-        //    var x = Math.round(width / 2 + radius * Math.cos(angle) - (player.width() as number)/ 2);
-        //    var y = Math.round(height / 2 + radius * Math.sin(angle) - (player.height() as number) / 2);
-        //    player.css({
-        //        left: x + 'px',
-        //        top: y - this.clientHeight + 'px'
-        //    });
-        //    angle += step;
-        //});
+        }
     }
 
     drawCard(player: PlayerLogic) {
-        //console.log("drawing card");
         if (player.currentRoundPlayerId == null) { console.log('CurrentRoundPlayerId is null'); return; }
         this.gameLogicService.giveCard(player.currentRoundPlayerId)
             .subscribe((data) => {
-                this.handleCard(data.text(), player); this.countScore(player);
-            }
-            );
+                this.handleCard(data.text(), player);
+                this.countScore(player);
+            });
     }
     drawTwoCards(player: PlayerLogic) {
-        //console.log("drawing two cards");
         if (player.currentRoundPlayerId == null) { console.log('CurrentRoundPlayerId is null'); return; }
         this.gameLogicService.giveCard(player.currentRoundPlayerId)
-            .subscribe((data) => { this.handleCard(data.text(), player); this.drawCard(player); });
+            .subscribe((data) => {
+                this.handleCard(data.text(), player);
+                this.drawCard(player);
+            });
     }
     handleCard(data: string, player: PlayerLogic) {
         var cardData = data.split(' ');
-        var newCard = new CardLogic(cardData[0], cardData[2]);
+        var newCard = { value: cardData[0],suit: cardData[2], uri: "" };
 
         if (CardValues.values[newCard.value as Card] != 1) {
             newCard.uri = 'assets/images/' + CardValues.values[newCard.value as Card] + newCard.suit.charAt(0) + '.png';
-            //newCard.uri = 'http://localhost:4200/' + cardValues[cardData[0]] + cardData[2].charAt(0) + '.png';
         } else {
             newCard.uri = 'assets/images/' + newCard.value.charAt(0) + newCard.suit.charAt(0) + '.png';
-            //newCard.uri = 'http://localhost:4200/' + cardData[0].charAt(0) + cardData[2].charAt(0)+ '.png';
         }
-        //console.log(newCard);
         player.cards.push(newCard);
     }
 
@@ -190,10 +149,17 @@ export class BlackJack implements AfterViewInit {
     }
 
 
-    finishRound(): void {
-        this.roundFinished = true;
+    finishRound() {
+        if (this.gameData == undefined) {
+            console.log('gameData is undefined');
+            return;
+        }
+        if (this.gameData.players == undefined) {
+            console.log('players are undefined');
+            return;
+        }
 
-        if (this.gameData.players == null) { console.log('gameData.Players is null'); return; }
+        this.roundFinished = true;
         var winners: string[] = [];
         var maxScore: number = 0;
         this.gameData.players.forEach((player) => {
@@ -218,6 +184,11 @@ export class BlackJack implements AfterViewInit {
 
 
     playerDrawCard() {
+        if (this.gameData == undefined) {
+            console.log('gameData is undefined');
+            return;
+        }
+
         if (this.gameData.players == null) {
             console.log('players is null');
             return;
@@ -234,31 +205,19 @@ export class BlackJack implements AfterViewInit {
 
     /////// anfter round is finished
     moveToTheNextRound() {
-        if (this.gameData.gameId == null || this.gameData.players == null) { console.log('gameData is null'); return; }
+
+        if (this.gameData == undefined) {
+            console.log('gameData is undefined');
+            return;
+        }
 
         this.gameLogicService.startNewGameRound(this.gameData.gameId)
             .subscribe((data) => {
                 var tempData = data.json() as GameLogic;
-                //var playersData = tempData.players as PlayerLogic[];
-                //if (tempData == null || tempData.players == null) {
-                //    console.log('new round data is null');
-                //    return;
-                //}
-
-                //this.gameData.currentRoundId = tempData.currentRoundId;
-                //playersData.forEach((newPlayerData, index) => {
-                //    if (this.gameData.players == null) { console.log('players is null'); return; }
-
-                //    this.gameData.players[index].currentRoundPlayerId = newPlayerData.currentRoundPlayerId;
-                //    this.gameData.players[index].cards = []; 
-                //});
-
-                //this.roundFinished = false;
-
 
                 this.gameData = tempData;
-                if (this.gameData.players == null) {
-                    console.log('new round data is null');
+                if (this.gameData.players == undefined) {
+                    console.log('new round data is undefined');
                     return;
                 }
 
@@ -270,7 +229,12 @@ export class BlackJack implements AfterViewInit {
     }
 
     finishGame() {
-        if (this.gameData.gameId == null) { console.log('gameData.GameId is null'); return; }
+
+        if (this.gameData == undefined) {
+            console.log('gameData is undefined');
+            return;
+        }
+
         this.gameLogicService.finishTheGame(this.gameData.gameId)
             .subscribe((data) => {
                 this.gameIsGoingOn = false;

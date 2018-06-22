@@ -4,11 +4,11 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
-import { GameList } from './gamelist.component';
+import { RoundPlayerList } from '../components/roundPlayerList/roundPlayerList.component';
 
 @NgModule({
     declarations: [
-        GameList
+        RoundPlayerList
     ],
     imports: [
         CommonModule,
@@ -17,10 +17,10 @@ import { GameList } from './gamelist.component';
         RouterModule.forChild([
             {
                 path: '',
-                component: GameList
+                component: RoundPlayerList
             }
         ])
     ]
 })
-export class GameListModule {
+export class RoundPlayerListModule {
 }

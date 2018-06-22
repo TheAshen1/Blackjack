@@ -6,50 +6,40 @@ import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
-import { HomeComponent } from './components/home/home.component';
 
-
-
-
-import { RoundPlayerList } from './components/roundPlayerList/roundPlayerList.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        NavMenuComponent,     
-        HomeComponent,
-
-
-        RoundPlayerList
+        NavMenuComponent 
     ],
     imports: [
         CommonModule,
         HttpModule,
         FormsModule,
         RouterModule.forRoot([
-            { path: '', redirectTo: 'home', pathMatch: 'full' },
-            { path: 'home', component: HomeComponent },
+            { path: '', redirectTo: 'blackjack', pathMatch: 'full' },
             {
                 path: 'blackjack',
-                loadChildren: './components/blackjack/blackjack.module#BlackJackModule'
+                loadChildren: './modules/blackjack.module#BlackJackModule'
             },
             {
                 path: 'games',
-                loadChildren: './components/gameList/gameList.module#GameListModule'
+                loadChildren: './modules/gameList.module#GameListModule'
             },
             {
                 path: 'players',
-                loadChildren: './components/playerList/playerList.module#PlayerListModule'
+                loadChildren: './modules/playerList.module#PlayerListModule'
             },
             {
                 path: 'rounds',
-                loadChildren: './components/roundList/roundList.module#RoundListModule'
+                loadChildren: './modules/roundList.module#RoundListModule'
             },
             {
                 path: 'roundPlayers',
-                loadChildren: './components/roundPlayerList/roundPlayerList.module#RoundPlayerListModule'
+                loadChildren: './modules/roundPlayerList.module#RoundPlayerListModule'
             },
-            { path: '**', redirectTo: 'home' }
+            { path: '**', redirectTo: 'blackjack' }
         ])
     ]
 })

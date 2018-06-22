@@ -1,7 +1,5 @@
-export class CardLogic {
-  public uri: string = "";
-  constructor(
-    public value: string = "",
-    public suit: string = ""
-  ) { }
+export interface CardLogic {
+    uri: string;
+    value: string;
+    suit: string;
 }

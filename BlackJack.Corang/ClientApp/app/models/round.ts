@@ -1,6 +1,5 @@
-export class Round {
-    constructor(public id?: string,
-        public gameId?: string,
-        public deck?: string) {
-    };
+export interface Round {
+    id: string;
+    gameId: string;
+    deck: string;   
 }

@@ -1,8 +1,7 @@
-export class Player {
-  constructor(public id?: string,
-    public gameId?: string,
-    public name?: string,
-    public isBot?: string
-  ) {
-  };
+export interface Player {
+    id: string;
+    gameId: string;
+    name: string;
+    isBot: string;
 }
+

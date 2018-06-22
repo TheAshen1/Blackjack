@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
 
-import { PlayerList } from './playerList.component';
+import { PlayerList } from '../components/playerList/playerList.component';
 
 @NgModule({
     declarations: [

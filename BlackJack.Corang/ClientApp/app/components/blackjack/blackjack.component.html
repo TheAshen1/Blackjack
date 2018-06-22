@@ -1,15 +1,8 @@
-<div *ngIf="gameIsGoingOn && roundFinished" id="roundSummary">
-    <div class="message">{{message}}</div>
-    <button class="btn btn-primary" id="startNextRound" (click)="moveToTheNextRound()">Next Round</button>
-    <button class="btn btn-danger" id="quitGame" (click)="finishGame()">Quit</button>
-    <span class="clear"></span>
-</div>
-
 <div id="gameBody" *ngIf="gameIsGoingOn; else start">
-    <div #roundBody id="roundBody">
+    <div id="roundBody">
 
         <div class="player" *ngFor="let player of gameData.players" [style.background-color]="player.score < 21 ? 'white' : (player.score == 21 ? 'green' : 'red')"
-             [style.left]="'player.x'" [style.top]="'player.y'">
+             [style.left.px]="player.x" [style.top.px]="player.y">
             <div class="playerName">{{player?.name}}</div>
             <div class='cardList'>
                 <div *ngFor="let card of player.cards" class="card" [style.margin-right]="player.cards.indexOf(card) < player.cards.length-1 ? '-40px' : '0px'">
@@ -21,10 +14,16 @@
                 <button class="btn btn-primary" (click)="drawCard(player)">Draw</button>
                 <button class="btn btn-warning" (click)="finishRound()">Stand</button>
             </div>
-            <p>{{player.score}}</p>
+            <p>{{player?.score}}</p>
         </div>
 
     </div>
+</div>
+<div *ngIf="gameIsGoingOn && roundFinished" id="roundSummary">
+    <div class="message">{{message}}</div>
+    <button class="btn btn-primary" id="startNextRound" (click)="moveToTheNextRound()">Next Round</button>
+    <button class="btn btn-danger" id="quitGame" (click)="finishGame()">Quit</button>
+    <span class="clear"></span>
 </div>
 
 <ng-template #start>

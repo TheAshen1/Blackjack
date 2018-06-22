@@ -1,10 +1,9 @@
 import { PlayerLogic } from "./playerLogic";
 
-export class GameLogic {
-  constructor(
-    public gameId?: string,
-    public currentRoundId?: string,
-    public numberOfBots?: number,
-    public players?: PlayerLogic[]
-  ) { }
+export interface GameLogic {
+    gameId: string;
+    currentRoundId: string;
+    numberOfBots: number;
+    players: PlayerLogic[];
+
 }

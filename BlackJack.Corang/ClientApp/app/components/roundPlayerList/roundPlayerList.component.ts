@@ -10,7 +10,7 @@ import { RoundPlayer } from '../../models/roundPlayer';
 })
 export class RoundPlayerList implements OnInit {
 
-    roundPlayer: RoundPlayer = new RoundPlayer();
+    roundPlayer: RoundPlayer | undefined;
     roundPlayers: RoundPlayer[] = [];
     tableMode: boolean = true;
 
@@ -26,6 +26,11 @@ export class RoundPlayerList implements OnInit {
     }
 
     save() {
+        if (this.roundPlayer == undefined) {
+            console.log('roundPlayer is undefined');
+            return;
+        }
+
         if (this.roundPlayer.id == null) {
             this.roundPlayerDataService.createRoundPlayer(this.roundPlayer)
                 .subscribe((data) => this.loadRoundPlayers());
@@ -39,7 +44,7 @@ export class RoundPlayerList implements OnInit {
         this.roundPlayer = rp;
     }
     cancel() {
-        this.roundPlayer = new RoundPlayer();
+        this.roundPlayer = undefined;
         this.tableMode = true;
     }
     delete(rp: RoundPlayer) {

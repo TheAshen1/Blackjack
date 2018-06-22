@@ -1,5 +1,5 @@
 <h1>RoundPlayers</h1>
-<button 
+<button class="btn btn-primary"
         (click)="add()">
   Add
 </button>
@@ -21,16 +21,16 @@
         <td>{{rp?.playerId}}</td>
         <td>{{rp?.cards}}</td>
         <td>
-          <p class="k-block">
-            <button 
+
+            <button class="btn btn-primary"
                     (click)="editRoundPlayer(rp)">
               Edit
             </button>
-            <button
+            <button class="btn btn-danger"
                     (click)="delete(rp)">
               Delete
             </button>
-          </p>
+
         </td>
       </ng-template>
     </tr>

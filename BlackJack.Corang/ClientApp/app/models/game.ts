@@ -1,6 +1,6 @@
-export class Game{
-  constructor(public id?: string,
-              public start?: string,
-              public end?: string){
-  };
+export interface Game {
+    id: string;
+    start: string;
+    end: string;
+
 }

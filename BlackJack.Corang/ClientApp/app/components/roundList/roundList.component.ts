@@ -10,7 +10,7 @@ import { Round } from '../../models/round';
 })
 export class RoundList implements OnInit {
 
-    round: Round = new Round();
+    round: Round | undefined;
     rounds: Round[] = [];
     tableMode: boolean = true;
 
@@ -26,6 +26,11 @@ export class RoundList implements OnInit {
     }
 
     save() {
+        if (this.round == undefined) {
+            console.log('round is undefined');
+            return;
+        }
+
         if (this.round.id == null) {
             this.roundDataService.createRound(this.round)
                 .subscribe((data) => this.loadRounds());
@@ -39,7 +44,7 @@ export class RoundList implements OnInit {
         this.round = r;
     }
     cancel() {
-        this.round = new Round();
+        this.round = undefined;
         this.tableMode = true;
     }
     delete(r: Round) {

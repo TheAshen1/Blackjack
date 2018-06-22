@@ -324,11 +324,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <TypeScriptCompile Include="ClientApp\app\components\blackjack\blackjack.module.ts" />
-    <TypeScriptCompile Include="ClientApp\app\components\gameList\gameList.module.ts" />
-    <TypeScriptCompile Include="ClientApp\app\components\playerList\playerList.module.ts" />
-    <TypeScriptCompile Include="ClientApp\app\components\roundList\roundList.module.ts" />
-    <TypeScriptCompile Include="ClientApp\app\components\roundPlayerList\roundPlayerList.module.ts" />
+    <TypeScriptCompile Include="ClientApp\app\modules\blackjack.module.ts" />
+    <TypeScriptCompile Include="ClientApp\app\modules\gameList.module.ts" />
+    <TypeScriptCompile Include="ClientApp\app\modules\playerList.module.ts" />
+    <TypeScriptCompile Include="ClientApp\app\modules\roundList.module.ts" />
+    <TypeScriptCompile Include="ClientApp\app\modules\roundPlayerList.module.ts" />
   </ItemGroup>
 
   <Target Name="DebugRunWebpack" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('wwwroot\dist') ">

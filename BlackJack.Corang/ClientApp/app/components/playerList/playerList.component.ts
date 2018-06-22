@@ -10,7 +10,7 @@ import { Player } from '../../models/player';
 })
 export class PlayerList implements OnInit {
 
-    player: Player = new Player();
+    player: Player | undefined;
     players: Player[] = [];
     tableMode: boolean = true;
 
@@ -26,6 +26,11 @@ export class PlayerList implements OnInit {
     }
 
     save() {
+        if (this.player == undefined) {
+            console.log('player is undefined');
+            return;
+        }
+
         if (this.player.id == null) {
             this.playerDataService.createPlayer(this.player)
                 .subscribe((data) => this.loadPlayers());
@@ -39,7 +44,7 @@ export class PlayerList implements OnInit {
         this.player = p;
     }
     cancel() {
-        this.player = new Player();
+        this.player = undefined;
         this.tableMode = true;
     }
     delete(p: Player) {
