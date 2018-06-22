@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { RoundPlayerDataService } from '../../services/roundPlayerData.service';
 import { RoundPlayer } from '../../models/roundPlayer';
+import { CardValues, Card } from '../../utils/cardValues';
+import { CardLogic } from '../../models/cardLogic';
 
 @Component({
     selector: 'roundPlayer-list',
@@ -22,7 +24,25 @@ export class RoundPlayerList implements OnInit {
 
     loadRoundPlayers() {
         this.roundPlayerDataService.getRoundPlayers()
-            .subscribe((data) => this.roundPlayers = data.json() as RoundPlayer[]);
+            .subscribe((data) => {
+                var parsedData = data.json() as RoundPlayer[]; 
+                //JSON.parse()
+                parsedData.forEach((roundPlayer: RoundPlayer) => {
+                    var tempCards = JSON.parse(roundPlayer.cards.toString());
+
+                     tempCards.forEach((card: CardLogic) => {
+                        if (CardValues.values[card.value as Card] != 1) {
+                            card.uri = 'assets/images/' + CardValues.values[card.value as Card] + card.suit.charAt(0) + '.png';
+                        } else {
+                            card.uri = 'assets/images/' + card.value.charAt(0) + card.suit.charAt(0) + '.png';
+                        }
+                    });
+
+                    roundPlayer.cards = tempCards;
+                });
+
+                this.roundPlayers = parsedData;
+            });
     }
 
     save() {

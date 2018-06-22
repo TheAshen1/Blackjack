@@ -1,81 +1,86 @@
 <h1>RoundPlayers</h1>
 <button class="btn btn-primary"
         (click)="add()">
-  Add
+    Add
 </button>
 <table *ngIf="tableMode; else create" class="table table-striped">
-  <thead>
-    <tr>
-      <td>Id</td>
-      <td>RoundId</td>
-      <td>PlayerId</td>
-      <td>Cards</td>
-      <td></td>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let rp of roundPlayers">
-      <ng-template [ngIf]="roundPlayer?.id != rp.id" [ngIfElse]="edit">
-        <td>{{rp?.id}}</td>
-        <td>{{rp?.roundId}}</td>
-        <td>{{rp?.playerId}}</td>
-        <td>{{rp?.cards}}</td>
-        <td>
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>RoundId</td>
+            <td>PlayerId</td>
+            <td>Cards</td>
+            <td></td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let rp of roundPlayers">
+            <ng-template [ngIf]="roundPlayer?.id != rp.id" [ngIfElse]="edit">
+                <td>{{rp?.id}}</td>
+                <td>{{rp?.roundId}}</td>
+                <td>{{rp?.playerId}}</td>
+                <td>
+                    <div class="card" *ngFor="let card of rp.cards">
+                        <img src={{card?.uri}} />
+                    </div>
 
-            <button class="btn btn-primary"
-                    (click)="editRoundPlayer(rp)">
-              Edit
-            </button>
-            <button class="btn btn-danger"
-                    (click)="delete(rp)">
-              Delete
-            </button>
+                </td>
+                <td>
 
-        </td>
-      </ng-template>
-    </tr>
-  </tbody>
+                    <button class="btn btn-primary"
+                            (click)="editRoundPlayer(rp)">
+                        Edit
+                    </button>
+                    <button class="btn btn-danger"
+                            (click)="delete(rp)">
+                        Delete
+                    </button>
+
+                </td>
+            </ng-template>
+        </tr>
+    </tbody>
 </table>
 
 <ng-template #edit>
-  <td>
-    <input type="text" [(ngModel)]="roundPlayer.id" />
-  </td>
-  <td>
-    <input type="text" [(ngModel)]="roundPlayer.roundId" />
-  </td>
-  <td>
-    <input type="text" [(ngModel)]="roundPlayer.playerId" />
-  </td>
-  <td>
-    <input type="text" [(ngModel)]="roundPlayer.cards" />
-  </td>
-  <td>
-    <input type="button" value="Сохранить" (click)="save()" class="btn btn-sm btn-success" />
-    <input type="button" value="Отмена" (click)="cancel()" class="btn btn-sm btn-warning" />
-  </td>
+    <td>
+        <input type="text" [(ngModel)]="roundPlayer.id" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="roundPlayer.roundId" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="roundPlayer.playerId" />
+    </td>
+    <td>
+        <input type="text" [(ngModel)]="roundPlayer.cards" />
+    </td>
+    <td>
+        <input type="button" value="Сохранить" (click)="save()" class="btn btn-sm btn-success" />
+        <input type="button" value="Отмена" (click)="cancel()" class="btn btn-sm btn-warning" />
+    </td>
 </ng-template>
 
 
 <ng-template #create>
-  <div>
-    <label>Id</label>
-    <input type="text" [(ngModel)]="roundPlayer.id" />
-  </div>
-  <div>
-    <label>RoundId</label>
-    <input type="text" [(ngModel)]="roundPlayer.roundId" />
-  </div>
-  <div>
-    <label>PlayerId</label>
-    <input type="text" [(ngModel)]="roundPlayer.playerId" />
-  </div>
-  <div>
-    <label>Cards</label>
-    <input type="text" [(ngModel)]="roundPlayer.cards" />
-  </div>
-  <div>
-    <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />
-    <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
-  </div>
+    <div>
+        <label>Id</label>
+        <input type="text" [(ngModel)]="roundPlayer.id" />
+    </div>
+    <div>
+        <label>RoundId</label>
+        <input type="text" [(ngModel)]="roundPlayer.roundId" />
+    </div>
+    <div>
+        <label>PlayerId</label>
+        <input type="text" [(ngModel)]="roundPlayer.playerId" />
+    </div>
+    <div>
+        <label>Cards</label>
+        <input type="text" [(ngModel)]="roundPlayer.cards" />
+    </div>
+    <div>
+        <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />
+        <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />
+    </div>
 </ng-template>

@@ -1,15 +1,15 @@
 <h3>game start menu</h3>
 
 <div>
-  <label>Your Name: </label>
-  <input type="text" [(ngModel)]="playerName" />
+    <label>Your Name: </label>
+    <input type="text" [(ngModel)]="playerName" />
 </div>
 
 <div>
-  <label>Number of bots in the game: </label>
-  <input type="number" min="0" max="5" [(ngModel)]="numberOfBots" />
+    <label>Number of bots in the game: </label>
+    <input type="number" min="0" max="5" [(ngModel)]="numberOfBots" />
 </div>
 
 <button (click)="start()">
-  Play
+    Play
 </button>

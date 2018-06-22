@@ -61,7 +61,24 @@ namespace BlackJack.BusinessLogic.GameLogic
 
         public string Stringify()
         {
-            var json = JsonConvert.SerializeObject(_cards);
+            var json = "[";
+            foreach (var card in _cards)
+            {
+                json += card.ToString() + ",";
+            }
+            json = json.Substring(0, json.Length - 1);
+            json += "]";
+            return json;
+        }
+        public static string Stringify(IEnumerable<CardLogic> cards)
+        {
+            var json = "[";
+            foreach (var card in cards)
+            {
+                json += card.ToString() + ",";
+            }
+            json = json.Substring(0, json.Length - 1);
+            json += "]";
             return json;
         }
     }

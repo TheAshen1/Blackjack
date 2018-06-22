@@ -1,5 +1,9 @@
+import { CardLogic } from "./cardLogic";
+
 export interface Round {
     id: string;
     gameId: string;
-    deck: string;   
+    deck: CardLogic[]; 
+
+    showFullDeck: boolean;
 }

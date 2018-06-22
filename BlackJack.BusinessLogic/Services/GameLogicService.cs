@@ -39,13 +39,20 @@ namespace BlackJack.BusinessLogic.Services
                 var deck = new DeckLogic(JsonConvert.DeserializeObject<List<CardLogic>>(round.Deck));
 
 
-                var card = deck.Draw().ToString();
-                roundPlayer.Cards += card + ", ";
+                if(roundPlayer.Cards == String.Empty)
+                {
+                    roundPlayer.Cards = "[]";
+                }
+
+                var card = deck.Draw();
+                var hand = JsonConvert.DeserializeObject<List<CardLogic>>(roundPlayer.Cards);
+                hand.Add(card);
+                roundPlayer.Cards = DeckLogic.Stringify(hand);
                 round.Deck = deck.Stringify();
 
                 await _roundPlayerService.UpdateRoundPlayer(roundPlayer);
                 await _roundService.UpdateRound(round);
-                return card;
+                return card.ToString();
 
             }
             catch (Exception ex)

@@ -87,7 +87,7 @@ export class BlackJack {
         if (player.currentRoundPlayerId == null) { console.log('CurrentRoundPlayerId is null'); return; }
         this.gameLogicService.giveCard(player.currentRoundPlayerId)
             .subscribe((data) => {
-                this.handleCard(data.text(), player);
+                this.handleCard(data.json() as CardLogic, player);
                 this.countScore(player);
             });
     }
@@ -95,20 +95,20 @@ export class BlackJack {
         if (player.currentRoundPlayerId == null) { console.log('CurrentRoundPlayerId is null'); return; }
         this.gameLogicService.giveCard(player.currentRoundPlayerId)
             .subscribe((data) => {
-                this.handleCard(data.text(), player);
+                this.handleCard(data.json() as CardLogic, player);
                 this.drawCard(player);
             });
     }
-    handleCard(data: string, player: PlayerLogic) {
-        var cardData = data.split(' ');
-        var newCard = { value: cardData[0],suit: cardData[2], uri: "" };
+    handleCard(card: CardLogic, player: PlayerLogic) {
 
-        if (CardValues.values[newCard.value as Card] != 1) {
-            newCard.uri = 'assets/images/' + CardValues.values[newCard.value as Card] + newCard.suit.charAt(0) + '.png';
+        console.log(card);
+
+        if (CardValues.values[card.value as Card] != 1) {
+            card.uri = 'assets/images/' + CardValues.values[card.value as Card] + card.suit.charAt(0) + '.png';
         } else {
-            newCard.uri = 'assets/images/' + newCard.value.charAt(0) + newCard.suit.charAt(0) + '.png';
+            card.uri = 'assets/images/' + card.value.charAt(0) + card.suit.charAt(0) + '.png';
         }
-        player.cards.push(newCard);
+        player.cards.push(card);
     }
 
     countScore(player: PlayerLogic) {

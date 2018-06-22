@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -23,7 +24,7 @@ namespace BlackJack.BusinessLogic.GameLogic
 
         public override string ToString()
         {
-            return $"{value.ToString("g")} of {suit.ToString("g")}";
+            return $@"{{""value"":""{value.ToString("g")}"",""suit"":""{suit.ToString("g")}""}}";
         }
     }
 }
