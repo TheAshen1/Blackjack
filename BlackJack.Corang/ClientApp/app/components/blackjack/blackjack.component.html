@@ -6,14 +6,13 @@
 </div>
 
 <div id="gameBody" *ngIf="gameIsGoingOn; else start">
-    <div id="roundBody">
+    <div #roundBody id="roundBody">
 
         <div class="player" *ngFor="let player of gameData.players" [style.background-color]="player.score < 21 ? 'white' : (player.score == 21 ? 'green' : 'red')"
-             
-             >
+             [style.left]="'player.x'" [style.top]="'player.y'">
             <div class="playerName">{{player?.name}}</div>
             <div class='cardList'>
-                <div *ngFor="let card of player.cards" class="card" [style.margin-right]="player.cards.indexOf(card) < player.cards.length-1 ? '-40px' : '5px;'">
+                <div *ngFor="let card of player.cards" class="card" [style.margin-right]="player.cards.indexOf(card) < player.cards.length-1 ? '-40px' : '0px'">
                     <img src={{card?.uri}} />
                 </div>
 

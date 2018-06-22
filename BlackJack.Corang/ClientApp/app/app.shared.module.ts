@@ -8,25 +8,18 @@ import { AppComponent } from './components/app/app.component';
 import { NavMenuComponent } from './components/navmenu/navmenu.component';
 import { HomeComponent } from './components/home/home.component';
 
-import { BlackJack } from './components/blackjack/blackjack.component';
-import { GameStart } from './components/blackjack/gameStart/gameStart.component';
-import { GameList } from './components/gameList/gamelist.component';
-import { PlayerList } from './components/playerList/playerList.component';
-import { RoundList } from './components/roundList/roundList.component';
+
+
+
 import { RoundPlayerList } from './components/roundPlayerList/roundPlayerList.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        NavMenuComponent,
-
+        NavMenuComponent,     
         HomeComponent,
 
-        BlackJack,
-        GameStart,
-        GameList,
-        PlayerList,
-        RoundList,
+
         RoundPlayerList
     ],
     imports: [
@@ -36,11 +29,26 @@ import { RoundPlayerList } from './components/roundPlayerList/roundPlayerList.co
         RouterModule.forRoot([
             { path: '', redirectTo: 'home', pathMatch: 'full' },
             { path: 'home', component: HomeComponent },
-            { path: 'blackjack', component: BlackJack },
-            { path: 'games', component: GameList },
-            { path: 'players', component: PlayerList },
-            { path: 'rounds', component: RoundList },
-            { path: 'roundPlayers', component: RoundPlayerList },
+            {
+                path: 'blackjack',
+                loadChildren: './components/blackjack/blackjack.module#BlackJackModule'
+            },
+            {
+                path: 'games',
+                loadChildren: './components/gameList/gameList.module#GameListModule'
+            },
+            {
+                path: 'players',
+                loadChildren: './components/playerList/playerList.module#PlayerListModule'
+            },
+            {
+                path: 'rounds',
+                loadChildren: './components/roundList/roundList.module#RoundListModule'
+            },
+            {
+                path: 'roundPlayers',
+                loadChildren: './components/roundPlayerList/roundPlayerList.module#RoundPlayerListModule'
+            },
             { path: '**', redirectTo: 'home' }
         ])
     ]

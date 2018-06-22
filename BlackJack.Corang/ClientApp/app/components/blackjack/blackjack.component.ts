@@ -1,10 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { GameLogicService } from '../../services/gameLogic.service';
 import { CardLogic } from '../../models/cardLogic';
 import { GameLogic } from '../../models/gameLogic';
 import { PlayerLogic } from '../../models/playerLogic';
 import { CardValues, Card } from '../../utils/cardValues';
-
+import * as $ from 'jquery';
 
 @Component({
     selector: 'blackjack',
@@ -12,8 +12,7 @@ import { CardValues, Card } from '../../utils/cardValues';
     styleUrls: ['./blackjack.component.css'],
     providers: [GameLogicService]
 })
-export class BlackJack {
-
+export class BlackJack implements AfterViewInit {
 
     constructor(private gameLogicService: GameLogicService) { }
 
@@ -23,7 +22,14 @@ export class BlackJack {
     roundFinished: boolean = true;
     message: string = "";
 
+    @ViewChild("roundBody")
+    private roundBody: ElementRef | undefined;
 
+
+    ngAfterViewInit(): void {
+        if (this.gameIsGoingOn)
+            this.positionPlayer();
+    }
 
     onBegin(data: GameLogic) {
         this.gameData = data;
@@ -38,12 +44,16 @@ export class BlackJack {
 
 
     startTheGame() {
+
+     
+
         this.roundFinished = false;
         this.message = "";
         if (this.gameData.players == null) {
             console.log('players is null');
             return;
         }
+
         var timeOut = 0;
         this.gameData.players.forEach((player) => {
             setTimeout(this.drawTwoCards(player), timeOut);
@@ -51,13 +61,74 @@ export class BlackJack {
         });
     }
 
+    positionPlayer(): any {
+        console.log('positioning players');
+        if (this.gameData.players == null) {
+            console.log('no players found');
+            return;
+        }
+        if (this.roundBody == undefined) {
+            console.log('roundBody is undefined');
+            return;
+        }
+
+        var radius = 250;
+        var width = this.roundBody.nativeElement.clientWidth;
+        var height = this.roundBody.nativeElement.clientHeight;
+        var angle = 0;
+        var step = 2 * Math.PI / this.gameData.players.length;
+
+        var minPlayerHeight = 100;
+        var maxPlayerWidth = 60;
+
+        this.gameData.players.forEach(function (player, index) {
+            player.x = Math.round(width / 2 + radius * Math.cos(angle) - maxPlayerWidth / 2);
+            player.y = Math.round(height / 2 + radius * Math.sin(angle) - minPlayerHeight / 2);
+            angle += step;
+        });
+
+
+        //var radius = 250;
+        //var fields = $('.player'),
+        //    container = $('#roundBody'),
+        //    width = container.width(),
+        //    height = container.height(),
+        //    angle = 0,
+        //    step = 2 * Math.PI / fields.length;
+
+        //if (fields == null) {
+        //    console.log('cannot get players');
+        //    return;
+        //}
+        //fields.each(function () {
+
+        //    if (width == undefined || height == undefined) {
+        //        console.log('height or width is undefined');
+        //        return;
+        //    }
+        //    var player = $(this);
+
+        //    if (player == undefined) {
+        //        console.log('player is undefined');
+        //        return;
+        //    }
+        //    var x = Math.round(width / 2 + radius * Math.cos(angle) - (player.width() as number)/ 2);
+        //    var y = Math.round(height / 2 + radius * Math.sin(angle) - (player.height() as number) / 2);
+        //    player.css({
+        //        left: x + 'px',
+        //        top: y - this.clientHeight + 'px'
+        //    });
+        //    angle += step;
+        //});
+    }
 
     drawCard(player: PlayerLogic) {
         //console.log("drawing card");
         if (player.currentRoundPlayerId == null) { console.log('CurrentRoundPlayerId is null'); return; }
         this.gameLogicService.giveCard(player.currentRoundPlayerId)
             .subscribe((data) => {
-                this.handleCard(data.text(), player); this.countScore(player); }
+                this.handleCard(data.text(), player); this.countScore(player);
+            }
             );
     }
     drawTwoCards(player: PlayerLogic) {
@@ -108,7 +179,7 @@ export class BlackJack {
         console.log("player:" + player.name + " score: " + score);
 
         player.score = score;
-        
+
 
         if (!player.isBot && player.score >= 21) {
             setTimeout(this.finishRound(), 10000);
