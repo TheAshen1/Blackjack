@@ -75,6 +75,18 @@
     <Compile Include="Migrations\201806110854034_deckField.Designer.cs">
       <DependentUpon>201806110854034_deckField.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806250649066_bets.cs" />
+    <Compile Include="Migrations\201806250649066_bets.Designer.cs">
+      <DependentUpon>201806250649066_bets.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806250703162_oops.cs" />
+    <Compile Include="Migrations\201806250703162_oops.Designer.cs">
+      <DependentUpon>201806250703162_oops.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806250755205_ReplaceChips.cs" />
+    <Compile Include="Migrations\201806250755205_ReplaceChips.Designer.cs">
+      <DependentUpon>201806250755205_ReplaceChips.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\BaseModel.cs" />
     <Compile Include="Models\Game.cs" />
@@ -98,6 +110,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806110854034_deckField.resx">
       <DependentUpon>201806110854034_deckField.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806250649066_bets.resx">
+      <DependentUpon>201806250649066_bets.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806250703162_oops.resx">
+      <DependentUpon>201806250703162_oops.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806250755205_ReplaceChips.resx">
+      <DependentUpon>201806250755205_ReplaceChips.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>

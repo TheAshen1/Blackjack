@@ -5,4 +5,5 @@ export interface RoundPlayer {
     roundId: string;
     playerId: string;
     cards: CardLogic[];
+    bet: number;
 }

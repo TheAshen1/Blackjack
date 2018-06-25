@@ -39,8 +39,12 @@
     min-width: 60px;
 }
 
+    .player input{
+        max-width: 50px;
+    }
+
 .card {
-  display: inline-block;
+    display: inline-block;
 }
 
   .card img {

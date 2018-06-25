@@ -33,7 +33,7 @@ namespace BlackJack.BusinessLogic.Services
             }
             catch (Exception ex)
             {
-                Logger.WriteLogToFile(ex.Message, "RoundService");
+                Logger.WriteLogToFile(ex.Message, "RoundService", "CreateRound");
             }
             return "Game does not exist!";
         }
@@ -47,7 +47,7 @@ namespace BlackJack.BusinessLogic.Services
             }
             catch (Exception ex)
             {
-                Logger.WriteLogToFile(ex.Message, "RoundService");
+                Logger.WriteLogToFile(ex.Message, "RoundService", "RetrieveAllRounds");
             }
             return null;
         }
@@ -64,7 +64,7 @@ namespace BlackJack.BusinessLogic.Services
             }
             catch (Exception ex)
             {
-                Logger.WriteLogToFile(ex.Message, "RoundService");
+                Logger.WriteLogToFile(ex.Message, "RoundService", "RetrieveRound");
             }
             return new RoundServiceViewModel
             {
@@ -86,7 +86,7 @@ namespace BlackJack.BusinessLogic.Services
             }
             catch (Exception ex)
             {
-                Logger.WriteLogToFile(ex.Message, "RoundService");
+                Logger.WriteLogToFile(ex.Message, "RoundService", "UpdateRound");
             }
             return false;
         }
@@ -104,10 +104,28 @@ namespace BlackJack.BusinessLogic.Services
             }
             catch (Exception ex)
             {
-                Logger.WriteLogToFile(ex.Message, "RoundService");
+                Logger.WriteLogToFile(ex.Message, "RoundService", "DeleteRound");
             }
             return 0;
         }
 
+        public async Task<RoundServiceViewModel> RetrieveLastGameRound(string gameId)
+        {
+            try
+            {
+                var rounds = await _roundRepository.All();
+                var result = rounds.Where(r => r.GameId.ToString() == gameId).OrderBy(r => r.RoundNumber).Last();
+                return DataMapper.Map(result);
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLogToFile(ex.Message, "RoundService", "RetrieveLastGameRound");
+            }
+            return new RoundServiceViewModel
+            {
+                Id = Guid.Empty.ToString(),
+                GameId = Guid.Empty.ToString()
+            };
+        }
     }
 }

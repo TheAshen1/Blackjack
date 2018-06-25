@@ -30,9 +30,9 @@ namespace BlackJack.BusinessLogic.Services
             }
             catch (Exception ex)
             {
-                Logger.WriteLogToFile(ex.Message, "GameService");
-                return "error";
+                Logger.WriteLogToFile(ex.Message, "GameService", "CreateGame");             
             }
+            return "error";
         }
 
         public async Task<IEnumerable<GameServiceViewModel>> RetrieveAllGames()
@@ -44,9 +44,9 @@ namespace BlackJack.BusinessLogic.Services
             }
             catch (Exception ex)
             {
-                Logger.WriteLogToFile(ex.Message, "GameService");
-                return null;
+                Logger.WriteLogToFile(ex.Message, "GameService", "RetrieveAllGames");               
             }
+            return null;
         }
 
         public async Task<GameServiceViewModel> RetrieveGame(string id)
@@ -61,18 +61,13 @@ namespace BlackJack.BusinessLogic.Services
             }
             catch (Exception ex)
             {
-                Logger.WriteLogToFile(ex.Message, "GameService");
-                return new GameServiceViewModel
-                {
-                    Id = Guid.Empty.ToString()
-                };
-            }
+                Logger.WriteLogToFile(ex.Message, "GameService", "RetrieveGame");
 
+            }
             return new GameServiceViewModel
             {
                 Id = Guid.Empty.ToString()
             };
-
         }
 
         public async Task<bool> UpdateGame(GameServiceViewModel viewModel)
@@ -88,7 +83,7 @@ namespace BlackJack.BusinessLogic.Services
             }
             catch (Exception ex)
             {
-                Logger.WriteLogToFile(ex.Message, "GameService");
+                Logger.WriteLogToFile(ex.Message, "GameService", "UpdateGame");
                 return false;
             }
             return false;
@@ -103,7 +98,7 @@ namespace BlackJack.BusinessLogic.Services
             }
             catch (Exception ex)
             {
-                Logger.WriteLogToFile(ex.Message, "GameService");
+                Logger.WriteLogToFile(ex.Message, "GameService", "DeleteGame");
                 return 0;
             }
         }

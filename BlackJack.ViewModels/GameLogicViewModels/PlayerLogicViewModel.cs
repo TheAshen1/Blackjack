@@ -13,5 +13,8 @@ namespace BlackJack.ViewModels.GameLogicViewModels
         public string Name { get; set; }
         public bool IsBot { get; set; }
 
+        public int Chips { get; set; }
+        public int Bet { get; set; }
+
     }
 }

@@ -12,7 +12,7 @@ namespace DataAccess.DapperModels
     {
         public Guid PlayerId { get; set; }
         public Guid RoundId { get; set; }
-
+        public int Bet { get; set; }
         public string Cards { get; set; }
 
     }

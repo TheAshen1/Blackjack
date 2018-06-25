@@ -26,7 +26,7 @@ export class RoundPlayerList implements OnInit {
         this.roundPlayerDataService.getRoundPlayers()
             .subscribe((data) => {
                 var parsedData = data.json() as RoundPlayer[]; 
-                //JSON.parse()
+
                 parsedData.forEach((roundPlayer: RoundPlayer) => {
                     var tempCards = JSON.parse(roundPlayer.cards.toString());
 

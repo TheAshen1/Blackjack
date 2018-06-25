@@ -10,6 +10,7 @@ namespace BlackJack.ViewModels.RoundServiceViewModels
     {
         public string Id { get; set; }
         public string GameId { get; set; }
+        public int RoundNumber { get; set; }
         public string Deck { get; set; }
     }
 }

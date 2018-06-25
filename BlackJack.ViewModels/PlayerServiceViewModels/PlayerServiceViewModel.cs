@@ -10,10 +10,9 @@ namespace BlackJack.ViewModels.PlayerServiceViewModels
     {
         public string Id { get; set; }
         public string GameId { get; set; }
-
         public string Name { get; set; }
-
         public bool IsBot { get; set; }
+        public int Chips { get; set; }
 
     }
 }

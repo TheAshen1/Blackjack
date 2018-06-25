@@ -23,7 +23,9 @@ namespace DataAccess.DataMappings
                 Id = entity.Id.ToString(),
                 GameId = entity.GameId.ToString(),
                 Name = entity.Name,
-                IsBot = entity.IsBot             
+                IsBot = entity.IsBot,
+                Chips = entity.Chips
+                
             };
         }
 
@@ -36,7 +38,8 @@ namespace DataAccess.DataMappings
                     Id = id,
                     GameId = gameId,
                     Name = viewModel.Name,
-                    IsBot = viewModel.IsBot
+                    IsBot = viewModel.IsBot,
+                    Chips = viewModel.Chips
                 };
 
                 return entity;
@@ -58,7 +61,8 @@ namespace DataAccess.DataMappings
                     Id = Guid.Empty,
                     GameId = gameId,
                     Name = viewModel.Name,
-                    IsBot = viewModel.IsBot
+                    IsBot = viewModel.IsBot,
+                    Chips = viewModel.Chips
                 };
 
                 return entity;
@@ -172,6 +176,7 @@ namespace DataAccess.DataMappings
             {
                 Id = entity.Id.ToString(),
                 GameId = entity.GameId.ToString(),
+                RoundNumber = entity.RoundNumber,
                 Deck = entity.Deck
             };
             return viewModel;
@@ -185,6 +190,7 @@ namespace DataAccess.DataMappings
                 {
                     Id = id,
                     GameId = gameId,
+                    RoundNumber = viewModel.RoundNumber,
                     Deck = viewModel.Deck
                 };
                 return entity;
@@ -204,6 +210,7 @@ namespace DataAccess.DataMappings
                 {
                     Id = Guid.Empty,
                     GameId = gameId,
+                    RoundNumber = viewModel.RoundNumber,
                     Deck = viewModel.Deck
                 };
 
@@ -247,6 +254,7 @@ namespace DataAccess.DataMappings
                 Id = entity.Id.ToString(),
                 RoundId = entity.RoundId.ToString(),
                 PlayerId = entity.PlayerId.ToString(),
+                Bet = entity.Bet,
                 Cards = entity.Cards
             };
             return viewModel;
@@ -261,6 +269,7 @@ namespace DataAccess.DataMappings
                     Id = id,
                     RoundId = roundId,
                     PlayerId = playerId,
+                    Bet = viewModel.Bet,
                     Cards = viewModel.Cards
                 };
 
@@ -284,6 +293,7 @@ namespace DataAccess.DataMappings
                     Id = Guid.Empty,
                     RoundId = roundId,
                     PlayerId = playerId,
+                    Bet = 0,
                     Cards = viewModel.Cards
                 };
 

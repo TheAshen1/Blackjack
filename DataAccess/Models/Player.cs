@@ -15,6 +15,8 @@ namespace DataAccess.Models
         public Guid GameId { get; set; }
         public Game Game { get; set; }
 
+        public int Chips { get; set; }
+
         public virtual ICollection<RoundPlayer> PlayerRounds { get; set; }
 
     }

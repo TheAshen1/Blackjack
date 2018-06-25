@@ -33,7 +33,7 @@ namespace BlackJack.BusinessLogic.Services
             }
             catch (Exception ex)
             {
-                Logger.WriteLogToFile(ex.Message, "RoundPlayerService");
+                Logger.WriteLogToFile(ex.Message, "RoundPlayerService", "CreateRoundPlayer");
             }
             return "Round or Player do not exist!";
 
@@ -48,7 +48,7 @@ namespace BlackJack.BusinessLogic.Services
             }
             catch (Exception ex)
             {
-                Logger.WriteLogToFile(ex.Message, "RoundPlayerService");
+                Logger.WriteLogToFile(ex.Message, "RoundPlayerService", "RetrieveAllRoundPlayers");
             }
             return null;
         }
@@ -65,7 +65,7 @@ namespace BlackJack.BusinessLogic.Services
             }
             catch (Exception ex)
             {
-                Logger.WriteLogToFile(ex.Message, "RoundPlayerService");
+                Logger.WriteLogToFile(ex.Message, "RoundPlayerService", "RetrieveRoundPlayer");
             }
             return DataMapper.Map(new RoundPlayer {
                 Id = Guid.Empty
@@ -85,7 +85,7 @@ namespace BlackJack.BusinessLogic.Services
             }
             catch (Exception ex)
             {
-                Logger.WriteLogToFile(ex.Message, "RoundPlayerService");
+                Logger.WriteLogToFile(ex.Message, "RoundPlayerService", "UpdateRoundPlayer");
             }
             return false;
         }
@@ -103,10 +103,23 @@ namespace BlackJack.BusinessLogic.Services
             }
             catch (Exception ex)
             {
-                Logger.WriteLogToFile(ex.Message, "RoundPlayerService");
+                Logger.WriteLogToFile(ex.Message, "RoundPlayerService", "DeleteRoundPlayer");
             }
             return 0;
         }
 
+        public async Task<IEnumerable<RoundPlayerServiceViewModel>> RetrieveRoundPlayersByRound(string roundId)
+        {
+            try{
+                var roundPlayers = await _roundPlayerRepository.All();
+                var result = roundPlayers.Where(rp => rp.RoundId.ToString() == roundId).ToList();
+                return DataMapper.Map(result);
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLogToFile(ex.Message, "RoundPlayerService", "RetrieveRoundPlayersByRound");
+            }
+            return null;
+        }
     }
 }

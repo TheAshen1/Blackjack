@@ -47,6 +47,7 @@
     <Compile Include="GameLogic\DeckLogic.cs" />
     <Compile Include="GameLogic\GameLogic.cs" />
     <Compile Include="GameLogic\PlayerLogic.cs" />
+    <Compile Include="GameLogic\ScoreLogic.cs" />
     <Compile Include="GameLogic\SuitLogic.cs" />
     <Compile Include="GameLogic\ValueLogic.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

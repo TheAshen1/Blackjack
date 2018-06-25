@@ -9,6 +9,7 @@
             <td>Id</td>
             <td>RoundId</td>
             <td>PlayerId</td>
+            <td>Bet</td>
             <td>Cards</td>
             <td></td>
         </tr>
@@ -19,6 +20,7 @@
                 <td>{{rp?.id}}</td>
                 <td>{{rp?.roundId}}</td>
                 <td>{{rp?.playerId}}</td>
+                <td>{{rp?.bet}}</td>
                 <td>
                     <div class="card" *ngFor="let card of rp.cards">
                         <img src={{card?.uri}} />
@@ -53,6 +55,9 @@
         <input type="text" [(ngModel)]="roundPlayer.playerId" />
     </td>
     <td>
+        <input type="text" [(ngModel)]="roundPlayer.bet" />
+    </td>
+    <td>
         <input type="text" [(ngModel)]="roundPlayer.cards" />
     </td>
     <td>
@@ -74,6 +79,10 @@
     <div>
         <label>PlayerId</label>
         <input type="text" [(ngModel)]="roundPlayer.playerId" />
+    </div>
+    <div>
+        <label>Bet</label>
+        <input type="text" [(ngModel)]="roundPlayer.bet" />
     </div>
     <div>
         <label>Cards</label>

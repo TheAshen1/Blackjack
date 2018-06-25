@@ -9,11 +9,10 @@ namespace BlackJack.ViewModels.RoundPlayerServiceViewModels
     public class RoundPlayerServiceViewModel
     {
         public string Id { get; set; }
-
         public string RoundId { get; set; }
-
         public string PlayerId { get; set; }
 
+        public int Bet { get; set; }
         public string Cards { get; set; }
     }
 }

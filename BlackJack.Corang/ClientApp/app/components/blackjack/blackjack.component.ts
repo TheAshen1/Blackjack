@@ -19,6 +19,7 @@ export class BlackJack {
     gameData: GameLogic | undefined;
 
     gameIsGoingOn: boolean = false;
+    canPlaceBets: boolean = false;
     roundFinished: boolean = true;
     message: string = "";
     positions: Array<[number, number]> = [];
@@ -32,48 +33,65 @@ export class BlackJack {
         this.gameIsGoingOn = true;
 
         this.startTheGame();
-
     }
 
 
     startTheGame() {
-        if (this.gameData == undefined) {
+        if (this.gameData == undefined || this.gameData.gameId == "00000000-0000-0000-0000-000000000000") {
             console.log('gameData is undefined');
-            return;
-        }
-        if (this.gameData.players == undefined) {
-            console.log('players are undefined');
+            this.gameIsGoingOn = false;
             return;
         }
         this.calculatePositions()
         this.roundFinished = false;
         this.message = "";
 
-
-        var timeOut = 0;
+        this.canPlaceBets = true;
         this.gameData.players.forEach((player, index) => {
             player.x = this.positions[index][0];
             player.y = this.positions[index][1];
-            this.drawTwoCards(player);
-            timeOut += 1000;
+            player.bet = player.chips > 10 ? 10 : player.chips;
         });
 
     }
 
+    continueGame() {
+        this.canPlaceBets = false;
+        if (this.gameData == undefined || this.gameData.gameId == "00000000-0000-0000-0000-000000000000") {
+            console.log('gameData is undefined');
+            this.gameIsGoingOn = false;
+            return;
+        }
+
+        var thePlayer: PlayerLogic | undefined;
+        this.gameData.players.forEach((player, index) => {
+
+            if (player.isBot)
+                this.drawTwoCards(player);
+            else
+                thePlayer = player;
+        });
+        if (thePlayer == undefined) {
+            console.log('cannot find the player');
+            return;
+        }
+        this.drawTwoCards(thePlayer);
+    }
+
     calculatePositions(): any {
         var maxNumberOfPlayers = 7;
-        var minPlayerHeight = 100;
-        var maxPlayerWidth = 60;
+        var minPlayerHeight = 200;
+        var maxPlayerWidth = 200;
         var containerWidth = 800;
         var containerHeight = 600;
         var radius = 250;
         var angle = 0;
         var step = 2 * Math.PI / maxNumberOfPlayers;
-        
+
         for (var i = 0; i < maxNumberOfPlayers; i++) {
 
             var temp: [number, number] = [
-                Math.round(containerWidth / 2 + radius * Math.cos(angle) - maxPlayerWidth / 2) ,
+                Math.round(containerWidth / 2 + radius * Math.cos(angle) - maxPlayerWidth / 2),
                 Math.round(containerHeight / 2 + radius * Math.sin(angle) - minPlayerHeight / 2)
             ];
 
@@ -100,8 +118,6 @@ export class BlackJack {
             });
     }
     handleCard(card: CardLogic, player: PlayerLogic) {
-
-        console.log(card);
 
         if (CardValues.values[card.value as Card] != 1) {
             card.uri = 'assets/images/' + CardValues.values[card.value as Card] + card.suit.charAt(0) + '.png';
@@ -135,17 +151,18 @@ export class BlackJack {
                 score++;
             }
         }
-        console.log("player:" + player.name + " score: " + score);
+        //console.log("player:" + player.name + " score: " + score);
 
         player.score = score;
 
 
         if (!player.isBot && player.score >= 21) {
-            setTimeout(this.finishRound(), 10000);
+            this.finishRound();
         }
         if (player.isBot && player.cards.length >= 2 && player.score < 17) {
-            setTimeout(this.drawCard(player), 1000);
+            this.drawCard(player);
         }
+
     }
 
 
@@ -158,6 +175,19 @@ export class BlackJack {
             console.log('players are undefined');
             return;
         }
+
+        this.gameData.players.forEach((player) => {
+            if (player.name == 'Dealer') {
+                return;
+            }
+            this.gameLogicService.placeBet(player.currentRoundPlayerId, player.bet)
+                .subscribe((answer) => {
+                    if (answer.text() == 'false') {
+                        console.log('Could not place bet');
+                    }
+                });
+        });
+
 
         this.roundFinished = true;
         var winners: string[] = [];
@@ -180,30 +210,17 @@ export class BlackJack {
         else
             this.message = "Winners are: " + winners;
         alert(this.message);
+
+
+        this.gameData.players.forEach((player) => {
+            if (!player.isBot && player.bet == player.chips && winners.findIndex((w) => w == player.name) < 0) {
+                alert('Game Over');
+                this.finishGame();
+            }
+        });
     }
 
-
-    playerDrawCard() {
-        if (this.gameData == undefined) {
-            console.log('gameData is undefined');
-            return;
-        }
-
-        if (this.gameData.players == null) {
-            console.log('players is null');
-            return;
-        }
-        var player = this.gameData.players.find((player) => !player.isBot);
-        if (player == null) {
-            console.log('cannot find the player');
-            return;
-        }
-        this.drawCard(player);
-
-    }
-
-
-    /////// anfter round is finished
+    /////// after round is finished
     moveToTheNextRound() {
 
         if (this.gameData == undefined) {
@@ -218,6 +235,7 @@ export class BlackJack {
                 this.gameData = tempData;
                 if (this.gameData.players == undefined) {
                     console.log('new round data is undefined');
+                    this.finishGame();
                     return;
                 }
 

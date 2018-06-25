@@ -11,8 +11,18 @@
 
             </div>
             <div *ngIf="!player.isBot && !roundFinished" id='user-input'>
-                <button class="btn btn-primary" (click)="drawCard(player)">Draw</button>
-                <button class="btn btn-warning" (click)="finishRound()">Stand</button>
+                <ng-template [ngIf]="canPlaceBets" [ngIfElse]="drawOrStand">
+                    Make your bet:
+                    <input type="number" [(ngModel)]="player.bet" [max]="player.chips" min="1" />
+                    <button class="btn btn-primary" (click)="continueGame()">Continue</button>
+                </ng-template>
+                <ng-template #drawOrStand>
+                    <button class="btn btn-primary" (click)="drawCard(player)">Draw</button>
+                    <button class="btn btn-warning" (click)="finishRound()">Stand</button>
+                </ng-template>
+            </div>
+            <div *ngIf="player.name!='Dealer'">
+                <p>bet:{{player?.bet}}</p>
             </div>
             <p>{{player?.score}}</p>
         </div>

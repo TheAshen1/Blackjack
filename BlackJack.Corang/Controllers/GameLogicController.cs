@@ -21,6 +21,12 @@ namespace BlackJack.Corang.Controllers
             var result = await _gameLogicService.GiveCard(roundPlayerId);
             return result;
         }
+        [HttpGet("[action]")]
+        public async Task<bool> PlaceBet([FromQuery]string roundPlayerId, [FromQuery]int bet)
+        {
+            var result = await _gameLogicService.PlaceBet(roundPlayerId, bet);
+            return result;
+        }
 
         [HttpGet("[action]")]
         public async Task<GameLogicViewModel> StartNewGame([FromQuery]string playerName, [FromQuery]int numberOfBots)

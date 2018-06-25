@@ -17,6 +17,14 @@ export class GameLogicService {
             }
         });
     }
+    placeBet(roundPlayerId: string, bet: number) {
+        return this.http.get(this.url + 'PlaceBet/', {
+            params: {
+                roundPlayerId,
+                bet
+            }
+        });
+    }
     startNewGame(playerName: string, numberOfBots: number) {
         return this.http.get(this.url + 'StartNewGame/', {
             params: {

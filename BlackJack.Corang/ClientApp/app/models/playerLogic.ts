@@ -4,7 +4,9 @@ export interface PlayerLogic {
     id: string;
     currentRoundPlayerId: string;
     name: string;
-    isBot: boolean;  
+    isBot: boolean; 
+    chips: number;
+    bet: number;
 
     cards: CardLogic[];
     score: number;

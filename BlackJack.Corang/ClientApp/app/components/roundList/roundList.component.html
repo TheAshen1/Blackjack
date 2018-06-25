@@ -8,6 +8,7 @@
         <tr>
             <td>Id</td>
             <td>GameId</td>
+            <td>RoundNumber</td>
             <td>Deck</td>
             <td></td>
         </tr>
@@ -17,6 +18,7 @@
             <ng-template [ngIf]="round?.id != r.id" [ngIfElse]="edit">
                 <td>{{r?.id}}</td>
                 <td>{{r?.gameId}}</td>
+                <td>{{r?.roundNumber}}</td>
                 <td>
                     <button class="btn btn-primary" (click)="toggleViewMode(r)">{{r?.showFullDeck ? "less" : "more"}}</button>
 
@@ -25,7 +27,7 @@
                     </div>
 
                     <div *ngIf="r.showFullDeck">
-                        <div  class="card" *ngFor="let card of r.deck">
+                        <div class="card" *ngFor="let card of r.deck">
                             <img src={{card?.uri}} />
                         </div>
                     </div>
@@ -54,6 +56,9 @@
         <input type="text" [(ngModel)]="round.gameId" />
     </td>
     <td>
+        <input type="text" [(ngModel)]="round.roundNumber" />
+    </td>
+    <td>
         <input type="text" [(ngModel)]="round.deck" />
     </td>
 
@@ -74,10 +79,13 @@
         <input type="text" [(ngModel)]="round.gameId" />
     </div>
     <div>
+        <label>RoundNumber</label>
+        <input type="text" [(ngModel)]="round.roundNumber" />
+    </div>
+    <div>
         <label>Deck</label>
         <input type="text" [(ngModel)]="round.deck" />
     </div>
-
     <div>
         <input type="button" value="Сохранить" (click)="save()" class="btn btn-success" />
         <input type="button" value="Отмена" (click)="cancel()" class="btn btn-warning" />

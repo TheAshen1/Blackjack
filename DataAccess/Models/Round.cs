@@ -11,7 +11,7 @@ namespace DataAccess.Models
     {
         public Guid GameId { get; set; }
         public Game Game { get; set; }
-
+        public int RoundNumber { get; set; }
         public string Deck { get; set; }
 
         public virtual ICollection<RoundPlayer> RoundPlayers { get; set; }

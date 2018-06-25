@@ -15,6 +15,8 @@ namespace DataAccess.Models
         public Guid RoundId { get; set; }
         public Round Round { get; set; }
 
+        public int Bet { get; set; }
+
         public string Cards { get; set; }
 
     }
