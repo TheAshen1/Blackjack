@@ -26,6 +26,16 @@ namespace BlackJack.Corang
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            //services.AddDistributedMemoryCache();
+
+            //services.AddSession(options =>
+            //{
+            //    options.IdleTimeout = TimeSpan.FromSeconds(60);
+            //    options.Cookie.HttpOnly = true;
+            //});
+
+
             services.AddMvc();
 
             services.AddTransient(r =>new BaseRepository<Game>(
@@ -69,7 +79,7 @@ namespace BlackJack.Corang
             }
 
             app.UseStaticFiles();
-
+            //app.UseSession();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

@@ -1,15 +1,30 @@
-<h3>game start menu</h3>
 
-<div>
-    <label>Your Name: </label>
-    <input type="text" [(ngModel)]="playerName" />
+<div class="container">
+    <h3>game start menu</h3>
+
+    <div class="col-md-5">
+        <h4>Start as a new player</h4>
+        <div>
+            <label>Your Name: </label>
+            <input type="text" [(ngModel)]="playerName" />
+        </div>
+        <div>
+            <label>Number of bots in the game: </label>
+            <input type="number" min="0" max="5" [(ngModel)]="numberOfBots" />
+        </div>
+        <button (click)="start()">
+            Play
+        </button>
+    </div>
+
+    <div *ngIf="!userIsNew" class="col-md-5">
+        <h4>Continue with your profile: {{cookieValueUserName}}</h4>
+        <div>
+            <label>Number of bots in the game: </label>
+            <input type="number" min="0" max="5" [(ngModel)]="numberOfBots" />
+        </div>
+        <button (click)="startAuthentificated()">
+            Play
+        </button>
+    </div>
 </div>
-
-<div>
-    <label>Number of bots in the game: </label>
-    <input type="number" min="0" max="5" [(ngModel)]="numberOfBots" />
-</div>
-
-<button (click)="start()">
-    Play
-</button>

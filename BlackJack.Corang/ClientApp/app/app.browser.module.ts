@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppModuleShared } from './app.shared.module';
 import { AppComponent } from './components/app/app.component';
 
+
 @NgModule({
     bootstrap: [ AppComponent ],
     imports: [
@@ -11,6 +12,7 @@ import { AppComponent } from './components/app/app.component';
     ],
     providers: [
         { provide: 'BASE_URL', useFactory: getBaseUrl }
+        //CookieService
     ]
 })
 export class AppModule {

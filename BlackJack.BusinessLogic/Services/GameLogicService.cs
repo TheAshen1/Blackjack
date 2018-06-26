@@ -303,6 +303,116 @@ namespace BlackJack.BusinessLogic.Services
             };
         }
 
+        public async Task<GameLogicViewModel> StartNewGameAuthentificated(string playerName, int numberOfBots, string userId)
+        {
+            try
+            {
+                var userData = await _playerService.RetrievePlayer(userId);
+                if(userData.Chips == 0)
+                {
+                    return await StartNewGame(playerName, numberOfBots);
+                }
+                ///
+                var newGameId = await _gameService.CreateGame(new GameServiceCreateGameViewModel());
+                var newRoundId = await _roundService.CreateRound(new RoundServiceCreateRoundViewModel() { GameId = newGameId, RoundNumber = 1, Deck = (new DeckLogic()).Stringify() });
+
+                var players = new List<PlayerLogicViewModel> {
+                new PlayerLogicViewModel
+                {
+                    Id = await _playerService.CreatePlayer(new PlayerServiceCreatePlayerViewModel() { GameId = newGameId, Name = "Dealer", IsBot=true, Chips = 9000 }),
+                    Name = "Dealer",
+                    IsBot = true,
+                    Chips = 9000,
+                    Bet = 0
+                },
+                new PlayerLogicViewModel
+                {
+                    Id = userId,
+                    Name = userData.Name,
+                    IsBot = false,
+                    Chips = userData.Chips,
+                    Bet = 0
+                }
+            };
+
+                #region create Bots
+                var listOfNames = new List<string>()
+            {
+                "James",
+                "John",
+                "Robert",
+                "Michael",
+                "William",
+                "David",
+                "Richard",
+                "Charles",
+                "Joseph",
+                "Thomas",
+                "Christopher",
+                "Daniel",
+                "Paul",
+                "Mark",
+                "Donald",
+            };
+                var RAND = new Random();
+
+                foreach (var name in listOfNames)
+                {
+                    if (name == playerName)
+                    {
+                        listOfNames.Remove(name);
+                    }
+                }
+
+                for (var i = 0; i < numberOfBots; i++)
+                {
+                    var tmpIndex = RAND.Next(listOfNames.Count);
+                    var bot = new PlayerLogicViewModel
+                    {
+                        Id = await _playerService.CreatePlayer(new PlayerServiceCreatePlayerViewModel() { GameId = newGameId, Name = listOfNames[tmpIndex], IsBot = true, Chips = 100 }),
+                        Name = listOfNames[tmpIndex],
+                        IsBot = true,
+                        Chips = 100,
+                        Bet = 0
+                    };
+                    listOfNames.RemoveAt(tmpIndex);
+
+                    players.Add(bot);
+                }
+                #endregion
+
+                #region initialize RoundPlayer values
+                for (var i = 0; i < players.Count; i++)
+                {
+                    var player = players.ElementAt(i);
+                    player.CurrentRoundPlayerId =
+                        await _roundPlayerService.CreateRoundPlayer(new RoundPlayerServiceCreateRoundPlayerViewModel
+                        {
+                            RoundId = newRoundId,
+                            PlayerId = player.Id,
+                            Cards = "[]"
+                        });
+                }
+                #endregion
+
+                var viewModel = new GameLogicViewModel();
+
+                viewModel.GameId = newGameId;
+                viewModel.CurrentRoundId = newRoundId;
+                viewModel.Players = players;
+
+                return viewModel;
+            }
+            catch (Exception ex)
+            {
+                Logger.WriteLogToFile(ex.Message, "GameLogicService", "StartNewGame");
+            }
+            return new GameLogicViewModel
+            {
+                GameId = Guid.Empty.ToString()
+            };
+        }
+
         public async Task<GameLogicViewModel> StartNewGameRound(string currentGameId)
         {
             try
@@ -371,7 +481,12 @@ namespace BlackJack.BusinessLogic.Services
             try
             {
                 var lastRound = await _roundService.RetrieveLastGameRound(gameId);
-                ResolveBets(lastRound.Id);
+                var ok = await ResolveBets(lastRound.Id);
+                if (!ok)
+                {
+                    Logger.WriteLogToFile("Could not save bets", "GameLogicService", "FinishTheGame");
+                    return false;
+                }
                 ///
                 var game = await _gameService.RetrieveGame(gameId);
                 game.End = DateTime.Now.ToString();

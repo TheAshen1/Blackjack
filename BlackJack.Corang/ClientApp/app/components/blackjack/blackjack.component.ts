@@ -51,6 +51,7 @@ export class BlackJack {
             player.x = this.positions[index][0];
             player.y = this.positions[index][1];
             player.bet = player.chips > 10 ? 10 : player.chips;
+            player.score = 0;
         });
 
     }

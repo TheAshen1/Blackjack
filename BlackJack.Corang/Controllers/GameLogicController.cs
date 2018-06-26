@@ -2,6 +2,7 @@
 using BlackJack.ViewModels.GameLogicViewModels;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Http;
 
 namespace BlackJack.Corang.Controllers
 {
@@ -9,6 +10,7 @@ namespace BlackJack.Corang.Controllers
     public class GameLogicController : ControllerBase
     {
         private readonly GameLogicService _gameLogicService;
+        public readonly string SessionKeyPlayerId = "_PlayerId";
 
         public GameLogicController(GameLogicService gameLogicService)
         {
@@ -31,8 +33,32 @@ namespace BlackJack.Corang.Controllers
         [HttpGet("[action]")]
         public async Task<GameLogicViewModel> StartNewGame([FromQuery]string playerName, [FromQuery]int numberOfBots)
         {
-
-            var result = await _gameLogicService.StartNewGame(playerName, numberOfBots);
+            GameLogicViewModel result = null;
+            //var userId = HttpContext.Session.GetString(SessionKeyPlayerId);
+            //if (string.IsNullOrEmpty(userId))
+            //{
+            //    result = await _gameLogicService.StartNewGame(playerName, numberOfBots);
+            //    userId = "";
+            //    foreach(var player in result.Players)
+            //    {
+            //        if (!player.IsBot)
+            //            userId = player.Id;
+            //    }
+            //    HttpContext.Session.SetString(SessionKeyPlayerId, userId);
+            //}
+            //else
+            //{
+            //    result = await _gameLogicService.StartNewGame(playerName, numberOfBots, userId);
+            //}
+            result = await _gameLogicService.StartNewGame(playerName, numberOfBots);
+            return result;
+        }
+        [HttpGet("[action]")]
+        public async Task<GameLogicViewModel> StartNewGameAuthentificated([FromQuery]string playerName, [FromQuery]int numberOfBots, [FromQuery]string userId)
+        {
+            GameLogicViewModel result = null;
+        
+            result = await _gameLogicService.StartNewGameAuthentificated(playerName, numberOfBots, userId);
             return result;
         }
 

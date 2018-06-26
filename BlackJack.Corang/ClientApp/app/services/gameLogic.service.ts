@@ -33,6 +33,15 @@ export class GameLogicService {
             }
         });
     }
+    startNewGameAuthenificated(playerName: string, numberOfBots: number, userId: string) {
+        return this.http.get(this.url + 'StartNewGameAuthentificated/', {
+            params: {
+                playerName,
+                numberOfBots,
+                userId
+            }
+        });
+    }
     startNewGameRound(gameId: string) {
         return this.http.get(this.url + 'StartNewGameRound/', {
             params: {
