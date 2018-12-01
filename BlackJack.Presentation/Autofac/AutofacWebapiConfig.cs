@@ -1,12 +1,10 @@
 ﻿using Autofac;
-using Autofac.Core;
 using Autofac.Integration.WebApi;
-using System.Web.Http;
-using System.Reflection;
 using BlackJack.BusinessLogic.Services;
 using DataAccess;
 using DataAccess.DapperModels;
-using BlackJack.BusinessLogic.GameLogic;
+using System.Reflection;
+using System.Web.Http;
 
 namespace BlackJack.Presentation.Config
 {
@@ -32,21 +30,25 @@ namespace BlackJack.Presentation.Config
             builder.RegisterType<BaseRepository<Player>>()
                     .WithParameter("tableName", "Players")
                     .WithParameter("connectionFactory", new ConnectionFactory())
+                    .WithParameter("nameOrConnectionString", "BlackJackContainerConnectionString")
                     .InstancePerRequest();
 
             builder.RegisterType<BaseRepository<Game>>()
                     .WithParameter("tableName", "Games")
                     .WithParameter("connectionFactory", new ConnectionFactory())
+                    .WithParameter("nameOrConnectionString", "BlackJackContainerConnectionString")
                     .InstancePerRequest();
 
             builder.RegisterType<BaseRepository<Round>>()
                     .WithParameter("tableName", "Rounds")
                     .WithParameter("connectionFactory", new ConnectionFactory())
+                    .WithParameter("nameOrConnectionString", "BlackJackContainerConnectionString")
                     .InstancePerRequest();
 
             builder.RegisterType<BaseRepository<RoundPlayer>>()
                     .WithParameter("tableName", "RoundPlayers")
                     .WithParameter("connectionFactory", new ConnectionFactory())
+                    .WithParameter("nameOrConnectionString", "BlackJackContainerConnectionString")
                     .InstancePerRequest();
 
             builder.RegisterType<PlayerService>()

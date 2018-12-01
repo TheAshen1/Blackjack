@@ -40,19 +40,19 @@ namespace BlackJack.Corang
 
             services.AddTransient(r =>new BaseRepository<Game>(
                 "Games",
-                new SqlConnection(Configuration.GetConnectionString("BlackJack"))
+                new SqlConnection(Configuration.GetConnectionString("BlackJackContainer"))
                 ));
             services.AddTransient(r => new BaseRepository<Player>(
                 "Players",
-                new SqlConnection(Configuration.GetConnectionString("BlackJack"))
+                new SqlConnection(Configuration.GetConnectionString("BlackJackContainer"))
                 ));
             services.AddTransient(r => new BaseRepository<Round>(
                 "Rounds",
-                new SqlConnection(Configuration.GetConnectionString("BlackJack"))
+                new SqlConnection(Configuration.GetConnectionString("BlackJackContainer"))
                 ));
             services.AddTransient(r => new BaseRepository<RoundPlayer>(
                 "RoundPlayers",
-                new SqlConnection(Configuration.GetConnectionString("BlackJack"))
+                new SqlConnection(Configuration.GetConnectionString("BlackJackContainer"))
                 ));
 
             services.AddTransient<GameLogicService>();

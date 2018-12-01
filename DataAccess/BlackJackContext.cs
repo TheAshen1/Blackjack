@@ -1,18 +1,15 @@
+using DataAccess.Models;
+using System.Data.Entity;
+
 namespace DataAccess
 {
-    using DataAccess.Models;
-    using System;
-    using System.Data.Entity;
-    using System.Linq;
-
     public class BlackJackContext : DbContext
     {
         public BlackJackContext()
             : base("name=BlackJackContext")
         {
-
-
         }
+
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Round>()

@@ -1,0 +1,245 @@
+10/7/2018 4:53:21 PM Invalid column name 'RoundNumber'.; class: RoundService; method: CreateRound</br>
+10/7/2018 4:53:21 PM Invalid column name 'Chips'.; class: PlayerService; method: not specified</br>
+10/7/2018 4:53:21 PM Invalid column name 'Chips'.; class: PlayerService; method: not specified</br>
+10/7/2018 4:53:21 PM Invalid column name 'Chips'.; class: PlayerService; method: not specified</br>
+10/7/2018 4:53:21 PM Invalid column name 'Chips'.; class: PlayerService; method: not specified</br>
+10/7/2018 4:53:21 PM Invalid column name 'Chips'.; class: PlayerService; method: not specified</br>
+10/7/2018 4:53:21 PM Invalid column name 'Chips'.; class: PlayerService; method: not specified</br>
+10/7/2018 4:53:21 PM Invalid column name 'Chips'.; class: PlayerService; method: not specified</br>
+10/7/2018 4:53:21 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 4:53:21 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 4:53:23 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 4:53:23 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 4:53:23 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 4:53:23 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 4:53:24 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 4:53:24 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 4:53:24 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 4:53:24 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 4:53:25 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 4:53:25 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 4:53:25 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 4:53:25 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 4:53:25 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 4:53:25 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 4:53:25 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 4:53:25 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 4:53:26 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 4:53:26 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 4:53:26 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 4:53:26 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 4:53:26 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 4:53:26 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 4:53:26 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 4:53:26 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 4:53:26 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 4:53:26 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 4:55:01 PM Invalid column name 'RoundNumber'.; class: RoundService; method: CreateRound</br>
+10/7/2018 4:55:01 PM Invalid column name 'Chips'.; class: PlayerService; method: not specified</br>
+10/7/2018 4:55:01 PM Invalid column name 'Chips'.; class: PlayerService; method: not specified</br>
+10/7/2018 4:55:01 PM Invalid column name 'Chips'.; class: PlayerService; method: not specified</br>
+10/7/2018 4:55:01 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 4:55:01 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 4:55:03 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 4:55:03 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 4:55:12 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 4:55:12 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 4:55:12 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 4:55:12 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 4:55:12 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 4:55:13 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 4:55:13 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 4:55:13 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 4:59:20 PM Invalid column name 'RoundNumber'.; class: RoundService; method: CreateRound</br>
+10/7/2018 5:03:27 PM Invalid column name 'RoundNumber'.; class: RoundService; method: CreateRound</br>
+10/7/2018 5:03:27 PM Invalid column name 'Chips'.; class: PlayerService; method: not specified</br>
+10/7/2018 5:03:27 PM Invalid column name 'Chips'.; class: PlayerService; method: not specified</br>
+10/7/2018 5:03:27 PM Invalid column name 'Chips'.; class: PlayerService; method: not specified</br>
+10/7/2018 5:03:37 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 5:03:37 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:03:39 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 5:03:39 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:03:40 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 5:03:40 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:03:40 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 5:03:40 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:03:40 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 5:03:40 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:03:41 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 5:03:41 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:03:57 PM Invalid column name 'RoundNumber'.; class: RoundService; method: CreateRound</br>
+10/7/2018 5:03:57 PM Invalid column name 'Chips'.; class: PlayerService; method: not specified</br>
+10/7/2018 5:03:57 PM Invalid column name 'Chips'.; class: PlayerService; method: not specified</br>
+10/7/2018 5:03:57 PM Invalid column name 'Chips'.; class: PlayerService; method: not specified</br>
+10/7/2018 5:03:57 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 5:03:57 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:03:58 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 5:03:58 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:03:59 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 5:03:59 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:03:59 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 5:03:59 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:03:59 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 5:04:00 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:04:00 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 5:04:00 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:05:54 PM Invalid column name 'RoundNumber'.; class: RoundService; method: CreateRound</br>
+10/7/2018 5:11:42 PM Invalid column name 'RoundNumber'.; class: RoundService; method: CreateRound</br>
+10/7/2018 5:11:55 PM Invalid column name 'Chips'.; class: PlayerService; method: not specified</br>
+10/7/2018 5:11:56 PM Invalid column name 'Chips'.; class: PlayerService; method: not specified</br>
+10/7/2018 5:11:56 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 5:11:56 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:11:59 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 5:11:59 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:11:59 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 5:11:59 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:11:59 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+10/7/2018 5:11:59 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:07 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:08 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:09 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:09 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:09 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:10 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:10 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:10 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:11 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:11 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:12 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:12 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:12 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:13 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:13 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:13 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:14 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:14 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:14 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:14 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:14 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:15 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:15 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:15 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:15 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:15 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:15 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:15 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:16 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:19 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:19 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:19 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:19 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:19 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:19 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:19 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:20 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:20 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:20 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:20 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:20 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:20 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:21 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:21 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:21 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:21 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:21 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:21 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:23 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:23 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 5:15:23 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 6:02:34 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 6:02:35 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 6:02:36 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 6:02:36 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 6:02:36 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 6:02:36 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 6:02:37 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 6:02:37 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 6:02:37 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 6:02:37 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 6:04:39 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 6:04:40 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 6:04:41 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 6:04:41 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 6:04:41 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 6:04:41 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 6:04:42 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 6:04:42 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 6:04:42 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 6:04:42 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 6:04:42 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+10/7/2018 6:04:43 PM JsonToken EndArray is not valid for closing JsonType None. Path '', line 1, position 1.; class: GameLogicService; method: GiveCard</br>
+12/1/2018 12:50:45 PM Invalid column name 'RoundNumber'.; class: RoundService; method: CreateRound</br>
+12/1/2018 12:50:45 PM Invalid column name 'Chips'.; class: PlayerService; method: not specified</br>
+12/1/2018 12:50:45 PM Invalid column name 'Chips'.; class: PlayerService; method: not specified</br>
+12/1/2018 12:50:45 PM Invalid column name 'Chips'.; class: PlayerService; method: not specified</br>
+12/1/2018 12:50:45 PM Invalid column name 'Chips'.; class: PlayerService; method: not specified</br>
+12/1/2018 12:50:45 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+12/1/2018 12:50:45 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+12/1/2018 12:50:47 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+12/1/2018 12:50:47 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+12/1/2018 12:50:48 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+12/1/2018 12:50:48 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+12/1/2018 12:50:49 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+12/1/2018 12:50:49 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+12/1/2018 12:50:50 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+12/1/2018 12:50:50 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+12/1/2018 12:50:50 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+12/1/2018 12:50:50 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+12/1/2018 12:50:51 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+12/1/2018 12:50:51 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+12/1/2018 12:50:54 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+12/1/2018 12:50:54 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>
+12/1/2018 12:56:29 PM Invalid column name 'RoundNumber'.; class: RoundService; method: CreateRound</br>
+12/1/2018 12:57:34 PM Invalid column name 'RoundNumber'.; class: RoundService; method: CreateRound</br>
+12/1/2018 12:59:14 PM Invalid column name 'RoundNumber'.; class: RoundService; method: CreateRound</br>
+12/1/2018 12:59:14 PM Invalid column name 'Chips'.; class: PlayerService; method: not specified</br>
+12/1/2018 12:59:14 PM Invalid column name 'Chips'.; class: PlayerService; method: not specified</br>
+12/1/2018 12:59:14 PM Invalid column name 'Chips'.; class: PlayerService; method: not specified</br>
+12/1/2018 12:59:14 PM Invalid column name 'Chips'.; class: PlayerService; method: not specified</br>
+12/1/2018 12:59:54 PM Sequence contains no elements; class: RoundService; method: RetrieveRound</br>
+12/1/2018 12:59:54 PM Value cannot be null.
+Parameter name: value; class: GameLogicService; method: GiveCard</br>

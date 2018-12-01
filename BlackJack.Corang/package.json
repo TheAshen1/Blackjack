@@ -7,6 +7,7 @@
   },
   "devDependencies": {
     "@angular/animations": "4.2.5",
+    "@angular/cli": "^6.2.4",
     "@angular/common": "4.2.5",
     "@angular/compiler": "4.2.5",
     "@angular/compiler-cli": "4.2.5",
@@ -30,7 +31,7 @@
     "awesome-typescript-loader": "3.2.1",
     "bootstrap": "3.3.7",
     "chai": "4.0.2",
-    "css": "2.2.1",
+    "css": "^2.2.4",
     "css-loader": "0.28.4",
     "es6-shim": "0.35.3",
     "event-source-polyfill": "0.0.9",
@@ -48,6 +49,7 @@
     "karma-cli": "1.0.1",
     "karma-jasmine": "1.1.0",
     "karma-webpack": "2.0.3",
+    "ngx-cookie-service": "^1.0.10",
     "preboot": "4.5.2",
     "raw-loader": "0.5.1",
     "reflect-metadata": "0.1.10",
@@ -61,7 +63,5 @@
     "webpack-merge": "4.1.0",
     "zone.js": "0.8.12"
   },
-  "dependencies": {
-    "ngx-cookie-service": "^1.0.8"
-  }
+  "dependencies": {}
 }

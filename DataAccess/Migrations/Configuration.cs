@@ -1,11 +1,8 @@
+using System.Data.Entity.Migrations;
+
 namespace DataAccess.Migrations
 {
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
-
-    internal sealed class Configuration : DbMigrationsConfiguration<DataAccess.BlackJackContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<BlackJackContext>
     {
         public Configuration()
         {
@@ -13,7 +10,7 @@ namespace DataAccess.Migrations
             ContextKey = "DataAccess.BlackJackContext";
         }
 
-        protected override void Seed(DataAccess.BlackJackContext context)
+        protected override void Seed(BlackJackContext context)
         {
             //  This method will be called after migrating to the latest version.
 

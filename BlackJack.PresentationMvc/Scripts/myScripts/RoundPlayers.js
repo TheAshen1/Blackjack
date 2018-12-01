@@ -1,32 +1,38 @@
 ﻿
-$(document).ready(function () {
+$(document).ready(function ()
+{
 
     getAllRoundPlayers();
     getAllRounds();
     getAllPlayers();
 
-    $("#editRoundPlayer").click(function (event) {
+    $("#editRoundPlayer").click(function (event)
+    {
         event.preventDefault();
         editRoundPlayer();
     });
 
-    $("#createRoundPlayer").click(function (event) {
+    $("#createRoundPlayer").click(function (event)
+    {
         event.preventDefault();
         createRoundPlayer();
     });
 
 
-    $("#createRoundId").change(function () {
+    $("#createRoundId").change(function ()
+    {
         getAllPlayers();
     });
-    $("#editRoundId").change(function () {
+    $("#editRoundId").change(function ()
+    {
         getAllPlayers();
     });
 
 
 });
 
-function getAllRoundPlayers() {
+function getAllRoundPlayers()
+{
 
     $("#createBlock").css('display', 'block');
     $("#editBlock").css('display', 'none');
@@ -38,16 +44,19 @@ function getAllRoundPlayers() {
             'Access-Control-Allow-Origin': '*'
         },
         crossDomain: true,
-        success: function (data) {
+        success: function (data)
+        {
             writeResponse(data);
         },
-        error: function (x, y, z, ) {
+        error: function (x, y, z, )
+        {
             alert(x.status + '\n' + x.responseJSON + '\n' + z);
         }
     });
 }
 
-function createRoundPlayer() {
+function createRoundPlayer()
+{
     var roundPlayer = {
         RoundId: $('#createRoundId').val(),
         PlayerId: $('#createPlayerId').val(),
@@ -62,16 +71,19 @@ function createRoundPlayer() {
             'Access-Control-Allow-Origin': '*'
         },
         crossDomain: true,
-        success: function () {
+        success: function ()
+        {
             getAllRoundPlayers();
         },
-        error: function (x, y, z) {
+        error: function (x, y, z)
+        {
             alert(x + '\n' + y + '\n' + z);
         }
     });
 }
 
-function deleteRoundPlayer(id) {
+function deleteRoundPlayer(id)
+{
     $.ajax({
         url: 'http://localhost:57060/api/RoundPlayerValues/' + id,
         type: 'DELETE',
@@ -80,16 +92,19 @@ function deleteRoundPlayer(id) {
             'Access-Control-Allow-Origin': '*'
         },
         crossDomain: true,
-        success: function (data) {
+        success: function (data)
+        {
             getAllRoundPlayers();
         },
-        error: function (x, y, z) {
+        error: function (x, y, z)
+        {
             alert(x + '\n' + y + '\n' + z);
         }
     });
 }
 
-function editRoundPlayer() {
+function editRoundPlayer()
+{
     var id = $('#editId').val();
 
     var roundPlayer = {
@@ -107,41 +122,85 @@ function editRoundPlayer() {
             'Access-Control-Allow-Origin': '*'
         },
         crossDomain: true,
-        success: function (data) {
+        success: function (data)
+        {
             getAllRoundPlayers();
         },
-        error: function (x, y, z) {
+        error: function (x, y, z)
+        {
             alert(x + '\n' + y + '\n' + z);
         }
     });
 }
 
-function writeResponse(roundplayers) {
-    var strResult = "<table><th>ID</th><th>RoundId</th><th>PlayerId</th><th>Cards</th>";
-    $.each(roundplayers, function (index, roundplayer) {
-        strResult += "<tr><td>" + roundplayer.Id + "</td><td> " + roundplayer.RoundId + "</td><td>" + roundplayer.PlayerId +
-            "</td><td>" + roundplayer.Cards +
-            "</td><td><a id=editItem' data-item='" + roundplayer.Id + "' onclick='editItem(this)'>Edit</a></td>" +
-            "<td><a id='deleteItem' data-item='" + roundplayer.Id + "' onclick='deleteItem(this)'>Delete</a></td></tr>";
+function writeResponse(roundplayers)
+{
+    var cardValues = {
+        TWO: 2,
+        THREE: 3,
+        FOUR: 4,
+        FIVE: 5,
+        SIX: 6,
+        SEVEN: 7,
+        EIGHT: 8,
+        NINE: 9,
+        TEN: 10,
+        JACK: 'J',
+        QUEEN: 'Q',
+        KING: 'K',
+        ACE: 'A'
+    };
+
+    var strResult = `<table><th>ID</th><th>RoundId</th><th>PlayerId</th><th>Cards</th>`;
+
+    $.each(roundplayers, function (index, roundplayer)
+    {
+
+        let cards = JSON.parse(roundplayer.Cards);
+        strResult += `
+            <tr>
+                <td>${roundplayer.Id}</td>
+                <td>${roundplayer.RoundId}</td>
+                <td>${roundplayer.PlayerId}</td>
+                <td>`;
+
+
+        $.each(cards, (index, card) =>
+        {
+            let picName = cardValues[card.value] + card.suit.charAt(0);
+            strResult += `  <div class='card' data-value='${card.value}' data-suit='${card.suit}'>
+                                <img src='Content/Pictures/Cards/${picName}.png' />
+                            </div>`;
+        });
+
+
+        strResult += `</td>
+                <td><a id='editItem' data-item='${roundplayer.Id}' onclick='editItem(this)'>Edit</a></td>
+                <td><a id='deleteItem' data-item='${roundplayer.Id}' onclick='deleteItem(this)'>Delete</a></td>
+            </tr>`;
     });
     strResult += "</table>";
     $("#tableBlock").html(strResult);
 
 }
 
-function deleteItem(el) {
+function deleteItem(el)
+{
 
     var id = $(el).attr('data-item');
     deleteRoundPlayer(id);
 }
 
-function editItem(el) {
+function editItem(el)
+{
     var id = $(el).attr('data-item');
     getRoundPlayer(id);
 }
 
-function showRoundPlayer(roundPlayer) {
-    if (roundPlayer !== null) {
+function showRoundPlayer(roundPlayer)
+{
+    if (roundPlayer !== null)
+    {
         $("#createBlock").css('display', 'none');
         $("#editBlock").css('display', 'block');
         $("#editId").val(roundPlayer.Id);
@@ -149,12 +208,14 @@ function showRoundPlayer(roundPlayer) {
         $("#editPlayerId").val(roundPlayer.PlayerId);
         $("#editCards").val(roundPlayer.Cards);
     }
-    else {
+    else
+    {
         alert("Such player does not exist!");
     }
 }
 
-function getRoundPlayer(id) {
+function getRoundPlayer(id)
+{
     $.ajax({
         url: 'http://localhost:57060/api/RoundPlayerValues/' + id,
         type: 'GET',
@@ -163,15 +224,18 @@ function getRoundPlayer(id) {
             'Access-Control-Allow-Origin': '*'
         },
         crossDomain: true,
-        success: function (data) {
+        success: function (data)
+        {
 
-            if (data.Id != getEmptyGuid()) {
+            if (data.Id != getEmptyGuid())
+            {
                 showRoundPlayer(data);
                 console.log('No entity with such Id was found!');
             }
-            
+
         },
-        error: function (x, y, z) {
+        error: function (x, y, z)
+        {
             alert(x + '\n' + y + '\n' + z);
         }
     });
@@ -179,7 +243,8 @@ function getRoundPlayer(id) {
 
 ///////////
 
-function getAllRounds() {
+function getAllRounds()
+{
 
     $("#createBlock").css('display', 'block');
     $("#editBlock").css('display', 'none');
@@ -191,25 +256,30 @@ function getAllRounds() {
             'Access-Control-Allow-Origin': '*'
         },
         crossDomain: true,
-        success: function (data) {
+        success: function (data)
+        {
             fillRoundSelect(data);
         },
-        error: function (x, y, z, ) {
+        error: function (x, y, z, )
+        {
             alert(x.status + '\n' + x.responseJSON + '\n' + z);
         }
     });
 }
 
-function fillRoundSelect(rounds) {
+function fillRoundSelect(rounds)
+{
     var strResult = "";
-    $.each(rounds, function (index, round) {
-        strResult += "<option value='" + round.Id + "' data-item='" + round.GameId +"' >" + round.Id + "</option>";
+    $.each(rounds, function (index, round)
+    {
+        strResult += "<option value='" + round.Id + "' data-item='" + round.GameId + "' >" + round.Id + "</option>";
     });
     $("#editRoundId").html(strResult);
     $("#createRoundId").html(strResult);
 }
 
-function getAllPlayers() {
+function getAllPlayers()
+{
 
     $("#createBlock").show();
     $("#editBlock").hide();
@@ -221,29 +291,34 @@ function getAllPlayers() {
             'Access-Control-Allow-Origin': '*'
         },
         crossDomain: true,
-        success: function (data) {
+        success: function (data)
+        {
             fillPlayerSelect(data);
         },
-        error: function (x, y, z, ) {
+        error: function (x, y, z, )
+        {
             alert(x.status + '\n' + x.responseJSON + '\n' + z);
         }
     });
 }
 
-function fillPlayerSelect(players) {
+function fillPlayerSelect(players)
+{
     var select = $('#createRoundId');
     var selectedRoundGameId = $('option:selected', select).attr('data-item');
 
     var strResult = "";
-    $.each(players, function (index, player) {
+    $.each(players, function (index, player)
+    {
         if (player.GameId === selectedRoundGameId)
-        strResult += "<option value='" + player.Id + "'>" + player.Name + "</option>";
+            strResult += "<option value='" + player.Id + "'>" + player.Name + "</option>";
     });
 
     $("#editPlayerId").html(strResult);
     $("#createPlayerId").html(strResult);
 }
 
-function getEmptyGuid() {
+function getEmptyGuid()
+{
     return "00000000-0000-0000-0000-000000000000";
 } 

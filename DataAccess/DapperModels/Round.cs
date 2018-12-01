@@ -1,9 +1,4 @@
-﻿using Dapper.Contrib.Extensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace DataAccess.DapperModels
 {
@@ -12,6 +7,5 @@ namespace DataAccess.DapperModels
         public Guid GameId { get; set; }
         public int RoundNumber { get; set; }
         public string Deck { get; set; }
-
     }
 }

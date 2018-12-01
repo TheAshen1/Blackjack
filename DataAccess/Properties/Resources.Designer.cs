@@ -70,11 +70,11 @@ namespace BlackJack.DataAccess.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to .
+        ///   Looks up a localized string similar to data source=127.0.0.1;initial catalog=BlackJack;User ID=SA;Password=MsSql_Pa55;.
         /// </summary>
-        public static string somestring {
+        public static string BlackJackContainerConnectionString {
             get {
-                return ResourceManager.GetString("somestring", resourceCulture);
+                return ResourceManager.GetString("BlackJackContainerConnectionString", resourceCulture);
             }
         }
     }

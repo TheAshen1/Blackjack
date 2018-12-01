@@ -203,7 +203,6 @@ namespace BlackJack.BusinessLogic.Services
         {
             try
             {
-
                 var newGameId = await _gameService.CreateGame(new GameServiceCreateGameViewModel());
                 var newRoundId = await _roundService.CreateRound(new RoundServiceCreateRoundViewModel() { GameId = newGameId, RoundNumber = 1, Deck = (new DeckLogic()).Stringify()});
 

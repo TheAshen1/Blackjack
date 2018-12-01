@@ -4,9 +4,6 @@ using Dapper.Contrib.Extensions;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DataAccess
@@ -16,11 +13,18 @@ namespace DataAccess
         protected readonly string _tableName;
         protected IDbConnection _connection { get; set; }
 
+        public BaseRepository(string tableName, ConnectionFactory connectionFactory, string nameOrConnectionString)
+        {
+            _tableName = tableName;
+            _connection = connectionFactory.CreateConnection(nameOrConnectionString);
+        }
+
         public BaseRepository(string tableName, IDbConnection connection)
         {
             _tableName = tableName;
             _connection = connection;
         }
+
         public virtual async Task<IEnumerable<T>> All()
         {
            var result = await _connection.GetAllAsync<T>();

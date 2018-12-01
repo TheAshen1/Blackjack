@@ -121,7 +121,7 @@
     <value>data source=(LocalDb)\MSSQLLocalDB;initial catalog=DataAccess.BlackJackContext;integrated security=True;MultipleActiveResultSets=True;</value>
     <comment>primary connection string for the project</comment>
   </data>
-  <data name="somestring" xml:space="preserve">
-    <value />
+  <data name="BlackJackContainerConnectionString" xml:space="preserve">
+    <value>data source=127.0.0.1;initial catalog=BlackJack;User ID=SA;Password=MsSql_Pa55;</value>
   </data>
 </root>
