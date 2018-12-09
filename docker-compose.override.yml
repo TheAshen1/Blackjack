@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  blackjack.api:
+    ports:
+      - "50001:80"
+  blackjack.mvc:
+    ports:
+      - "50000:80"
+networks:
+  default:
+    external:
+      name: nat

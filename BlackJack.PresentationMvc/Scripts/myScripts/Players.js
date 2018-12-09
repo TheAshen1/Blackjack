@@ -21,7 +21,7 @@ function getAllPlayers() {
     $("#createBlock").css('display', 'block');
     $("#editBlock").css('display', 'none');
     $.ajax({
-        url: 'http://localhost:57060/api/PlayerValues/',
+        url: 'http://localhost:50001/api/PlayerValues/',
         type: 'GET',
         dataType: 'json',
         headers: {
@@ -43,7 +43,7 @@ function createPlayer() {
         IsBot: $('#createIsBot').val()
     };
     $.ajax({
-        url: 'http://localhost:57060/api/PlayerValues/',
+        url: 'http://localhost:50001/api/PlayerValues/',
         type: 'POST',
         data: JSON.stringify(player),
         contentType: "application/json;charset=utf-8",
@@ -87,7 +87,7 @@ function editPlayer() {
         IsBot: $('#editIsBot').val()
     };
     $.ajax({
-        url: 'http://localhost:57060/api/PlayerValues/' + id,
+        url: 'http://localhost:50001/api/PlayerValues/' + id,
         type: 'PUT',
         data: JSON.stringify(player),
         contentType: "application/json;charset=utf-8",
@@ -142,7 +142,7 @@ function showPlayer(player) {
 
 function getPlayer(id) {
     $.ajax({
-        url: 'http://localhost:57060/api/PlayerValues/' + id,
+        url: 'http://localhost:50001/api/PlayerValues/' + id,
         type: 'GET',
         dataType: 'json',
         headers: {
@@ -169,7 +169,7 @@ function getAllGames() {
     $("#createBlock").css('display', 'block');
     $("#editBlock").css('display', 'none');
     $.ajax({
-        url: 'http://localhost:57060/api/GameValues/',
+        url: 'http://localhost:50001/api/GameValues/',
         type: 'GET',
         dataType: 'json',
         headers: {

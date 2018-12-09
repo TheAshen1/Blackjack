@@ -37,7 +37,7 @@ function getAllRoundPlayers()
     $("#createBlock").css('display', 'block');
     $("#editBlock").css('display', 'none');
     $.ajax({
-        url: 'http://localhost:57060/api/RoundPlayerValues/',
+        url: 'http://localhost:50001/api/RoundPlayerValues/',
         type: 'GET',
         dataType: 'json',
         headers: {
@@ -63,7 +63,7 @@ function createRoundPlayer()
         Cards: $('#createCards').val()
     };
     $.ajax({
-        url: 'http://localhost:57060/api/RoundPlayerValues/',
+        url: 'http://localhost:50001/api/RoundPlayerValues/',
         type: 'POST',
         data: JSON.stringify(roundPlayer),
         contentType: "application/json;charset=utf-8",
@@ -85,7 +85,7 @@ function createRoundPlayer()
 function deleteRoundPlayer(id)
 {
     $.ajax({
-        url: 'http://localhost:57060/api/RoundPlayerValues/' + id,
+        url: 'http://localhost:50001/api/RoundPlayerValues/' + id,
         type: 'DELETE',
         contentType: "application/json;charset=utf-8",
         headers: {
@@ -114,7 +114,7 @@ function editRoundPlayer()
         Cards: $('#editCards').val()
     };
     $.ajax({
-        url: 'http://localhost:57060/api/RoundPlayerValues/' + id,
+        url: 'http://localhost:50001/api/RoundPlayerValues/' + id,
         type: 'PUT',
         data: JSON.stringify(roundPlayer),
         contentType: "application/json;charset=utf-8",
@@ -217,7 +217,7 @@ function showRoundPlayer(roundPlayer)
 function getRoundPlayer(id)
 {
     $.ajax({
-        url: 'http://localhost:57060/api/RoundPlayerValues/' + id,
+        url: 'http://localhost:50001/api/RoundPlayerValues/' + id,
         type: 'GET',
         dataType: 'json',
         headers: {
@@ -249,7 +249,7 @@ function getAllRounds()
     $("#createBlock").css('display', 'block');
     $("#editBlock").css('display', 'none');
     $.ajax({
-        url: 'http://localhost:57060/api/RoundValues/',
+        url: 'http://localhost:50001/api/RoundValues/',
         type: 'GET',
         dataType: 'json',
         headers: {
@@ -284,7 +284,7 @@ function getAllPlayers()
     $("#createBlock").show();
     $("#editBlock").hide();
     $.ajax({
-        url: 'http://localhost:57060/api/PlayerValues/',
+        url: 'http://localhost:50001/api/PlayerValues/',
         type: 'GET',
         dataType: 'json',
         headers: {

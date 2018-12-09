@@ -20,7 +20,7 @@ function getAllRounds() {
     $("#createBlock").css('display', 'block');
     $("#editBlock").css('display', 'none');
     $.ajax({
-        url: 'http://localhost:57060/api/RoundValues/',
+        url: 'http://localhost:50001/api/RoundValues/',
         type: 'GET',
         dataType: 'json',
         headers: {
@@ -41,7 +41,7 @@ function createRound() {
         GameId: $('#createGameId').val()
     };
     $.ajax({
-        url: 'http://localhost:57060/api/RoundValues/',
+        url: 'http://localhost:50001/api/RoundValues/',
         type: 'POST',
         data: JSON.stringify(round),
         contentType: "application/json;charset=utf-8",
@@ -60,7 +60,7 @@ function createRound() {
 
 function deleteRound(id) {
     $.ajax({
-        url: 'http://localhost:57060/api/RoundValues/' + id,
+        url: 'http://localhost:50001/api/RoundValues/' + id,
         type: 'DELETE',
         contentType: "application/json;charset=utf-8",
         headers: {
@@ -84,7 +84,7 @@ function editRound() {
         GameId: $('#editGameId').val()
     };
     $.ajax({
-        url: 'http://localhost:57060/api/RoundValues/' + id,
+        url: 'http://localhost:50001/api/RoundValues/' + id,
         type: 'PUT',
         data: JSON.stringify(round),
         contentType: "application/json;charset=utf-8",
@@ -138,7 +138,7 @@ function showRound(round) {
 
 function getRound(id) {
     $.ajax({
-        url: 'http://localhost:57060/api/RoundValues/' + id,
+        url: 'http://localhost:50001/api/RoundValues/' + id,
         type: 'GET',
         dataType: 'json',
         headers: {
@@ -163,7 +163,7 @@ function getAllGames() {
     $("#createBlock").css('display', 'block');
     $("#editBlock").css('display', 'none');
     $.ajax({
-        url: 'http://localhost:57060/api/GameValues/',
+        url: 'http://localhost:50001/api/GameValues/',
         type: 'GET',
         dataType: 'json',
         headers: {

@@ -8,7 +8,7 @@
         event.preventDefault();
 
         $.ajax({
-            url: 'http://localhost:57060/api/GameLogic/',
+            url: 'http://localhost:50001/api/GameLogic/',
             type: 'GET',
             dataType: 'json',
             data: {
@@ -119,7 +119,7 @@ function drawCard(roundPlayerId)
     };
 
     $.ajax({
-        url: 'http://localhost:57060/api/GameLogic/',
+        url: 'http://localhost:50001/api/GameLogic/',
         type: 'GET',
         data: {
             roundPlayerId: roundPlayerId
@@ -307,7 +307,7 @@ function moveToTheNextRound()
 
     $('#roundSummary .message').text('');
     $.ajax({
-        url: 'http://localhost:57060/api/GameLogic/',
+        url: 'http://localhost:50001/api/GameLogic/',
         type: 'GET',
         dataType: 'json',
         data: {
@@ -340,7 +340,7 @@ function moveToTheNextRound()
 function finishGame()
 {
     $.ajax({
-        url: 'http://localhost:57060/api/GameLogic/',
+        url: 'http://localhost:50001/api/GameLogic/',
         type: 'GET',
         data: {
             GameId: $('#gameBody').attr('data-item')

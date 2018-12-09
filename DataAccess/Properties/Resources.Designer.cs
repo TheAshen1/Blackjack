@@ -70,7 +70,7 @@ namespace BlackJack.DataAccess.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to data source=127.0.0.1;initial catalog=BlackJack;User ID=SA;Password=MsSql_Pa55;.
+        ///   Looks up a localized string similar to Server=127.0.0.1;Database=BlackJack;User ID=SA;Password=MsSql_Pa55;.
         /// </summary>
         public static string BlackJackContainerConnectionString {
             get {

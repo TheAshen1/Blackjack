@@ -1,0 +1,13 @@
+version: '3.4'
+
+services:
+  blackjack.api:
+    image: ${DOCKER_REGISTRY-}api
+    build:
+      context: .\BlackJack.Presentation
+      dockerfile: dockerfile
+  blackjack.mvc:
+    image: ${DOCKER_REGISTRY-}mvc
+    build:
+      context: .\BlackJack.PresentationMvc
+      dockerfile: dockerfile

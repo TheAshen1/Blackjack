@@ -122,6 +122,6 @@
     <comment>primary connection string for the project</comment>
   </data>
   <data name="BlackJackContainerConnectionString" xml:space="preserve">
-    <value>data source=127.0.0.1;initial catalog=BlackJack;User ID=SA;Password=MsSql_Pa55;</value>
+    <value>Server=127.0.0.1;Database=BlackJack;User ID=SA;Password=MsSql_Pa55;</value>
   </data>
 </root>
